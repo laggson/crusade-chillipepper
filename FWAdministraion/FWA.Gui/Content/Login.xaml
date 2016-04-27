@@ -32,8 +32,8 @@
         <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" 
                                  Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <TextBox Grid.Row="0" Grid.Column="1" Margin="5 20 5 20"
-				    x:Name="NameTextBox"
-				    local:HintAssist.Hint="Benutzername">
+				    x:Name="TxtName"
+				    local:HintAssist.Hint="Name oder E-Mail" KeyUp="Login_KeyUp">
             <TextBox.Text>
                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -45,10 +45,10 @@
 
         <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Key" HorizontalAlignment="Center" 
                                  VerticalAlignment="Center" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" />
-        <PasswordBox Grid.Row="1" Grid.Column="1" local:HintAssist.Hint="Passwort" Margin="5 10 5 10" x:Name="PasswordBox" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+        <PasswordBox Grid.Row="1" Grid.Column="1" local:HintAssist.Hint="Passwort" Margin="5 10 5 10" x:Name="TxtPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" KeyUp="Login_KeyUp" >
         </PasswordBox>
 
-        <Button Grid.Row="2" Grid.Column="1" Margin="10 0 10 0" Content="Anmelden" />
+        <Button Grid.Row="2" Grid.Column="1" Margin="10 0 10 0" Content="Anmelden" Click="BtnLogin_Click" />
 
     </Grid>
 </Metro:MetroWindow>

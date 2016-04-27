@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FWA.Gui.Properties {
+namespace FWA.Logic.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -26,12 +26,11 @@ namespace FWA.Gui.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\Eigene Dateien\\Dokumente\\" +
-            "Programmiertes\\crusade-chillipepper\\FWAdministraion\\FWA.Logic\\DB.mdf\";Integrated" +
-            " Security=True")]
-        public string DBConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=fwverne.database.windows.net;Initial Catalog=FWAdministraion;Persist " +
+            "Security Info=True;User ID=markusschmidt;Password=Krom5bacher")]
+        public string FWAdministraionConnectionString {
             get {
-                return ((string)(this["DBConnectionString"]));
+                return ((string)(this["FWAdministraionConnectionString"]));
             }
         }
     }

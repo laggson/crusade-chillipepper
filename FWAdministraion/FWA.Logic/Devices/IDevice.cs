@@ -17,7 +17,7 @@
             get; set;
         }
 
-        bool Checkkard
+        bool NeedsCheckkard
         {
             get; set;
         }

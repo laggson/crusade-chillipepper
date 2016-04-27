@@ -22,7 +22,7 @@
     <Metro:MetroWindow.RightWindowCommands>
         <Metro:WindowCommands>
             
-            <Button Click="BtnMail_Click">
+            <Button Click="ButtonMail_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
                    Height="20"
@@ -48,7 +48,7 @@
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
                    VerticalAlignment="Center"
-                   Text="Login" />
+                   Text="Nicht angemeldet" x:Name="TxtLogin" />
                 </StackPanel>
             </Button>
         </Metro:WindowCommands>

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using FWA.Logic;
 
 namespace FWA.Gui
 {
@@ -12,20 +14,6 @@ namespace FWA.Gui
     public partial class MainWindow
     {
         private List<TabItem> _tabItems;
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            _tabItems = new List<TabItem>();
-            mainMenu.ItemsSource = _tabItems;
-            this.AddTab("TLF 3000", new TLF());
-        }
-
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            this.Title = "FWAdministration v" + ver.Major + "." + ver.Minor + "." + ver.Revision;
-        }
 
         private void AddTab(string header, UserControl content)
         {
@@ -37,13 +25,43 @@ namespace FWA.Gui
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login log = new Login();
+            Login log = new Login(this);
             log.Show();
         }
 
-        private void BtnMail_Click(object sender, RoutedEventArgs e)
+        private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
+            //FWA.Logic.Control.DBHandler.SerializeUser("Ad3", "m.estrich98@gmail.com", "test3");
+            //System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
+        }
+
+        public FWA.Logic.Control Control
+        {
+            get; set;
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            _tabItems = new List<TabItem>();
+            mainMenu.ItemsSource = _tabItems;
+            Control = new FWA.Logic.Control();
+            this.AddTab("TLF 3000", new TLF());
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Title = "FWAdministration v" + FWA.Logic.Control.GetVersion();
+        }
+
+        public async void MsgBox(string header, string message)
+        {
+            await this.ShowMessageAsync(header, message);
+        }
+
+        public void SetLoginName()
+        {
+            TxtLogin.Text = "Angemeldet als " + Control?.ConnectedUser.Name;
         }
     }
 }

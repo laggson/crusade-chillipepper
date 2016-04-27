@@ -1,4 +1,5 @@
-﻿using FWA.Gui.Logic;
+﻿using FWA.Logic;
+
 
 namespace FWA.Gui.Content
 {
@@ -7,11 +8,34 @@ namespace FWA.Gui.Content
     /// </summary>
     public partial class Login
     {
-        MainWindow _mainWindow;
+        MainWindow _main;
 
-        public Login()
+        public Login(MainWindow main)
         {
             InitializeComponent();
+            _main = main;
+        }
+
+        private void BtnLogin_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.CheckData(TxtName.Text, TxtPassword.Password);
+        }
+
+        private void CheckData(string name, string pw)
+        {
+            if (_main.Control.DBHandler.UserDataCorrect(name, pw))
+            {
+                _main.SetLoginName();
+                this.Close();
+            }
+            else _main.MsgBox("Fehler", "Die Nutzerdaten waren ungültig.");
+        }
+
+        private void Login_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+                if (!TxtName.Text.Equals(string.Empty) && !TxtPassword.Password.Equals(string.Empty))
+                    BtnLogin_Click(null, null);
         }
     }
 }

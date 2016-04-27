@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="hibernate-configuration" type="NHibernate.Cfg.ConfigurationSectionHandler, NHibernate" />
+  </configSections>
+  <hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
+    <session-factory>
+      <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
+      <property name="dialect">NHibernate.Dialect.MySQL5Dialect</property>
+      <property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+      <property name="connection.driver_class">NHibernate.Driver.MySqlDataDriver</property>
+      <property name="connection.connection_string">Server=127.0.0.1;Database=fwverne;Uid=root;</property>
+      <property name="show_sql">true</property>
+      <mapping assembly="FWA.Logic" />
+    </session-factory>
+  </hibernate-configuration>
+</configuration>
