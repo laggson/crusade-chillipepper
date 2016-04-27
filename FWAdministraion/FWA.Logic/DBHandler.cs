@@ -3,6 +3,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Criterion;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -71,7 +72,7 @@ namespace FWA.Logic
                 if (list.Count == 0)
                     return false;
 
-                user = list[0];
+                user = list.Single();
                
                 mySession.Transaction.Commit();
             }

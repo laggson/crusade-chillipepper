@@ -16,7 +16,7 @@
             }
         }
 
-        public static string GetVersion()
+        public string GetVersion()
         {
             System.Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             return ver.Major + "." + ver.Minor + "." + ver.Revision;

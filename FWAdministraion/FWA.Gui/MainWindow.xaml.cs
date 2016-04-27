@@ -1,11 +1,9 @@
 ﻿using FWA.Gui.Content;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using FWA.Logic;
-
+using CControl = FWA.Logic.Control;
 namespace FWA.Gui
 {
     /// <summary>
@@ -35,7 +33,7 @@ namespace FWA.Gui
             //System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
         }
 
-        public FWA.Logic.Control Control
+        public CControl Control
         {
             get; set;
         }
@@ -45,13 +43,13 @@ namespace FWA.Gui
             InitializeComponent();
             _tabItems = new List<TabItem>();
             mainMenu.ItemsSource = _tabItems;
-            Control = new FWA.Logic.Control();
+            Control = new CControl();
             this.AddTab("TLF 3000", new TLF());
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "FWAdministration v" + FWA.Logic.Control.GetVersion();
+            this.Title = "FWAdministration v" + Control.GetVersion();
         }
 
         public async void MsgBox(string header, string message)
