@@ -19,6 +19,40 @@
         TextOptions.TextRenderingMode="Auto"
                    
         Height="700" Width="1050">
+    <Metro:MetroWindow.RightWindowCommands>
+        <Metro:WindowCommands>
+            
+            <Button Click="ButtonMail_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_email}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Schreib 'nen Beschwerdebrief!" />
+                </StackPanel>
+            </Button>
+            
+            <Button Click="ButtonLogin_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_database}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Nicht angemeldet" x:Name="TxtLogin" />
+                </StackPanel>
+            </Button>
+        </Metro:WindowCommands>
+    </Metro:MetroWindow.RightWindowCommands>
 
     <dragablz:TabablzControl x:Name="mainMenu" ItemsSource="{Binding}" />
 </Metro:MetroWindow>
