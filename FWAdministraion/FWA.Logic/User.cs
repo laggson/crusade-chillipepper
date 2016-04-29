@@ -28,5 +28,15 @@
         {
             get; set;
         }
+
+        public virtual int AccountType
+        {
+            get; set;
+        }
+    }
+
+    public enum AccountType
+    {
+        Master, User, Spectator
     }
 }

@@ -30,7 +30,7 @@ namespace FWA.Gui
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
             //FWA.Logic.Control.DBHandler.SerializeUser("Ad3", "m.estrich98@gmail.com", "test3");
-            //System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
+            System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
         }
 
         public CControl Control

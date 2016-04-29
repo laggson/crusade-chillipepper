@@ -17,7 +17,7 @@
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" ShowIconOnTitleBar="False"
-        TextOptions.TextRenderingMode="Auto">
+        TextOptions.TextRenderingMode="Auto" Loaded="Login_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

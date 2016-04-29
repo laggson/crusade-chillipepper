@@ -14,6 +14,8 @@ namespace FWA.Gui.Content
         {
             InitializeComponent();
             _main = main;
+            this.Owner = _main;
+            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
         }
 
         private void BtnLogin_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -36,6 +38,11 @@ namespace FWA.Gui.Content
             if (e.Key == System.Windows.Input.Key.Enter)
                 if (!TxtName.Text.Equals(string.Empty) && !TxtPassword.Password.Equals(string.Empty))
                     BtnLogin_Click(null, null);
+        }
+
+        private void Login_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            TxtName.Focus();
         }
     }
 }
