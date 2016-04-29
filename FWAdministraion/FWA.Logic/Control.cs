@@ -4,10 +4,10 @@ namespace FWA.Logic
 {
     public class Control
     {
+        private ExcelImporter exc;
 
         public Control()
         {
-
         }
 
         public DBHandler DBHandler
@@ -27,6 +27,11 @@ namespace FWA.Logic
         public User ConnectedUser
         {
             get; set;
+        }
+
+        public void StartExcelImport()
+        {
+            exc = new ExcelImporter();
         }
     }
 }

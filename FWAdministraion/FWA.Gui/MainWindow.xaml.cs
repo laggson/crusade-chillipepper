@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using FWA.Gui.Content;
 using System.Windows;
+using System.Data;
 
 namespace FWA.Gui
 {
@@ -13,10 +14,12 @@ namespace FWA.Gui
     public partial class MainWindow
     {
         private List<TabItem> _tabItems;
+        private DataGrid grid;
 
         private void AddTab(string header, UserControl content)
         {
             TabItem tab = new TabItem();
+            grid = new DataGrid();
             tab.Header = header;
             tab.Content = content;
             _tabItems.Add(tab);
@@ -31,6 +34,7 @@ namespace FWA.Gui
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
             //Process.Start("mailto://markus.schmidt98@outlook.de");
+            Control.StartExcelImport();
         }
 
         public CControl Control
