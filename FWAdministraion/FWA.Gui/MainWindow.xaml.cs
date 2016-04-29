@@ -1,9 +1,10 @@
-﻿using FWA.Gui.Content;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls.Dialogs;
 using CControl = FWA.Logic.Control;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using FWA.Gui.Content;
+using System.Windows;
+
 namespace FWA.Gui
 {
     /// <summary>
@@ -29,8 +30,7 @@ namespace FWA.Gui
 
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
-            //FWA.Logic.Control.DBHandler.SerializeUser("Ad3", "m.estrich98@gmail.com", "test3");
-            System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
+            //Process.Start("mailto://markus.schmidt98@outlook.de");
         }
 
         public CControl Control
@@ -45,6 +45,9 @@ namespace FWA.Gui
             mainMenu.ItemsSource = _tabItems;
             Control = new CControl();
             this.AddTab("TLF 3000", new TLF());
+            this.AddTab("LF 10", new LF());
+            //this.AddTab("MFT", new MTF()); To be added later
+            this.AddTab("Halle", new Halle());
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

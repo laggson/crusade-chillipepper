@@ -94,14 +94,15 @@
   <ItemGroup>
     <Compile Include="Control.cs" />
     <Compile Include="DBHandler.cs" />
-    <Compile Include="Devices\IDevice.cs" />
+    <Compile Include="Storage\Device.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
+    <Compile Include="Storage\IStorageItem.cs" />
+    <Compile Include="Storage\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -111,8 +112,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="User.hbm.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <EmbeddedResource Include="Storage\User.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -127,6 +128,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Storage\Device.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

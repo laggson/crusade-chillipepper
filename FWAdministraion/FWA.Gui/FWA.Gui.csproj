@@ -80,7 +80,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Content\Halle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\LF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\MTF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,10 +108,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBDataSet.xsd</DependentUpon>
+    <Compile Include="Content\Halle.xaml.cs">
+      <DependentUpon>Halle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\LF.xaml.cs">
+      <DependentUpon>LF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\MTF.xaml.cs">
+      <DependentUpon>MTF.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\HintAssist.cs" />
     <Compile Include="Content\Login.xaml.cs">
@@ -136,17 +152,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="DBDataSet.xsc">
-      <DependentUpon>DBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DBDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DBDataSet.xss">
-      <DependentUpon>DBDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

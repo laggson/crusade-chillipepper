@@ -1,4 +1,6 @@
-﻿namespace FWA.Logic
+﻿using FWA.Logic.Storage;
+
+namespace FWA.Logic
 {
     public class Control
     {
