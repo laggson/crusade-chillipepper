@@ -11,6 +11,8 @@
     <property name="InvNumber" column="DeviceInvNumber" />
     <property name="AnnualChecks" column="DeviceAnnualChecks" />
     <property name="NeedsCheckcard" column="DeviceNeedsCheckcard" />
+    <property name="KindOfCheck" column="DeviceKindOfCheck" />
+    <property name="Comment" column="DeviceComment" />
   </class>
 
 </hibernate-mapping>

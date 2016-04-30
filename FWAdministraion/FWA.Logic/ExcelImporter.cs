@@ -1,109 +1,82 @@
 ﻿using System;
 using System.IO;
 using Excel;
-using System.Data;
 using System.Collections.Generic;
-using System.Windows;
 using FWA.Logic.Storage;
-using System.Windows.Controls;
+using System.Data;
+using System.Text;
 
 namespace FWA.Logic
 {
     /// <summary>
     /// This class is temporary as long as the data is not copied to database
+    /// This is the most sloppy implementation I have ever made...
     /// </summary>
     class ExcelImporter
     {
-        private const string path = "D:\\Eigene Dateien\\Downloads\\Projects Backup\\Feuerwehr\\Prüfkarten";
-        private DataSet set;
-        private Window window;
+        private String[] filesToSearch;
+        private List<Device> items;
 
         public ExcelImporter()
         {
-            set = new DataSet();
-            window = new Window();
-            set.MergeFailed += Set_MergeFailed;
-            this.SearchDir(path);
-        }
-
-        private void Set_MergeFailed(object sender, MergeFailedEventArgs e)
-        {
-            Console.WriteLine(e.Conflict);
-        }
-
-        private void SearchDir(string directory)
-        {
-            foreach (string subDirectory in Directory.GetDirectories(directory))
+            string path = @"D:\Eigene Dateien\Downloads\";
+            items = new List<Device>();
+            filesToSearch = new string[]
             {
-                SearchDir(subDirectory);
-                foreach (string file in Directory.GetFiles(subDirectory))
-                    this.AddFile(file);
-            }
-
-            if (directory.Equals(path))
-            {
-                DataGrid dg = new DataGrid();
-                Window w = window;
-                w.Closing += W_Closing;
-                w.Content = dg;
-                w.Show();
-                dg.ItemsSource = this.FilterDataSet();
-            }
+                path + "TLF 3000.xlsx"//,
+                //path + "LF 10.xlsx",
+                //path + "MTF.xlsx",
+                //path + "Halle.xlsx"
+            };
+            this.Import2();
         }
 
-        private void W_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DataGrid g = (DataGrid)window.Content;
-            //Rows in Objekte umwandeln und speichern. Änderung muss per Hand
-        }
-
-        private List<Device> FilterDataSet()
+        public List<Device> Import()
         {
             List<Device> temp = new List<Device>();
 
-            foreach (DataTable t in set.Tables)
+            foreach (string file in filesToSearch)
             {
-                foreach (DataRow r in t.Rows)
+                FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+                IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(fs);
+
+                //excelReader.IsFirstRowAsColumnNames = true;
+
+                while (excelReader.Read())
                 {
-                    if (r[2].ToString().Length == 16)
-                    {
-                        Device device = new Device()
-                        {
-                            Name = r[1].ToString(),
-                            InvNumber = r[2].ToString()
-                        };
-                        temp.Add(device);
-                    }
+                    string s = excelReader.GetString(0);
+                    Console.WriteLine(s);
                 }
             }
 
             return temp;
-
         }
 
-        private void AddFile(string file)
+        public List<Device> Import2()
         {
-            FileStream stream = File.Open(file, FileMode.Open, FileAccess.Read);
-            IExcelDataReader excelReader = null;
-            if (file.EndsWith(".xlsx"))
+            List<Device> temp = new List<Device>();
+
+            StreamReader sr = new StreamReader(@"D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\TLF 3000.csv", Encoding.UTF8);
+
+            while (!sr.EndOfStream)
             {
-                //Datei Format ist xlsx - OpenXml-Excel Datei auslesen
-                excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            }
-            else if (file.EndsWith(".xls"))
-            {
-                //Datei Format ist xls - Binäre Excel Datei auslesen
-                excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                string[] text = sr.ReadLine().Split(';');
+
+                if (text[0] != string.Empty)
+
+                    temp.Add(new Device
+                    {
+                        ID = Convert.ToInt32(text[0]),
+                        Name = text[1],
+                        InvNumber = text[2],
+                        NeedsCheckcard = Convert.ToBoolean(text[3]),
+                        AnnualChecks = Convert.ToInt16(text[4]),
+                        KindOfCheck = text[5],
+                        Comment = text[6]
+                    });
             }
 
-            if (set == null)
-            {
-                set = excelReader?.AsDataSet();
-            }
-            else set.Merge(excelReader?.AsDataSet());
-
-            excelReader?.Close();
+            return temp;
         }
     }
-}
 }

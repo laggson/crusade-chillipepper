@@ -6,6 +6,13 @@
     public class Device : IStorageItem
     {
 
+        public override string ToString()
+        {
+            string s = ID + ";" + Name + ";" + InvNumber + ";" + NeedsCheckcard + ";" + AnnualChecks + ";";
+
+            return s;
+        }
+
         public virtual int ID
         {
             get; set;
@@ -27,6 +34,16 @@
         }
 
         public virtual short AnnualChecks
+        {
+            get; set;
+        }
+
+        public virtual string KindOfCheck
+        {
+            get; set;
+        }
+
+        public virtual string Comment
         {
             get; set;
         }

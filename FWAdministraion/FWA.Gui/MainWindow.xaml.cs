@@ -34,6 +34,9 @@ namespace FWA.Gui
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
             //Process.Start("mailto://markus.schmidt98@outlook.de");
+
+            //System.Diagnostics.Process.Start("shutdown", "/l");
+
             Control.StartExcelImport();
         }
 
