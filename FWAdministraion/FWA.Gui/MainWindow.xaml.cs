@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using FWA.Gui.Content;
 using System.Windows;
-using System.Data;
+using System.Windows.Input;
+using System;
 
 namespace FWA.Gui
 {
@@ -13,17 +14,7 @@ namespace FWA.Gui
     /// </summary>
     public partial class MainWindow
     {
-        private List<TabItem> _tabItems;
-        private DataGrid grid;
-
-        private void AddTab(string header, UserControl content)
-        {
-            TabItem tab = new TabItem();
-            grid = new DataGrid();
-            tab.Header = header;
-            tab.Content = content;
-            _tabItems.Add(tab);
-        }
+        private Dictionary<string, FWControl> _tabs = new Dictionary<string, FWControl>();
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -35,9 +26,9 @@ namespace FWA.Gui
         {
             //Process.Start("mailto://markus.schmidt98@outlook.de");
 
-            //System.Diagnostics.Process.Start("shutdown", "/l");
-
-            Control.StartExcelImport();
+            FWControl ret;
+            Tabs.TryGetValue("TLF", out ret);
+            ret.Table.ItemsSource = Control.DBHandler.GetTLFData();
         }
 
         public CControl Control
@@ -48,13 +39,28 @@ namespace FWA.Gui
         public MainWindow()
         {
             InitializeComponent();
-            _tabItems = new List<TabItem>();
-            mainMenu.ItemsSource = _tabItems;
             Control = new CControl();
-            this.AddTab("TLF 3000", new TLF());
-            this.AddTab("LF 10", new LF());
-            //this.AddTab("MFT", new MTF()); To be added later
-            this.AddTab("Halle", new Halle());
+
+            Tabs.Add("TLF", new FWControl());
+            Tabs.Add("LF", new FWControl());
+            Tabs.Add("MTF", new FWControl());
+            Tabs.Add("Halle", new FWControl());
+            this.SetItemssource();
+            
+        }
+
+        private void SetItemssource()
+        {
+            List<TabItem> test = new List<TabItem>();
+
+            foreach(var v in Tabs)
+            {
+                TabItem t = new TabItem();
+                t.Header = v.Key;
+                t.Content = v.Value;
+                test.Add(t);
+            }
+            mainMenu.ItemsSource = test;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -69,7 +75,62 @@ namespace FWA.Gui
 
         public void SetLoginName()
         {
-            TxtLogin.Text = "Angemeldet als " + Control?.ConnectedUser.Name;
+            TxtLogin.Text = "Angemeldet als " + Control.ConnectedUser?.Name;
+            this.SetData();
+        }
+
+        public void SetData()
+        {
+            FWControl usedTab;
+            Tabs.TryGetValue("TLF", out usedTab);
+            usedTab.Table.ItemsSource = Control.DBHandler.GetTLFData();
+
+            Tabs.TryGetValue("LF", out usedTab);
+            usedTab.Table.ItemsSource = Control.DBHandler.GetLFData();
+
+            Tabs.TryGetValue("MTF", out usedTab);
+            usedTab.Table.ItemsSource = Control.DBHandler.GetMTFData();
+
+            Tabs.TryGetValue("Halle", out usedTab);
+            usedTab.Table.ItemsSource = Control.DBHandler.GetHallData();
+        }
+
+        public Dictionary<string, FWControl> Tabs
+        {
+            get
+            {
+                return _tabs;
+            }
+            set
+            {
+                _tabs = value;
+            }
+        }
+
+        private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if( (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && Keyboard.IsKeyDown(Key.Tab))
+            {
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                    this.LowerMenuIndex();
+                else this.RaiseMenuIndex();
+            }
+        }
+
+        private void LowerMenuIndex()
+        {
+            if(mainMenu.SelectedIndex == 0)
+            {
+                mainMenu.SelectedIndex = mainMenu.Items.Count - 1;
+            }
+        }
+
+        private void RaiseMenuIndex()
+        {
+            if(mainMenu.SelectedIndex == mainMenu.Items.Count -1)
+            {
+                mainMenu.SelectedIndex = 0;
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FWA.Logic.Storage
+﻿using System.ComponentModel;
+
+namespace FWA.Logic.Storage
 {
     /// <summary>
     /// Storage class for controlling the data of one single object, fitting for all logistical places.
@@ -13,44 +15,51 @@
             return s;
         }
 
+        [DisplayName("ID")]
         public virtual int ID
         {
             get; set;
         }
 
+        [DisplayName("Name")]
         public virtual string Name
         {
             get; set;
         }
-
+        
+        [DisplayName("Inventar-Nr.")]
         public virtual string InvNumber
         {
             get; set;
         }
 
+        [DisplayName("Prüfkarte")]
         public virtual bool NeedsCheckcard
         {
             get; set;
         }
 
+        [DisplayName("Jährl. Prüfungen")]
         public virtual short AnnualChecks
         {
             get; set;
         }
 
+        [DisplayName("Durchzuf. Prüfung")]
         public virtual string KindOfCheck
         {
             get; set;
         }
 
+        [DisplayName("Bemerkung")]
         public virtual string Comment
         {
             get; set;
         }
 
-        public string GetLocation()
+        protected virtual string GetLocation()
         {
-            return InvNumber.Split(' ')[1];
+            return InvNumber?.Split(' ')[1];
         }
     }
 }

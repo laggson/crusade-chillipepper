@@ -4,7 +4,7 @@ namespace FWA.Logic
 {
     public class Control
     {
-        private ExcelImporter exc;
+        //private ExcelImporter exc;
 
         public Control()
         {
@@ -21,7 +21,7 @@ namespace FWA.Logic
         public string GetVersion()
         {
             System.Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return ver.Major + "." + ver.Minor + "." + ver.Revision;
+            return ver.Major + "." + ver.Minor + "." + ver.Build + "." + ver.Revision;
         }
 
         public User ConnectedUser
@@ -31,7 +31,7 @@ namespace FWA.Logic
 
         public void StartExcelImport()
         {
-            exc = new ExcelImporter();
+            this.DBHandler.PushListOfDevices(new ExcelImporter().ImportLocalCSV());
         }
     }
 }

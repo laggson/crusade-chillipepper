@@ -1,122 +1,121 @@
-ID	Name	InvNumber	NeedsCheckcard	AnnualChecks	Kind Of Check	Comment
-1	TS 8/8	08LF10G1 07 001	False	4	Trockensaugp. Schließdruck	
-2	Pressluftatmer 1	08LF10 G1 01 001	True	12		
-3	Pressluftatmer 2	08LF10 G1 01 002	True	12		
-4	PA-Reserveflasche 1	08LF10 G1 01 005	False	12		
-5	PA-Reserveflasche 2	08LF10 G1 01 006	False	12		
-6	PA-Reserveflasche 3	08LF10 G1 01 007	False	12		Fehlt
-7	PA-Reserveflasche 4	08LF10 G1 01 008	False	12		Fehlt
-8	Motorkettensäge	08LF10 G1 09 001	True	4	Nach Prüfordnung	
-9	Kombikanister	08LF10 G1 09 004	True	12	Ablaufjahr	2017
-10	Wathose 1	08LF10 G1 01 011	False	1		Löcher undicht
-11	Wathose 2	08LF10 G1 01 012	False	1		
-12	Brandfluchthaube 1	08LF10 G1 01 013	True	1	Vollständigkeit/Ablaufdatum	Mai 19
-13	Brandfluchthaube 2	08LF10 G1 01 014	True	1	Vollständigkeit/Ablaufdatum	Mai 19
-						
-14	Übergangsstück C-D	08LF10 G2 03 001	False	1		
-15	Strahlrohr D	08LF10 G3 02 002	False	1		
-16	Strahlrohr C 1	08LF10 G2 02 003	False	1		
-17	Strahlrohr C 2	08LF10 G3 02 004	False	1		
-18	Strahlrohr C 3	08LF10 G3 02 005	False	1		
-19	Strahlrohr B	08LF10 G3 02 006	False	1		
-20	Stützkrümmer B	08LF10 G3 02 007	False	1		
-21	Standrohr	08LF10 G3 02 008	False	1		
-22	Übergangsstück B-C	08LF10 G2 03 018	False	1		
-23	Stromaggregat	08LF10 G2 07 003	False	3	Funktion / Schutzleiter Prüfung	
-24	Leitungsroller 240V 1	08LF10 G2 06 001	False	3	Funktion / Beschädigungen	Nase der Kappe am Stecker
-25	Leitungsroller 240V 2	08LF10 G2 06 002	False	3	Funktion / Beschädigungen	
-26	Tauchpumpe	08LF10 G2 07 004	False	3		
-27	Hitzeschutzkleidung 1	08LF10 G2 01 015	False	1	Zustand	
-28	Hitzeschutzkleidung 2	08LF10 G2 01 016	False	1	Zustand	
-29	Absturzsicherung	08LF10 G2 04 003	False	1		
-						
-30	Verteiler 1	08LF10 G3 03 024	False	1		
-31	Verteiler 2	08LF10 G3 03 025	False	1		
-32	Druckbegrenzungsventil	08LF10 G3 03 026	False	1		
-33	Übergangsstück B-C	08LF10 G3 03 027	False	1		
-34	Übergangsstück B-C	08LF10 G3 03 028	False	1		
-35	Druckschl. S DN 25/50	08LF10 G4 03 029	True	1	Zustand	
-36	Pistolenstrahlrohr	08LF10 G4 03 030	False	1	Zustand	
-37	Lüftungsgerät	08LF10 G4 07 008	False	4	Funktion/Öl/Kraftstoff	
-38	Stativ	08LF10 G4 06 004	False	1		
-39	Zubehör zu Stativ	08LF10 G4 06 005	False	1		
-40	Flutlichtscheinwerfer 1	08LF10 G4 06 006	False	3		Kappe des Steckers fehlt
-41	Flutlichtscheinwerfer 2	08LF10 G4 06 007	False	3		Kappe des Steckers fehlt
-42	Verteiler 240V	08LF10 G4 06 008	True	3		
-43	Hydrantenanschluss	08LF10 G4 03 032	False	1	Funktion/Belastbarkeit	
-						
-44	Saugkorb	08LF10 GR 03 036	False	1		
-45	Saugschutzkorb	08LF10 GR 03 037	False	1		
-46	Druckschlauch 5m	08LF10 GR 03 038	False	1		
-47	Übergangsstück A-B	08LF10 GR 03 039	False	1		
-48	Sammelstück	08LF10 GR 03 040	False	1		
-49	Saugschlauch A 1	08LF10 GR 03 042	False	1		
-50	Saugschlauch A 2	08LF10 GR 03 043	False	1		
-51	Saugschlauch A 3	08LF10 GR 03 044	False	1		
-52	Saugschlauch A 4	08LF10 GR 03 045	False	1		
-53	Übergangsstück B-C	08LF10 GR 03 049	False	1		
-54	Mehrzweckleine 1	08LF10 GR 07 009	False	1	Zustand	
-55	Mehrzweckleine 2	08LF10 GR 07 010	False	1	Zustand	
-56	Saugschlauch 1	08LF10 GR 03 042	False	1	Nach Prüfordnung	
-57	Saugschlauch 2	08LF10 GR 03 043	False	1	Nach Prüfordnung	
-58	Saugschlauch 3	08LF10 GR 03 044	False	1	Nach Prüfordnung	
-59	Saugschlauch 4	08LF10 GR 03 045	False	1	Nach Prüfordnung	
-60	Krankentrage	08LF10 GR 05 001	False	1	Zustand	
-61	Pumpe FP 8/8	08LF10 GR 07 011	True	4	Trockensaugp. Schließdruck	
-						
-62	Schaumrohr M2	08LF10 DA 02 001	False	1	Funktion/Zustand	
-63	Flutlichtstrahler 1	08LF10 DA 06 015	False	4		
-64	Flutlichtstrahler 2	08LF10 DA 06 016	False	4		
-						
-65	Pressluftatmer 1	08LF10 MR 01 017	True	12		
-66	Pressluftatmer 2	08LF10 MR 01 018	True	12		
-67	Handscheinwerfer 1	08LF10 MR 06 016	False	12		
-68	Handscheinwerfer 2	08LF10 MR 06 017	False	12		
-69	Handscheinwerfer 3	08LF10 MR 06 018	False	12		
-70	Handscheinwerfer 4	08LF10 MR 06 019	False	12		
-71	Kübelspritze	08LF10 MR 02 003	False	12		
-72	Handfunkgerät Digital 1	08LF10 MR 06 020	False	12		
-73	Handfunkgerät Digital 2	08LF10 MR 06 021	False	12		
-74	Handfunkgerät Digital 3	08LF10 MR 06 022	False	12		
-75	Handfunkgerät Digital 4	08LF10 MR 06 023	False	12		
-76	Atemschutztafel	08LF10 MR 01 025	False	4		
-77	Brantfluchthaube 1	08LF10 MR 01 033	False	1		
-78	Brantfluchthaube 2	08LF10 MR 01 034	False	1		
-						
-79	Werkzeughasten E	08LF10 S1 08 003	False	1	Funktion/Vollständigkeit	
-80	Schnittschutz Jacke	08LF10 S1 010 35	False	1	Zustand/Ablaufdatum	Entspricht nicht UVV Muß Form c
-81	Schnittschutz Jacke	08LF10 S1 010 36	False	1	Zustand/Ablaufdatum	
-82	Schnittschutz Hose	08LF10 S1 010 37	False	1	Zustand/Ablaufdatum	
-83	Schnittschutz Helm	08LF10 S1 010 38	False	1	Zustand/Ablaufdatum	
-84	Verbandskasten Feuerwehr	08LF10 S2 05 002	False	1	Vollständigkeit/Ablaufdatum	Jun 20
-85	Bindestrang 1	08LF10 S2 07 019	False	1	Vollständigkeit	Fehlt
-86	Bindestrang 2	08LF10 S2 07 020	False	1	Vollständigkeit	Fehlt
-87	Bindestrang 3	08LF10 S2 07 021	False	1	Vollständigkeit	Fehlt
-88	Bindestrang 4	08LF10 S2 07 022	False	1	Vollständigkeit	Fehlt
-89	Bindestrang 5	08LF10 S2 07 023	False	1	Vollständigkeit	Fehlt
-90	Bindestrang 6	08LF10 S2 07 024	False	1	Vollständigkeit	Fehlt
-91	Schaumrohr S2	08LF10 S2 02 005	False	1	Funktion/Zustand	
-92	Zumischer Z2	08LF10 S2 02 006	False	1	Funktion/Zustand	
-93	Ansaugschlauch D	08LF10 S2 02 007	False	1		
-94	Schaummittelbehälter 1	08LF10 S2 02 008	False	2		
-95	Schaummittelbehälter 2	08LF10 S2 02 009	False	2		
-96	Schaummittelbehälter 3	08LF10 S2 02 010	False	2		
-97	Werkzeugkasten Makita	08LF10 S2 08 002	False	1	Zustand/Vollständigkeit	
-						
-98	Handfunkgerät Digital 1	08LF10 FR 06 026	False	12	Ladung/Funktion	
-99	Handfunkgerät Digital 2	08LF10 FR 06 027	False	12	Ladung/Funktion	
-100	Handfunkgerät Digital 3	08LF10 FR 06 028	False	12	Ladung/Funktion	
-101	Handfunkgerät Digital 4	08LF10 FR 06 029	False	12	Ladung/Funktion	
-102	Warnlampe LKW 1	08LF10 FR 06 030	False	2	Ladung/Funktion	
-103	Warnlampe LKW 2	08LF10 FR 06 031	False	2	Ladung/Funktion	
-104	Winkerkelle 1	08LF10 FR 06 032	False	12	Ladung/Funktion	
-105	Winkerkelle 2	08LF10 FR 06 033	False	12	Ladung/Funktion	
-106	Metabo Handlampe 1	08LF10 FR 06 034	False	12	Ladung/Funktion	
-107	Metabo Handlampe 2	08LF10 FR 06 035	False	12	Ladung/Funktion	
-108	Handlampe LNW 1	08LF10 FR 06 039	False	12	Ladung/Funktion	
-109	Handlampe LNW 2	08LF10 FR 06 040	False	12	Ladung/Funktion	
-110	Handlampe LNW 3	08LF10 FR 06 041	False	12	Ladung/Funktion	
-111	Suchscheinwerfer	08LF10 FR 06 042	False	1	Funktion	
-112	Funkgerät MRT	08LF10 FR 06 043	False	12	Funktion	
-113	Funkgerät 4m analog	08LF10 FR 06 044	False	12	Funktion	
-114	Mikro für Außenlautspr.	08LF10 FR -- ---	False	1	Funktion	
+1;TS 8/8;08LF10G1 07 001;False;4;Trockensaugp. Schließdruck;;
+2;Pressluftatmer 1;08LF10 G1 01 001;True;12;;;
+3;Pressluftatmer 2;08LF10 G1 01 002;True;12;;;
+4;PA-Reserveflasche 1;08LF10 G1 01 005;False;12;;;
+5;PA-Reserveflasche 2;08LF10 G1 01 006;False;12;;;
+6;PA-Reserveflasche 3;08LF10 G1 01 007;False;12;;Fehlt;
+7;PA-Reserveflasche 4;08LF10 G1 01 008;False;12;;Fehlt;
+8;Motorkettensäge;08LF10 G1 09 001;True;4;Nach Prüfordnung;;
+9;Kombikanister;08LF10 G1 09 004;True;12;Ablaufjahr;2017;
+10;Wathose 1;08LF10 G1 01 011;False;1;;Löcher undicht;
+11;Wathose 2;08LF10 G1 01 012;False;1;;;
+12;Brandfluchthaube 1;08LF10 G1 01 013;True;1;Vollständigkeit/Ablaufdatum;Mai 19;
+13;Brandfluchthaube 2;08LF10 G1 01 014;True;1;Vollständigkeit/Ablaufdatum;Mai 19;
+;;;;;;;
+14;Übergangsstück C-D;08LF10 G2 03 001;False;1;;;
+15;Strahlrohr D;08LF10 G3 02 002;False;1;;;
+16;Strahlrohr C 1;08LF10 G2 02 003;False;1;;;
+17;Strahlrohr C 2;08LF10 G3 02 004;False;1;;;
+18;Strahlrohr C 3;08LF10 G3 02 005;False;1;;;
+19;Strahlrohr B;08LF10 G3 02 006;False;1;;;
+20;Stützkrümmer B;08LF10 G3 02 007;False;1;;;
+21;Standrohr;08LF10 G3 02 008;False;1;;;
+22;Übergangsstück B-C;08LF10 G2 03 018;False;1;;;
+23;Stromaggregat;08LF10 G2 07 003;False;3;Funktion / Schutzleiter Prüfung;;
+24;Leitungsroller 240V 1;08LF10 G2 06 001;False;3;Funktion / Beschädigungen;Nase der Kappe am Stecker;
+25;Leitungsroller 240V 2;08LF10 G2 06 002;False;3;Funktion / Beschädigungen;;
+26;Tauchpumpe;08LF10 G2 07 004;False;3;;;
+27;Hitzeschutzkleidung 1;08LF10 G2 01 015;False;1;Zustand;;
+28;Hitzeschutzkleidung 2;08LF10 G2 01 016;False;1;Zustand;;
+29;Absturzsicherung;08LF10 G2 04 003;False;1;;;
+;;;;;;;
+30;Verteiler 1;08LF10 G3 03 024;False;1;;;
+31;Verteiler 2;08LF10 G3 03 025;False;1;;;
+32;Druckbegrenzungsventil;08LF10 G3 03 026;False;1;;;
+33;Übergangsstück B-C;08LF10 G3 03 027;False;1;;;
+34;Übergangsstück B-C;08LF10 G3 03 028;False;1;;;
+35;Druckschl. S DN 25/50;08LF10 G4 03 029;True;1;Zustand;;
+36;Pistolenstrahlrohr;08LF10 G4 03 030;False;1;Zustand;;
+37;Lüftungsgerät;08LF10 G4 07 008;False;4;Funktion/Öl/Kraftstoff;;
+38;Stativ;08LF10 G4 06 004;False;1;;;
+39;Zubehör zu Stativ;08LF10 G4 06 005;False;1;;;
+40;Flutlichtscheinwerfer 1;08LF10 G4 06 006;False;3;;Kappe des Steckers fehlt;
+41;Flutlichtscheinwerfer 2;08LF10 G4 06 007;False;3;;Kappe des Steckers fehlt;
+42;Verteiler 240V;08LF10 G4 06 008;True;3;;;
+43;Hydrantenanschluss;08LF10 G4 03 032;False;1;Funktion/Belastbarkeit;;
+;;;;;;;
+44;Saugkorb;08LF10 GR 03 036;False;1;;;
+45;Saugschutzkorb;08LF10 GR 03 037;False;1;;;
+46;Druckschlauch 5m;08LF10 GR 03 038;False;1;;;
+47;Übergangsstück A-B;08LF10 GR 03 039;False;1;;;
+48;Sammelstück;08LF10 GR 03 040;False;1;;;
+49;Saugschlauch A 1;08LF10 GR 03 042;False;1;;;
+50;Saugschlauch A 2;08LF10 GR 03 043;False;1;;;
+51;Saugschlauch A 3;08LF10 GR 03 044;False;1;;;
+52;Saugschlauch A 4;08LF10 GR 03 045;False;1;;;
+53;Übergangsstück B-C;08LF10 GR 03 049;False;1;;;
+54;Mehrzweckleine 1;08LF10 GR 07 009;False;1;Zustand;;
+55;Mehrzweckleine 2;08LF10 GR 07 010;False;1;Zustand;;
+56;Saugschlauch 1;08LF10 GR 03 042;False;1;Nach Prüfordnung;;
+57;Saugschlauch 2;08LF10 GR 03 043;False;1;Nach Prüfordnung;;
+58;Saugschlauch 3;08LF10 GR 03 044;False;1;Nach Prüfordnung;;
+59;Saugschlauch 4;08LF10 GR 03 045;False;1;Nach Prüfordnung;;
+60;Krankentrage;08LF10 GR 05 001;False;1;Zustand;;
+61;Pumpe FP 8/8;08LF10 GR 07 011;True;4;Trockensaugp. Schließdruck;;
+;;;;;;;
+62;Schaumrohr M2;08LF10 DA 02 001;False;1;Funktion/Zustand;;
+63;Flutlichtstrahler 1;08LF10 DA 06 015;False;4;;;
+64;Flutlichtstrahler 2;08LF10 DA 06 016;False;4;;;
+;;;;;;;
+65;Pressluftatmer 1;08LF10 MR 01 017;True;12;;;
+66;Pressluftatmer 2;08LF10 MR 01 018;True;12;;;
+67;Handscheinwerfer 1;08LF10 MR 06 016;False;12;;;
+68;Handscheinwerfer 2;08LF10 MR 06 017;False;12;;;
+69;Handscheinwerfer 3;08LF10 MR 06 018;False;12;;;
+70;Handscheinwerfer 4;08LF10 MR 06 019;False;12;;;
+71;Kübelspritze;08LF10 MR 02 003;False;12;;;
+72;Handfunkgerät Digital 1;08LF10 MR 06 020;False;12;;;
+73;Handfunkgerät Digital 2;08LF10 MR 06 021;False;12;;;
+74;Handfunkgerät Digital 3;08LF10 MR 06 022;False;12;;;
+75;Handfunkgerät Digital 4;08LF10 MR 06 023;False;12;;;
+76;Atemschutztafel;08LF10 MR 01 025;False;4;;;
+77;Brantfluchthaube 1;08LF10 MR 01 033;False;1;;;
+78;Brantfluchthaube 2;08LF10 MR 01 034;False;1;;;
+;;;;;;;
+79;Werkzeughasten E;08LF10 S1 08 003;False;1;Funktion/Vollständigkeit;;
+80;Schnittschutz Jacke;08LF10 S1 010 35;False;1;Zustand/Ablaufdatum;Entspricht nicht UVV Muß Form c;
+81;Schnittschutz Jacke;08LF10 S1 010 36;False;1;Zustand/Ablaufdatum;;
+82;Schnittschutz Hose;08LF10 S1 010 37;False;1;Zustand/Ablaufdatum;;
+83;Schnittschutz Helm;08LF10 S1 010 38;False;1;Zustand/Ablaufdatum;;
+84;Verbandskasten Feuerwehr;08LF10 S2 05 002;False;1;Vollständigkeit/Ablaufdatum;Jun 20;
+85;Bindestrang 1;08LF10 S2 07 019;False;1;Vollständigkeit;Fehlt;
+86;Bindestrang 2;08LF10 S2 07 020;False;1;Vollständigkeit;Fehlt;
+87;Bindestrang 3;08LF10 S2 07 021;False;1;Vollständigkeit;Fehlt;
+88;Bindestrang 4;08LF10 S2 07 022;False;1;Vollständigkeit;Fehlt;
+89;Bindestrang 5;08LF10 S2 07 023;False;1;Vollständigkeit;Fehlt;
+90;Bindestrang 6;08LF10 S2 07 024;False;1;Vollständigkeit;Fehlt;
+91;Schaumrohr S2;08LF10 S2 02 005;False;1;Funktion/Zustand;;
+92;Zumischer Z2;08LF10 S2 02 006;False;1;Funktion/Zustand;;
+93;Ansaugschlauch D;08LF10 S2 02 007;False;1;;;
+94;Schaummittelbehälter 1;08LF10 S2 02 008;False;2;;;
+95;Schaummittelbehälter 2;08LF10 S2 02 009;False;2;;;
+96;Schaummittelbehälter 3;08LF10 S2 02 010;False;2;;;
+97;Werkzeugkasten Makita;08LF10 S2 08 002;False;1;Zustand/Vollständigkeit;;
+;;;;;;;
+98;Handfunkgerät Digital 1;08LF10 FR 06 026;False;12;Ladung/Funktion;;
+99;Handfunkgerät Digital 2;08LF10 FR 06 027;False;12;Ladung/Funktion;;
+100;Handfunkgerät Digital 3;08LF10 FR 06 028;False;12;Ladung/Funktion;;
+101;Handfunkgerät Digital 4;08LF10 FR 06 029;False;12;Ladung/Funktion;;
+102;Warnlampe LKW 1;08LF10 FR 06 030;False;2;Ladung/Funktion;;
+103;Warnlampe LKW 2;08LF10 FR 06 031;False;2;Ladung/Funktion;;
+104;Winkerkelle 1;08LF10 FR 06 032;False;12;Ladung/Funktion;;
+105;Winkerkelle 2;08LF10 FR 06 033;False;12;Ladung/Funktion;;
+106;Metabo Handlampe 1;08LF10 FR 06 034;False;12;Ladung/Funktion;;
+107;Metabo Handlampe 2;08LF10 FR 06 035;False;12;Ladung/Funktion;;
+108;Handlampe LNW 1;08LF10 FR 06 039;False;12;Ladung/Funktion;;
+109;Handlampe LNW 2;08LF10 FR 06 040;False;12;Ladung/Funktion;;
+110;Handlampe LNW 3;08LF10 FR 06 041;False;12;Ladung/Funktion;;
+111;Suchscheinwerfer;08LF10 FR 06 042;False;1;Funktion;;
+112;Funkgerät MRT;08LF10 FR 06 043;False;12;Funktion;;
+113;Funkgerät 4m analog;08LF10 FR 06 044;False;12;Funktion;;
+114;Mikro für Außenlautspr.;08LF10 FR -- ---;False;1;Funktion;;

@@ -11,7 +11,7 @@ using System;
 namespace FWA.Logic
 {
     /// <summary>
-    /// Handles everything a database connection is used for.
+    /// Handles everything a database connection is used for
     /// Controls user transmitting as well as device transmitting
     /// </summary>
     public class DBHandler : IDisposable
@@ -32,6 +32,91 @@ namespace FWA.Logic
         }
 
         #region Device-Transmission
+
+        public IList<Device> GetTLFData()
+        {
+            IList<Device> result;
+
+            using (mySession.BeginTransaction())
+            {
+                ICriteria criteria = mySession.CreateCriteria<Device>()
+                    .Add(Restrictions.Like("InvNumber", "__TF%"));
+
+                result = criteria.List<Device>();
+
+            }
+            return result;
+        }
+
+        public IList<Device> GetLFData()
+        {
+            IList<Device> result;
+
+            using (mySession.BeginTransaction())
+            {
+                ICriteria criteria = mySession.CreateCriteria<Device>()
+                    .Add(Restrictions.Like("InvNumber", "__LF%"));
+
+                result = criteria.List<Device>();
+
+            }
+            return result;
+        }
+        public IList<Device> GetMTFData()
+        {
+            IList<Device> result;
+
+            using (mySession.BeginTransaction())
+            {
+                ICriteria criteria = mySession.CreateCriteria<Device>()
+                    .Add(Restrictions.Like("InvNumber", "__MF%"));
+
+                result = criteria.List<Device>();
+
+            }
+            return result;
+        }
+
+        public IList<Device> GetHallData()
+        {
+            IList<Device> result;
+
+            using (mySession.BeginTransaction())
+            {
+                ICriteria criteria = mySession.CreateCriteria<Device>()
+                    .Add(Restrictions.Eq("InvNumber", string.Empty));
+
+                result = criteria.List<Device>();
+
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// The parameter device is pushed to the database... Nobody saw that coming o_O
+        /// </summary>
+        /// <param name="device">The device to push</param>
+        public void PushDevice(Device device)
+        {
+            //Not much to say here. Device is pushed to DB
+            using (mySession.BeginTransaction())
+            {
+                mySession.Save(device);
+                mySession.Transaction.Commit();
+            }
+        }
+
+        /// <summary>
+        /// Basically does what the name promises. Goes through the generic list and pushes every Device in it
+        /// </summary>
+        /// <param name="list">What would you guess this is for? :D</param>
+        public void PushListOfDevices(List<Device> list)
+        {
+            foreach(Device d in list)
+            {
+                this.PushDevice(d);
+            }
+        }
 
         #endregion
 
@@ -113,7 +198,12 @@ namespace FWA.Logic
             string localHash = Crypter.Blowfish.Crypt(pwBytes, user.Salt);
 
             //If both hashes are the same, we can be shure that the entered password is correct
-            return localHash.Equals(user.Hash);
+            if (localHash.Equals(user.Hash))
+            {
+                _con.ConnectedUser = user;
+                return true;
+            }
+            else return false;
         }
 
         #endregion

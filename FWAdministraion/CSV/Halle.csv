@@ -1,27 +1,26 @@
-ID	Name	InvNumber	NeedsCheckcard	AnnualChecks	Kind of Check	Comments
-1	MTF	x	False	1	TÜV / Stadt	
-2	MTF	x	False	1	Ölstand	
-3	MTF	x	False	1	Flüssigkeiten	
-4	MTF	x	False	1	Beleuchtung	
-5	TLF	x	False	1	TÜV bzw SP jährlich	
-6	TLF	x	False	1	Feuerlöscher	Prüffrist April 2016
-7	TLF	x	False	4	Flüssigkeiten (Kühler/Scheiben)	Kühlwasser fast minimum
-8	TLF	x	False	4	Ölstand	
-9	TLF	x	False	6	Beleuchtung	Blinker vorne beide Seiten ern.
-10	TLF	x	False	1	Fangleinen	Prüfung durch den Bauhof
-11	LF	x	False	1	TÜV / Stadt	
-12	LF	x	False	1	Feuerlöscher	Prüffrist April 2016
-13	LF	x	False	4	Ölstand	Sollte aufgefüllt werden
-14	LF	x	False	4	Flüssigkeiten (Kühler/Scheiben)	
-15	LF	x	False	6	Beleuchtung	Positionsleuchte links mitte defekt
-16	LF	x	False	1	Fangleinen	Prüfung durch den Bauhof
-	LF	x	False	1	Steckleiter Dach	Prüfung durch den Bauhof
-	Halle	x	False	1	Feuerlöscher	Prüffrist April 2016
-	Kompressor	x	False	12	Ölstand	Sollte aufgefüllt werden
-	Spinde	x	False	1	Feuerwehrgurte	Prüfung durch den Bauhof
-	Scheinwerfer	x	False	1	Jährlicher E-Check	
-	Kabeltrommel	x	False	1	Jährlicher E-Check	
-	Tauchpumpe	x	False	1	Jährlicher E-Check	
-	Generator	x	False	1	Jährlicher E-Check	
-	Steckdose G4	x	False	1	Jährlicher E-Check	
-	Lichtmast DA	x	False	1	Jährlicher E-Check	
+1;MTF;;False;1;TÜV / Stadt;;
+2;MTF;;False;1;Ölstand;;
+3;MTF;;False;1;Flüssigkeiten;;
+4;MTF;;False;1;Beleuchtung;;
+5;TLF;;False;1;TÜV bzw SP jährlich;;
+6;TLF;;False;1;Feuerlöscher;Prüffrist April 2016;
+7;TLF;;False;4;Flüssigkeiten (Kühler/Scheiben);Kühlwasser fast minimum;
+8;TLF;;False;4;Ölstand;;
+9;TLF;;False;6;Beleuchtung;Blinker vorne beide Seiten ern.;
+10;TLF;;False;1;Fangleinen;Prüfung durch den Bauhof;
+11;LF;;False;1;TÜV / Stadt;;
+12;LF;;False;1;Feuerlöscher;Prüffrist April 2016;
+13;LF;;False;4;Ölstand;Sollte aufgefüllt werden;
+14;LF;;False;4;Flüssigkeiten (Kühler/Scheiben);;
+15;LF;;False;6;Beleuchtung;Positionsleuchte links mitte defekt;
+16;LF;;False;1;Fangleinen;Prüfung durch den Bauhof;
+;LF;;False;1;Steckleiter Dach;Prüfung durch den Bauhof;
+;Halle;;False;1;Feuerlöscher;Prüffrist April 2016;
+;Kompressor;;False;12;Ölstand;Sollte aufgefüllt werden;
+;Spinde;;False;1;Feuerwehrgurte;Prüfung durch den Bauhof;
+;Scheinwerfer;;False;1;Jährlicher E-Check;;
+;Kabeltrommel;;False;1;Jährlicher E-Check;;
+;Tauchpumpe;;False;1;Jährlicher E-Check;;
+;Generator;;False;1;Jährlicher E-Check;;
+;Steckdose G4;;False;1;Jährlicher E-Check;;
+;Lichtmast DA;;False;1;Jährlicher E-Check;;
