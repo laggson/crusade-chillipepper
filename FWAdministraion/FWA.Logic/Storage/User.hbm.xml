@@ -11,6 +11,7 @@
     <property name="EMail" column="UserEMail" />
     <property name="Hash" column="UserPwHash" />
     <property name="Salt" column="UserSalt" />
+    <property name="AccountType" column="AccountTypeID" />
   </class>
 
 </hibernate-mapping>

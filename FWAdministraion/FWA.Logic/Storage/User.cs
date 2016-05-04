@@ -32,7 +32,7 @@
             get; set;
         }
 
-        public virtual int AccountType
+        public virtual AccountType AccountType
         {
             get; set;
         }

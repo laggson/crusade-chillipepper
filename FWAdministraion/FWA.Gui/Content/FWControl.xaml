@@ -6,5 +6,5 @@
              xmlns:local="clr-namespace:FWA.Gui.Content"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <DataGrid x:Name="Table" ItemsSource="{Binding}" AutoGeneratingColumn="Table_AutoGeneratingColumn" />
+    <DataGrid x:Name="Table" ItemsSource="{Binding}" AutoGeneratingColumn="Table_AutoGeneratingColumn" MouseDoubleClick="Table_MouseDoubleClick" RowEditEnding="Table_OnEditEnded" />
 </UserControl>

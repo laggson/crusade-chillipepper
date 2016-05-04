@@ -42,7 +42,17 @@ namespace FWA.Logic
                 ICriteria criteria = mySession.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__TF%"));
 
+                //criteria.SetProjection(Projections.ProjectionList()
+                //                .Add(Projections.Sum("Name")));
+
                 result = criteria.List<Device>();
+
+                foreach(Device d in result)
+                {
+                    // TODO: Group items
+                    // Probably need to save the whole collection somewhere else,
+                    // to make shure the items are not lost
+                }
 
             }
             return result;

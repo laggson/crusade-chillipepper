@@ -4,7 +4,8 @@
 namespace FWA.Gui.Content
 {
     /// <summary>
-    /// Interaktionslogik für Login.xaml
+    /// This small Windows shows up when the user presses the "Login" button,
+    /// but basically does not much code.
     /// </summary>
     public partial class Login
     {
@@ -20,28 +21,37 @@ namespace FWA.Gui.Content
 
         private void BtnLogin_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.CheckData(TxtName.Text, TxtPassword.Password);
-        }
+            string name = TxtName.Text;
+            string pw = TxtPassword.Password;
 
-        private void CheckData(string name, string pw)
-        {
-            if (_main.Control.DBHandler.UserDataCorrect(name, pw))
+            //The following is only called, if both textboxes are not empty
+            if (!string.Empty.Equals(name) && !string.Empty.Equals(pw))
             {
-                _main.SetLoginName();
-                this.Close();
+                if(_main.Control.DBHandler.UserDataCorrect(name, pw))
+                {
+                    // Write the name of the new user into the button and
+                    // Get all the devices from the database, which are filled
+                    // into the tables
+                    _main.RefreshLoginName();
+                    _main.PullDeviceData();
+                    this.Close();
+                }
+                else _main.MsgBox("Fehler", "Die Nutzerdaten waren ungültig.");
             }
-            else _main.MsgBox("Fehler", "Die Nutzerdaten waren ungültig.");
         }
 
         private void Login_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            // If the user presses enter, the Button is called.
+            // Not necessary, but very nice to have
+
             if (e.Key == System.Windows.Input.Key.Enter)
-                if (!TxtName.Text.Equals(string.Empty) && !TxtPassword.Password.Equals(string.Empty))
-                    BtnLogin_Click(null, null);
+                this.BtnLogin_Click(null, null);
         }
 
         private void Login_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            // After the frame is opened, TxtName automatically gets the focus. For easier use.
             TxtName.Focus();
         }
     }
