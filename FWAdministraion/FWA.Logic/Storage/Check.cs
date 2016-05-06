@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace FWA.Logic.Storage
 {
@@ -9,6 +10,8 @@ namespace FWA.Logic.Storage
         public Check(Device d)
         {
             _device = d;
+            this.Name = d.Name;
+            this.InvNumber = d.InvNumber;
         }
 
         public int ID
@@ -29,6 +32,7 @@ namespace FWA.Logic.Storage
             }
         }
 
+        [DisplayName("Inventar-Nr.")]
         public string InvNumber
         {
             get
@@ -46,6 +50,7 @@ namespace FWA.Logic.Storage
             get; set;
         }
 
+        [DisplayName("Geprüft am")]
         public string StringDate
         {
             get
@@ -53,17 +58,26 @@ namespace FWA.Logic.Storage
                 return DateChecked.ToString("dd/MM/yyyy");
             }
         }
-
+        
+        [DisplayName("Prüfer")]
         public User WhoChecked
         {
             get; set;
         }
 
+        [DisplayName("Zustand")]
+        public CheckType CheckType
+        {
+            get; set;
+        }
+
+        [DisplayName("Mängel")]
         public string Lack
         {
             get; set;
         }
 
+        [DisplayName("Bemerkung")]
         public string Comment
         {
             get; set;

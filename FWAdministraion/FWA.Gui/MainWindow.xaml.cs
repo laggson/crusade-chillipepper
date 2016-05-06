@@ -19,7 +19,7 @@ namespace FWA.Gui
     /// </summary>
     public partial class MainWindow
     {
-        private Dictionary<string, FWControl> _tabs = new Dictionary<string, FWControl>();
+        private Dictionary<string, OverviewControl> _tabs = new Dictionary<string, OverviewControl>();
 
         public MainWindow()
         {
@@ -30,10 +30,10 @@ namespace FWA.Gui
             Control.MFDataChanged += Control_MFDataChanged;
             Control.HallDataChanged += Control_HallDataChanged;
 
-            Tabs.Add("TLF", new FWControl(this, "TLF"));
-            Tabs.Add("LF", new FWControl(this, "LF"));
+            Tabs.Add("TLF", new OverviewControl(this, "TLF"));
+            Tabs.Add("LF", new OverviewControl(this, "LF"));
             //Tabs.Add("MTF", new FWControl(this, "MTF"));
-            Tabs.Add("Halle", new FWControl(this, "Halle"));
+            Tabs.Add("Halle", new OverviewControl(this, "Halle"));
             this.SetItemssource();
 
         }
@@ -54,13 +54,41 @@ namespace FWA.Gui
             mainMenu.ItemsSource = test;
 
             //The DeviceCheck is initialized and gets the data, filtered by name, as Itemssource
-            DeviceCheck controller = new DeviceCheck(tab);
+            CheckControl controller = new CheckControl(this);
             List<Device> devices = Control.DevicesByName(device.Name, Control.DataListByName(name));
+            List<Check> checks = new List<Check>();
 
-            //Itemssource nicht devices, sondern iwas mit den checks :D
-            controller.Table.ItemsSource = devices;
+            foreach(Device d in devices)
+            {
+                checks.Add(new Check(d)
+                {
+                    //Name and InvNumber set automatically in Constructor
+                    ID = d.ID,
+                    DateChecked = DateTime.Now,
+                    WhoChecked = Control.ConnectedUser,
+                    CheckType = CheckType.OK
+                });
+            }
+            
+            controller.Table.ItemsSource = checks;
             tab.Content = controller;
             mainMenu.SelectedItem = tab;
+        }
+
+        public void CloseTab(int hash)
+        {
+            List<TabItem> tabs = mainMenu.ItemsSource as List<TabItem>;
+
+            foreach(TabItem tab in tabs)
+            {
+                if(tab.Content.GetHashCode() == hash)
+                {
+                    mainMenu.ItemsSource = null;
+                    tabs.Remove(tab);
+                    mainMenu.ItemsSource = tabs;
+                    return;
+                }
+            }
         }
 
         private void SetItemssource()
@@ -79,7 +107,8 @@ namespace FWA.Gui
 
         public async void MsgBox(string header, string message)
         {
-            await this.ShowMessageAsync(header, message);
+            //await this.ShowMessageAsync(header, message);
+            await MaterialDesignThemes.Wpf.DialogHost.Show(message);
         }
 
         /// <summary>
@@ -92,7 +121,7 @@ namespace FWA.Gui
             else TxtLogin.Text = "Nicht angemeldet";
         }
 
-        public Dictionary<string, FWControl> Tabs
+        public Dictionary<string, OverviewControl> Tabs
         {
             get
             {
@@ -108,21 +137,21 @@ namespace FWA.Gui
 
         private void Control_TFDataChanged(object sender, EventArgs e)
         {
-            FWControl usedTab;
+            OverviewControl usedTab;
             Tabs.TryGetValue("TLF", out usedTab);
             usedTab.Table.ItemsSource = Control.TrimList(Control.TFData);
         }
 
         private void Control_LFDataChanged(object sender, EventArgs e)
         {
-            FWControl usedTab;
+            OverviewControl usedTab;
             Tabs.TryGetValue("LF", out usedTab);
             usedTab.Table.ItemsSource = Control.TrimList(Control.LFData);
         }
 
         private void Control_MFDataChanged(object sender, EventArgs e)
         {
-            FWControl usedTab;
+            OverviewControl usedTab;
             Tabs.TryGetValue("MTF", out usedTab);
             if (usedTab != null)
                 usedTab.Table.ItemsSource = Control.MFData;
@@ -130,7 +159,7 @@ namespace FWA.Gui
 
         private void Control_HallDataChanged(object sender, EventArgs e)
         {
-            FWControl usedTab;
+            OverviewControl usedTab;
             Tabs.TryGetValue("Halle", out usedTab);
             usedTab.Table.ItemsSource = Control.HallData;
         }
@@ -143,7 +172,7 @@ namespace FWA.Gui
             }
             else
             {
-                Login log = new Login(this);
+                LoginWindow log = new LoginWindow(this);
                 log.Show();
             }
 
@@ -157,7 +186,7 @@ namespace FWA.Gui
             if (result == MessageDialogResult.Affirmative)
             {
 
-                FWControl usedTab;
+                OverviewControl usedTab;
                 Tabs.TryGetValue("TLF", out usedTab);
                 usedTab.Table.ItemsSource = null;
 
@@ -214,7 +243,7 @@ namespace FWA.Gui
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = "FWAdministration v" + Control.GetVersion();
-            //this.logintemptestzeug();
+            this.logintemptestzeug();
         }
 
         #endregion
@@ -260,6 +289,6 @@ namespace FWA.Gui
             }
         }
 
-#endregion
+        #endregion
     }
 }

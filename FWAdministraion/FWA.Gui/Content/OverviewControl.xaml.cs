@@ -7,11 +7,11 @@ namespace FWA.Gui.Content
     /// <summary>
     /// Interaktionslogik für FWControl.xaml
     /// </summary>
-    public partial class FWControl : UserControl
+    public partial class OverviewControl : UserControl
     {
         MainWindow _main;
 
-        public FWControl(MainWindow main, string name)
+        public OverviewControl(MainWindow main, string name)
         {
             InitializeComponent();
             _main = main;

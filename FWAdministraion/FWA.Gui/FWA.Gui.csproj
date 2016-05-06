@@ -100,15 +100,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Content\DeviceCheck.xaml">
+    <Page Include="Content\CheckControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\FWControl.xaml">
+    <Page Include="Content\OverviewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Login.xaml">
+    <Page Include="Content\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,15 +120,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Content\DeviceCheck.xaml.cs">
-      <DependentUpon>DeviceCheck.xaml</DependentUpon>
+    <Compile Include="Content\CheckControl.xaml.cs">
+      <DependentUpon>CheckControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\FWControl.xaml.cs">
-      <DependentUpon>FWControl.xaml</DependentUpon>
+    <Compile Include="Content\OverviewControl.xaml.cs">
+      <DependentUpon>OverviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\HintAssist.cs" />
-    <Compile Include="Content\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Content\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\NotEmptyValidationRule.cs" />
     <Compile Include="MainWindow.xaml.cs">

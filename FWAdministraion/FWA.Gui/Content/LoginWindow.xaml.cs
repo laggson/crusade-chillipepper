@@ -7,11 +7,11 @@ namespace FWA.Gui.Content
     /// This small Windows shows up when the user presses the "Login" button,
     /// but basically does not much code.
     /// </summary>
-    public partial class Login
+    public partial class LoginWindow
     {
         MainWindow _main;
 
-        public Login(MainWindow main)
+        public LoginWindow(MainWindow main)
         {
             InitializeComponent();
             _main = main;
