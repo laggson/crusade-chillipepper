@@ -29,9 +29,18 @@ namespace FWA.Logic
             myConfiguration.Configure();
             mySessionFactory = myConfiguration.BuildSessionFactory();
             mySession = mySessionFactory.OpenSession();
+            mySession.FlushMode = FlushMode.Commit;
         }
 
         #region Device-Transmission
+
+        public void GetAllDeviceData()
+        {
+            this.GetTLFData();
+            this.GetLFData();
+            this.GetMTFData();
+            this.GetHallData();
+        }
 
         public IList<Device> GetTLFData()
         {
@@ -42,19 +51,10 @@ namespace FWA.Logic
                 ICriteria criteria = mySession.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__TF%"));
 
-                //criteria.SetProjection(Projections.ProjectionList()
-                //                .Add(Projections.Sum("Name")));
-
                 result = criteria.List<Device>();
 
-                foreach(Device d in result)
-                {
-                    // TODO: Group items
-                    // Probably need to save the whole collection somewhere else,
-                    // to make shure the items are not lost
-                }
-
             }
+            _con.TFData = result;
             return result;
         }
 
@@ -70,8 +70,10 @@ namespace FWA.Logic
                 result = criteria.List<Device>();
 
             }
+            _con.LFData = result;
             return result;
         }
+
         public IList<Device> GetMTFData()
         {
             IList<Device> result;
@@ -84,6 +86,7 @@ namespace FWA.Logic
                 result = criteria.List<Device>();
 
             }
+            _con.MFData = result;
             return result;
         }
 
@@ -99,6 +102,7 @@ namespace FWA.Logic
                 result = criteria.List<Device>();
 
             }
+            _con.HallData = result;
             return result;
         }
 
@@ -106,15 +110,33 @@ namespace FWA.Logic
         /// The parameter device is pushed to the database... Nobody saw that coming o_O
         /// </summary>
         /// <param name="device">The device to push</param>
-        public void PushDevice(Device device)
+        public void PushOrUpdateDevice(Device device)
         {
             //Not much to say here. Device is pushed to DB
             using (mySession.BeginTransaction())
             {
-                mySession.Save(device);
+
+                mySession.SaveOrUpdate(device);
                 mySession.Transaction.Commit();
             }
         }
+
+        //public void UpdateDevice(Device device)
+        //{
+        //    Device retr = mySession.Get<Device>(device.ID);
+        //    retr.Name = device.Name;
+        //    retr.InvNumber = device.InvNumber;
+        //    retr.AnnualChecks = device.AnnualChecks;
+        //    retr.Comment = device.Comment;
+        //    retr.KindOfCheck = device.KindOfCheck;
+        //    retr.NeedsCheckcard = device.NeedsCheckcard;
+
+        //    using (ITransaction trans = mySession.BeginTransaction())
+        //    {
+        //        mySession.Update(retr);
+        //        trans.Commit();
+        //    }
+        //}
 
         /// <summary>
         /// Basically does what the name promises. Goes through the generic list and pushes every Device in it
@@ -124,7 +146,7 @@ namespace FWA.Logic
         {
             foreach(Device d in list)
             {
-                this.PushDevice(d);
+                this.PushOrUpdateDevice(d);
             }
         }
 
@@ -217,6 +239,7 @@ namespace FWA.Logic
         }
 
         #endregion
+
         /// <summary>
         /// Closes all connections and disposes all inner objects
         /// </summary>

@@ -14,14 +14,15 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <AssemblyVersion>1.0.289.1125</AssemblyVersion>
+    <AssemblyVersion>1.0.308.1106</AssemblyVersion>
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
-    <AssemblyInfoFilePath>Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
+    <AssemblyInfoFilePath>..\FWA.Logic\Properties\AssemblyInfo.cs</AssemblyInfoFilePath>
     <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
     <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <AssemblyVersionSettings>None.IncrementOnDemandWithReset.Increment.TimeStamp</AssemblyVersionSettings>
-    <AssemblyFileVersionSettings>None.IncrementOnDemandWithReset.Increment.TimeStamp</AssemblyFileVersionSettings>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyInfoVersionSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

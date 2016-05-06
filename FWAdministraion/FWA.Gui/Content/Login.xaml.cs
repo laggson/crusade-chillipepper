@@ -33,7 +33,7 @@ namespace FWA.Gui.Content
                     // Get all the devices from the database, which are filled
                     // into the tables
                     _main.RefreshLoginName();
-                    _main.PullDeviceData();
+                    _main.Control.DBHandler.GetAllDeviceData();
                     this.Close();
                 }
                 else _main.MsgBox("Fehler", "Die Nutzerdaten waren ungültig.");

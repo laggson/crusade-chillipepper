@@ -16,31 +16,33 @@ namespace FWA.Gui
     {
         private Dictionary<string, FWControl> _tabs = new Dictionary<string, FWControl>();
 
-        
+        public MainWindow()
+        {
+            InitializeComponent();
+            Control = new CControl();
+            Control.TFDataChanged += Control_TFDataChanged;
+            Control.LFDataChanged += Control_LFDataChanged;
+            Control.MFDataChanged += Control_MFDataChanged;
+            Control.HallDataChanged += Control_HallDataChanged;
+
+            Tabs.Add("TLF", new FWControl(this));
+            Tabs.Add("LF", new FWControl(this));
+            //Tabs.Add("MTF", new FWControl(this));
+            Tabs.Add("Halle", new FWControl(this));
+            this.SetItemssource();
+
+        }
 
         public CControl Control
         {
             get; set;
         }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-            Control = new CControl();
-
-            Tabs.Add("TLF", new FWControl(this));
-            Tabs.Add("LF", new FWControl(this));
-            Tabs.Add("MTF", new FWControl(this));
-            Tabs.Add("Halle", new FWControl(this));
-            this.SetItemssource();
-            
-        }
-
         private void SetItemssource()
         {
             List<TabItem> test = new List<TabItem>();
 
-            foreach(var v in Tabs)
+            foreach (var v in Tabs)
             {
                 TabItem t = new TabItem();
                 t.Header = v.Key;
@@ -65,26 +67,6 @@ namespace FWA.Gui
             else TxtLogin.Text = "Nicht angemeldet";
         }
 
-        /// <summary>
-        /// The database is searched for the vehicle data. This will be stored in the
-        /// different tabs, to make them easier to be distinguished
-        /// </summary>
-        public void PullDeviceData()
-        {
-            FWControl usedTab;
-            Tabs.TryGetValue("TLF", out usedTab);
-            usedTab.Table.ItemsSource = Control.DBHandler.GetTLFData();
-
-            Tabs.TryGetValue("LF", out usedTab);
-            usedTab.Table.ItemsSource = Control.DBHandler.GetLFData();
-
-            Tabs.TryGetValue("MTF", out usedTab);
-            usedTab.Table.ItemsSource = Control.DBHandler.GetMTFData();
-
-            Tabs.TryGetValue("Halle", out usedTab);
-            usedTab.Table.ItemsSource = Control.DBHandler.GetHallData();
-        }
-
         public Dictionary<string, FWControl> Tabs
         {
             get
@@ -98,6 +80,35 @@ namespace FWA.Gui
         }
 
         #region Events
+
+        private void Control_TFDataChanged(object sender, EventArgs e)
+        {
+            FWControl usedTab;
+            Tabs.TryGetValue("TLF", out usedTab);
+            usedTab.Table.ItemsSource = Control.TFData;
+        }
+
+        private void Control_LFDataChanged(object sender, EventArgs e)
+        {
+            FWControl usedTab;
+            Tabs.TryGetValue("LF", out usedTab);
+            usedTab.Table.ItemsSource = Control.LFData;
+        }
+
+        private void Control_MFDataChanged(object sender, EventArgs e)
+        {
+            FWControl usedTab;
+            Tabs.TryGetValue("MTF", out usedTab);
+            if (usedTab != null)
+                usedTab.Table.ItemsSource = Control.MFData;
+        }
+
+        private void Control_HallDataChanged(object sender, EventArgs e)
+        {
+            FWControl usedTab;
+            Tabs.TryGetValue("Halle", out usedTab);
+            usedTab.Table.ItemsSource = Control.HallData;
+        }
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -118,9 +129,8 @@ namespace FWA.Gui
             string msg = "Sind sie sicher, dass sie den Benutzer " + Control.ConnectedUser?.Name + " abmelden wollen";
             var result = await this.ShowMessageAsync("Warnung", msg, MessageDialogStyle.AffirmativeAndNegative);
 
-            if( result == MessageDialogResult.Affirmative )
+            if (result == MessageDialogResult.Affirmative)
             {
-                // TODO: Clear all table data on logout
 
                 FWControl usedTab;
                 Tabs.TryGetValue("TLF", out usedTab);
@@ -175,7 +185,7 @@ namespace FWA.Gui
         /// <param name="e">The arguments concerning the pressed key, etc</param>
         private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if( (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && Keyboard.IsKeyDown(Key.Tab))
+            if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && Keyboard.IsKeyDown(Key.Tab))
             {
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                     this.LowerMenuIndex();
@@ -188,7 +198,7 @@ namespace FWA.Gui
         /// </summary>
         private void LowerMenuIndex()
         {
-            if(mainMenu.SelectedIndex == 0)
+            if (mainMenu.SelectedIndex == 0)
             {
                 mainMenu.SelectedIndex = mainMenu.Items.Count - 1;
             }
@@ -199,7 +209,7 @@ namespace FWA.Gui
         /// </summary>
         private void RaiseMenuIndex()
         {
-            if(mainMenu.SelectedIndex == mainMenu.Items.Count -1)
+            if (mainMenu.SelectedIndex == mainMenu.Items.Count - 1)
             {
                 mainMenu.SelectedIndex = 0;
             }

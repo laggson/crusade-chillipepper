@@ -451,3 +451,52 @@ Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2016-05-04T10:37:30.611307Z 97 [Note] Aborted connection 97 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
 2016-05-04T10:40:42.860808Z 98 [Note] Aborted connection 98 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
 2016-05-04T11:25:02.508822Z 99 [Note] Aborted connection 99 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T14:48:49.237486Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 11875828ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-05T09:31:35.065695Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 54342135ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-06T09:42:15.899901Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-06T09:42:15.900403Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2016-05-06T09:42:15.902402Z 0 [Note] mysqld (mysqld 5.7.12) starting as process 992 ...
+2016-05-06T09:42:15.950815Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-06T09:42:15.951815Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-06T09:42:15.952315Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-06T09:42:15.953315Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-06T09:42:15.957816Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-06T09:42:15.961816Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-06T09:42:16.030446Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2016-05-06T09:42:16.044966Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-06T09:42:16.288303Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-05-06T09:42:16.294323Z 0 [Note] InnoDB: Log scan progressed past the checkpoint lsn 3612914
+2016-05-06T09:42:16.295806Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 3612923
+2016-05-06T09:42:16.298410Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 3612923
+2016-05-06T09:42:16.298936Z 0 [Note] InnoDB: Database was not shutdown normally!
+2016-05-06T09:42:16.299936Z 0 [Note] InnoDB: Starting crash recovery.
+2016-05-06T09:42:16.921659Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2016-05-06T09:42:16.922658Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-05-06T09:42:16.926159Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-05-06T09:42:17.362317Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-05-06T09:42:17.378803Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-05-06T09:42:17.382804Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-05-06T09:42:17.386303Z 0 [Note] InnoDB: Waiting for purge to start
+2016-05-06T09:42:17.464877Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 3612923
+2016-05-06T09:42:17.465878Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\DB\ib_buffer_pool
+2016-05-06T09:42:17.467378Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-05-06T09:42:17.789141Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-05-06T09:42:17.798141Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-05-06T09:42:17.800657Z 0 [Note] IPv6 is available.
+2016-05-06T09:42:17.802141Z 0 [Note]   - '::' resolves to '::';
+2016-05-06T09:42:17.803653Z 0 [Note] Server socket created on IP: '::'.
+2016-05-06T09:42:18.004007Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160506 11:42:18
+2016-05-06T09:42:18.638054Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-05-06T09:42:18.640055Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.12'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-05-06T09:46:52.281509Z 8 [Note] Aborted connection 8 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T09:50:04.997916Z 9 [Note] Aborted connection 9 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T09:57:15.659957Z 11 [Note] Aborted connection 11 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T09:58:52.200705Z 12 [Note] Aborted connection 12 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:01:22.272184Z 13 [Note] Aborted connection 13 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:11:53.736114Z 14 [Note] Aborted connection 14 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:49:05.544755Z 15 [Note] Aborted connection 15 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:52:51.239531Z 16 [Note] Aborted connection 16 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:02:20.934941Z 17 [Note] Aborted connection 17 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:04:53.575209Z 19 [Note] Aborted connection 19 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:06:59.108618Z 20 [Note] Aborted connection 20 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)

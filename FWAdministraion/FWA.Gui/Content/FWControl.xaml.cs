@@ -29,9 +29,11 @@ namespace FWA.Gui.Content
             // Bsp: Ein Verkehrsleitkegel wird angezeigt, bei doppeklick sieht man liste mit allen 10
         }
 
-        private void Table_OnEditEnded(object sender, DataGridRowEditEndingEventArgs e)
+        private void Table_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            // TODO: Push the modified data to DB
+            // TODO: Transmitted Data has old value.
+            //       Must find a way to get the new one
+            _main.Control.DBHandler.PushOrUpdateDevice(e.Row.Item as FWA.Logic.Storage.Device);
         }
     }
 }
