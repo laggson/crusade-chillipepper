@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿#define Debug
+using MahApps.Metro.Controls.Dialogs;
 using CControl = FWA.Logic.Control;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -6,6 +7,10 @@ using System.Windows.Input;
 using FWA.Gui.Content;
 using System.Windows;
 using System;
+using System.Linq;
+using System.Diagnostics;
+using FWA.Logic.Storage;
+using System.Collections;
 
 namespace FWA.Gui
 {
@@ -25,10 +30,10 @@ namespace FWA.Gui
             Control.MFDataChanged += Control_MFDataChanged;
             Control.HallDataChanged += Control_HallDataChanged;
 
-            Tabs.Add("TLF", new FWControl(this));
-            Tabs.Add("LF", new FWControl(this));
-            //Tabs.Add("MTF", new FWControl(this));
-            Tabs.Add("Halle", new FWControl(this));
+            Tabs.Add("TLF", new FWControl(this, "TLF"));
+            Tabs.Add("LF", new FWControl(this, "LF"));
+            //Tabs.Add("MTF", new FWControl(this, "MTF"));
+            Tabs.Add("Halle", new FWControl(this, "Halle"));
             this.SetItemssource();
 
         }
@@ -36,6 +41,26 @@ namespace FWA.Gui
         public CControl Control
         {
             get; set;
+        }
+
+        public void Test(Device device, string name)
+        {
+            //The new Tab is created, named and added to the ItemsSource, which has to be assigned again.
+            List<TabItem> test = mainMenu.ItemsSource as List<TabItem>;
+            TabItem tab = new TabItem();
+            tab.Header = "Test " + device.Name;
+            test.Add(tab);
+            mainMenu.ItemsSource = null;
+            mainMenu.ItemsSource = test;
+
+            //The DeviceCheck is initialized and gets the data, filtered by name, as Itemssource
+            DeviceCheck controller = new DeviceCheck(tab);
+            List<Device> devices = Control.DevicesByName(device.Name, Control.DataListByName(name));
+
+            //Itemssource nicht devices, sondern iwas mit den checks :D
+            controller.Table.ItemsSource = devices;
+            tab.Content = controller;
+            mainMenu.SelectedItem = tab;
         }
 
         private void SetItemssource()
@@ -85,14 +110,14 @@ namespace FWA.Gui
         {
             FWControl usedTab;
             Tabs.TryGetValue("TLF", out usedTab);
-            usedTab.Table.ItemsSource = Control.TFData;
+            usedTab.Table.ItemsSource = Control.TrimList(Control.TFData);
         }
 
         private void Control_LFDataChanged(object sender, EventArgs e)
         {
             FWControl usedTab;
             Tabs.TryGetValue("LF", out usedTab);
-            usedTab.Table.ItemsSource = Control.LFData;
+            usedTab.Table.ItemsSource = Control.TrimList(Control.LFData);
         }
 
         private void Control_MFDataChanged(object sender, EventArgs e)
@@ -140,6 +165,7 @@ namespace FWA.Gui
                 usedTab.Table.ItemsSource = null;
 
                 Tabs.TryGetValue("MTF", out usedTab);
+                if(usedTab != null)
                 usedTab.Table.ItemsSource = null;
 
                 Tabs.TryGetValue("Halle", out usedTab);
@@ -148,6 +174,24 @@ namespace FWA.Gui
                 Control.ConnectedUser = null;
                 this.RefreshLoginName();
             }
+        }
+
+        public void logintemptestzeug()
+        {
+
+#if Debug
+            Control.ConnectedUser = new User()
+            {
+                ID = 0,
+                Name = "hs",
+                EMail = "hermann.schmidt24@freenet.de",
+                Hash = "$2a$06$T0lScnYf7KXijnGzshe74OHrpO5nJap3XwFaKTVBZIBzVX5ZnlRgu",
+                Salt = "$2a$06$T0lScnYf7KXijnGzshe74O",
+                AccountType = FWA.Logic.Storage.AccountType.User
+            };
+            this.RefreshLoginName();
+            Control.DBHandler.GetAllDeviceData();
+#endif
         }
 
         /// <summary>
@@ -170,6 +214,7 @@ namespace FWA.Gui
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = "FWAdministration v" + Control.GetVersion();
+            //this.logintemptestzeug();
         }
 
         #endregion
@@ -215,6 +260,6 @@ namespace FWA.Gui
             }
         }
 
-        #endregion
+#endregion
     }
 }

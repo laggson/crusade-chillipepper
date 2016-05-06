@@ -33,7 +33,7 @@
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
     <AssemblyVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyVersionSettings>
     <AssemblyFileVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyFileVersionSettings>
-    <AssemblyVersion>1.0.302.1101</AssemblyVersion>
+    <AssemblyVersion>1.0.343.1351</AssemblyVersion>
     <AssemblyInfoVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyInfoVersionSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -104,9 +104,11 @@
     <Compile Include="Control.cs" />
     <Compile Include="DBHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\Check.cs" />
     <Compile Include="Storage\Device.cs" />
     <Compile Include="Storage\IStorageItem.cs" />
     <Compile Include="Storage\User.cs" />
+    <Compile Include="Storage\YearCheck.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
