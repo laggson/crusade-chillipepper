@@ -9,7 +9,8 @@
       <property name="dialect">NHibernate.Dialect.MySQL5Dialect</property>
       <property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
       <property name="connection.driver_class">NHibernate.Driver.MySqlDataDriver</property>
-      <property name="connection.connection_string">Server=127.0.0.1;Database=fwadministration;Uid=root;Pwd=volks3wagen;</property>
+      <!-- <property name="connection.connection_string">Server=127.0.0.1;Database=fwadministration;Uid=fwuser;Pwd=th1sPWisN_ts4f3;charset=UTF8;</property> -->
+      <property name="connection.connection_string">Server=127.0.0.1;Database=fwadministration;Uid=root;Pwd=volks3-Wagen;</property>
       <property name="show_sql">true</property>
       <mapping assembly="FWA.Logic" />
     </session-factory>

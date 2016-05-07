@@ -361,3 +361,182 @@ Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2016-04-29T13:27:59.941902Z 7 [Note] Access denied for user 'root'@'localhost' (using password: NO)
 2016-04-29T13:31:23.501237Z 8 [Note] Aborted connection 8 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
 2016-04-29T13:39:02.432518Z 9 [Note] Aborted connection 9 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-04-29T14:17:02.929391Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-04-29T14:17:02.929391Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-04-29T14:17:02.931892Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe (mysqld 5.7.12-log) starting as process 10208 ...
+2016-04-29T14:17:02.945893Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-04-29T14:17:02.946894Z 0 [Note] InnoDB: Uses event mutexes
+2016-04-29T14:17:02.947393Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-04-29T14:17:02.948394Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-04-29T14:17:02.949894Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-04-29T14:17:02.952397Z 0 [Note] InnoDB: Number of pools: 1
+2016-04-29T14:17:02.953397Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-04-29T14:17:03.022904Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-04-29T14:17:03.025903Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-04-29T14:17:03.467075Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-04-29T14:17:03.485575Z 0 [Note] InnoDB: Log scan progressed past the checkpoint lsn 2614080
+2016-04-29T14:17:03.486575Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 2614089
+2016-04-29T14:17:03.488077Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 2614089
+2016-04-29T14:17:03.488583Z 0 [Note] InnoDB: Database was not shutdown normally!
+2016-04-29T14:17:03.489576Z 0 [Note] InnoDB: Starting crash recovery.
+2016-04-29T14:17:03.853637Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2016-04-29T14:17:03.855137Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-04-29T14:17:03.856637Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-04-29T14:17:04.056675Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-04-29T14:17:04.063175Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-04-29T14:17:04.064175Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-04-29T14:17:04.065682Z 0 [Note] InnoDB: Waiting for purge to start
+2016-04-29T14:17:04.117186Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 2614089
+2016-04-29T14:17:04.118684Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\DB\ib_buffer_pool
+2016-04-29T14:17:04.118684Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-04-29T14:17:04.182759Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-04-29T14:17:04.184760Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-04-29T14:17:04.185759Z 0 [Note] IPv6 is available.
+2016-04-29T14:17:04.186260Z 0 [Note]   - '::' resolves to '::';
+2016-04-29T14:17:04.186760Z 0 [Note] Server socket created on IP: '::'.
+2016-04-29T14:17:04.279772Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160429 16:17:04
+2016-04-29T14:17:04.362782Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-04-29T14:17:04.363782Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe: ready for connections.
+Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-04-29T15:02:34.987570Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 2275605ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-04-29T16:02:48.158228Z 16 [Note] Aborted connection 16 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-04-29T18:39:55.969442Z 33 [Note] Aborted connection 33 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-04-30T07:54:30.731647Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 32027967ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-04-30T19:05:10.117042Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 15873107ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-02T09:20:37.998935Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 128559642ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-02T10:15:37.003992Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 3287174ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-02T18:40:37.503161Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 7015378ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-03T08:08:03.188090Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 36644397ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-03T10:13:16.985562Z 44 [Note] Access denied for user 'fwuser'@'localhost' (using password: YES)
+2016-05-03T10:14:05.279919Z 47 [Note] Access denied for user 'fwuser'@'localhost' (using password: YES)
+2016-05-03T10:15:04.497885Z 48 [Note] Access denied for user 'fwuser@%'@'localhost' (using password: YES)
+2016-05-03T10:15:43.319506Z 49 [Note] Access denied for user 'fwuser'@'localhost' (using password: YES)
+2016-05-03T10:16:27.545346Z 50 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-03T10:17:52.127450Z 51 [Note] Aborted connection 51 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T10:19:12.902024Z 52 [Note] Aborted connection 52 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T10:20:55.573788Z 53 [Note] Aborted connection 53 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T10:25:51.942569Z 54 [Note] Aborted connection 54 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T10:36:27.876141Z 55 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-03T10:36:28.262690Z 56 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-03T10:44:47.144186Z 59 [Note] Aborted connection 59 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T10:46:03.208903Z 60 [Note] Aborted connection 60 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T10:53:44.436892Z 61 [Note] Aborted connection 61 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T11:10:03.403565Z 64 [Note] Aborted connection 64 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T11:13:40.056807Z 65 [Note] Aborted connection 65 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T11:28:41.873061Z 66 [Note] Aborted connection 66 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T13:12:58.511645Z 67 [Note] Aborted connection 67 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T13:35:11.880748Z 68 [Note] Aborted connection 68 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T13:35:54.624163Z 69 [Note] Aborted connection 69 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T13:37:39.188804Z 70 [Note] Aborted connection 70 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T15:29:08.833852Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 1641755ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-03T15:39:59.330624Z 73 [Note] Aborted connection 73 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T15:42:50.969009Z 74 [Note] Aborted connection 74 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T15:50:15.089049Z 75 [Note] Aborted connection 75 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T15:53:00.552937Z 76 [Note] Aborted connection 76 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T16:36:56.908279Z 77 [Note] Aborted connection 77 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T16:38:16.416202Z 78 [Note] Aborted connection 78 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-03T17:21:52.344431Z 79 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-03T17:22:38.654337Z 80 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-03T17:22:54.034538Z 83 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-04T08:50:31.150953Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 36760541ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-04T08:57:08.253702Z 86 [Note] Aborted connection 86 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T08:59:25.984571Z 89 [Note] Aborted connection 89 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T09:01:08.104936Z 90 [Note] Aborted connection 90 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T09:01:30.025005Z 91 [Note] Aborted connection 91 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:16:29.719825Z 92 [Note] Aborted connection 92 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:30:30.250839Z 93 [Note] Aborted connection 93 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:31:42.179975Z 94 [Note] Aborted connection 94 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:33:42.055187Z 95 [Note] Aborted connection 95 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:36:48.976444Z 96 [Note] Aborted connection 96 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:37:30.611307Z 97 [Note] Aborted connection 97 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T10:40:42.860808Z 98 [Note] Aborted connection 98 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T11:25:02.508822Z 99 [Note] Aborted connection 99 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-04T14:48:49.237486Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 11875828ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-05T09:31:35.065695Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 54342135ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-06T09:42:15.899901Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-06T09:42:15.900403Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2016-05-06T09:42:15.902402Z 0 [Note] mysqld (mysqld 5.7.12) starting as process 992 ...
+2016-05-06T09:42:15.950815Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-06T09:42:15.951815Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-06T09:42:15.952315Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-06T09:42:15.953315Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-06T09:42:15.957816Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-06T09:42:15.961816Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-06T09:42:16.030446Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2016-05-06T09:42:16.044966Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-06T09:42:16.288303Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-05-06T09:42:16.294323Z 0 [Note] InnoDB: Log scan progressed past the checkpoint lsn 3612914
+2016-05-06T09:42:16.295806Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 3612923
+2016-05-06T09:42:16.298410Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 3612923
+2016-05-06T09:42:16.298936Z 0 [Note] InnoDB: Database was not shutdown normally!
+2016-05-06T09:42:16.299936Z 0 [Note] InnoDB: Starting crash recovery.
+2016-05-06T09:42:16.921659Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2016-05-06T09:42:16.922658Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-05-06T09:42:16.926159Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-05-06T09:42:17.362317Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-05-06T09:42:17.378803Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-05-06T09:42:17.382804Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-05-06T09:42:17.386303Z 0 [Note] InnoDB: Waiting for purge to start
+2016-05-06T09:42:17.464877Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 3612923
+2016-05-06T09:42:17.465878Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\DB\ib_buffer_pool
+2016-05-06T09:42:17.467378Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-05-06T09:42:17.789141Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-05-06T09:42:17.798141Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-05-06T09:42:17.800657Z 0 [Note] IPv6 is available.
+2016-05-06T09:42:17.802141Z 0 [Note]   - '::' resolves to '::';
+2016-05-06T09:42:17.803653Z 0 [Note] Server socket created on IP: '::'.
+2016-05-06T09:42:18.004007Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160506 11:42:18
+2016-05-06T09:42:18.638054Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-05-06T09:42:18.640055Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.12'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-05-06T09:46:52.281509Z 8 [Note] Aborted connection 8 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T09:50:04.997916Z 9 [Note] Aborted connection 9 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T09:57:15.659957Z 11 [Note] Aborted connection 11 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T09:58:52.200705Z 12 [Note] Aborted connection 12 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:01:22.272184Z 13 [Note] Aborted connection 13 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:11:53.736114Z 14 [Note] Aborted connection 14 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:49:05.544755Z 15 [Note] Aborted connection 15 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T10:52:51.239531Z 16 [Note] Aborted connection 16 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:02:20.934941Z 17 [Note] Aborted connection 17 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:04:53.575209Z 19 [Note] Aborted connection 19 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:06:59.108618Z 20 [Note] Aborted connection 20 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:39:03.668216Z 21 [Note] Aborted connection 21 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:40:54.530122Z 22 [Note] Aborted connection 22 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T11:58:56.198384Z 24 [Note] Aborted connection 24 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:06:17.792082Z 25 [Note] Aborted connection 25 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:08:24.272463Z 26 [Note] Aborted connection 26 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:16:57.303949Z 27 [Note] Aborted connection 27 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:19:56.237145Z 28 [Note] Aborted connection 28 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:20:23.778206Z 29 [Note] Aborted connection 29 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:20:41.292902Z 30 [Note] Aborted connection 30 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:22:02.901108Z 32 [Note] Aborted connection 32 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:22:56.502979Z 33 [Note] Aborted connection 33 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T12:52:59.299782Z 34 [Note] Aborted connection 34 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:09:42.726433Z 36 [Note] Aborted connection 36 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:10:31.191675Z 37 [Note] Aborted connection 37 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:11:05.172586Z 38 [Note] Aborted connection 38 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:14:19.812702Z 39 [Note] Aborted connection 39 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:15:14.776132Z 40 [Note] Aborted connection 40 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:15:43.237834Z 41 [Note] Aborted connection 41 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:17:38.175123Z 42 [Note] Aborted connection 42 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:19:22.315247Z 43 [Note] Aborted connection 43 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:20:55.862445Z 44 [Note] Aborted connection 44 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:21:36.954657Z 45 [Note] Aborted connection 45 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:21:59.832734Z 46 [Note] Aborted connection 46 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:24:59.875264Z 47 [Note] Aborted connection 47 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:34:43.024402Z 49 [Note] Aborted connection 49 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:49:44.813749Z 51 [Note] Aborted connection 51 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:50:17.957912Z 52 [Note] Aborted connection 52 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:50:59.571598Z 53 [Note] Aborted connection 53 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T13:51:29.675998Z 54 [Note] Aborted connection 54 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:23:20.077101Z 55 [Note] Aborted connection 55 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:24:03.328367Z 56 [Note] Aborted connection 56 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:25:49.098866Z 57 [Note] Aborted connection 57 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:28:50.793357Z 58 [Note] Aborted connection 58 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:29:34.323678Z 59 [Note] Aborted connection 59 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:36:58.195990Z 60 [Note] Aborted connection 60 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T14:53:55.206942Z 62 [Note] Aborted connection 62 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T15:00:13.988297Z 63 [Note] Aborted connection 63 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T15:01:02.633238Z 64 [Note] Aborted connection 64 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T15:01:54.601008Z 65 [Note] Aborted connection 65 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2016-05-06T15:06:09.336482Z 66 [Note] Aborted connection 66 to db: 'fwadministration' user: 'root' host: 'localhost' (Got an error reading communication packets)

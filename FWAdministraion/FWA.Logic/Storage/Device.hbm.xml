@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="FWA.Logic"
+                   namespace="FWA.Logic.Storage">
+
+  <class name="Device" table="devices">
+    <id name="ID" column="DeviceID">
+      <generator class="native"/>
+    </id>
+    <property name="Name" column="DeviceName" />
+    <property name="InvNumber" column="DeviceInvNumber" />
+    <property name="AnnualChecks" column="DeviceAnnualChecks" />
+    <property name="NeedsCheckcard" column="DeviceNeedsCheckcard" />
+    <property name="KindOfCheck" column="DeviceKindOfCheck" />
+    <property name="Comment" column="DeviceComment" />
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="FWA.Logic"
+                   namespace="FWA.Logic.Storage">
+
+  <class name="User" table="Users">
+    <id name="ID" column="UserID">
+      <generator class="native"/>
+    </id>
+    <property name="Name" column="UserName" />
+    <property name="EMail" column="UserEMail" />
+    <property name="Hash" column="UserPwHash" />
+    <property name="Salt" column="UserSalt" />
+    <property name="AccountType" column="AccountTypeID" />
+  </class>
+
+</hibernate-mapping>
