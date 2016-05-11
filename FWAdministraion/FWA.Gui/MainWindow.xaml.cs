@@ -243,7 +243,7 @@ namespace FWA.Gui
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = "FWAdministration v" + Control.GetVersion();
-            this.logintemptestzeug();
+            //this.logintemptestzeug();
         }
 
         #endregion
