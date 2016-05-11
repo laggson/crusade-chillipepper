@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using FWA.Logic.Storage;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace FWA.Gui.Content
@@ -18,6 +19,11 @@ namespace FWA.Gui.Content
 
         private void ButtonFinish_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Änderungen in DB speichern
+            foreach(Check c in Table.Items)
+            {
+                _parent.Control.DBHandler.PushOrUpdateCheck(c);
+            }
             _parent.CloseTab(this.GetHashCode());
         }
 
@@ -39,6 +45,10 @@ namespace FWA.Gui.Content
 
                 case "Comment":
                     e.Column.IsReadOnly = false;
+                    break;
+
+                default:
+                    e.Column.IsReadOnly = true;
                     break;
                     
             }

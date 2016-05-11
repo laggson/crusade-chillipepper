@@ -27,6 +27,8 @@ namespace FWA.Logic
             _con = con;
             myConfiguration = new Configuration();
             myConfiguration.Configure();
+            myConfiguration.AddAssembly(typeof(Check).Assembly);
+            new NHibernate.Tool.hbm2ddl.SchemaExport(myConfiguration).Execute(false, true, false);
             mySessionFactory = myConfiguration.BuildSessionFactory();
             mySession = mySessionFactory.OpenSession();
             mySession.FlushMode = FlushMode.Commit;
@@ -147,6 +149,28 @@ namespace FWA.Logic
             foreach(Device d in list)
             {
                 this.PushOrUpdateDevice(d);
+            }
+        }
+
+        #endregion
+
+        #region Check-Transmission
+
+        public void PushOrUpdateCheck(Check check)
+        {
+            using (mySession.BeginTransaction())
+            {
+                //Not much to say here. Check is pushed to DB
+                mySession.SaveOrUpdate(check);
+                mySession.Transaction.Commit();
+            }
+        }
+
+        public void PushListOfChecks(List<Check> list)
+        {
+            foreach(Check c in list)
+            {
+                this.PushOrUpdateCheck(c);
             }
         }
 

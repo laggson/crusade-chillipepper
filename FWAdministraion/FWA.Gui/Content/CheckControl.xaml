@@ -24,7 +24,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" x:Name="Table" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Single" AutoGeneratingColumn="Table_AutoGeneratingColumns" />
+        <DataGrid Grid.Row="0" x:Name="Table" ItemsSource="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="False" SelectionMode="Single" AutoGeneratingColumn="Table_AutoGeneratingColumns" />
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
