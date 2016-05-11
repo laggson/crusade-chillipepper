@@ -16,10 +16,9 @@ namespace FWA.Logic
     /// </summary>
     public class DBHandler : IDisposable
     {
-        private Configuration myConfiguration;
-        private ISessionFactory mySessionFactory;
-        private ISession mySession;
-        private Control _con;
+        private readonly Configuration myConfiguration;
+        private readonly ISessionFactory mySessionFactory;
+        private readonly Control _con;
 
         public DBHandler(Control con)
         {
@@ -30,8 +29,60 @@ namespace FWA.Logic
             myConfiguration.AddAssembly(typeof(Check).Assembly);
             new NHibernate.Tool.hbm2ddl.SchemaExport(myConfiguration).Execute(false, true, false);
             mySessionFactory = myConfiguration.BuildSessionFactory();
-            mySession = mySessionFactory.OpenSession();
-            mySession.FlushMode = FlushMode.Commit;
+        }
+
+        public void Insert(object obj, InsertionMode mode = InsertionMode.SaveOrUpdate, ISession session = null)
+        {
+            Execute(x =>
+            {
+                switch (mode)
+                {
+                    case InsertionMode.Save:
+                        x.Save(obj); break;
+                    case InsertionMode.Update:
+                        x.Update(obj); break;
+                    default:
+                        x.SaveOrUpdate(obj); break;
+                }
+            }, session);
+        }
+
+        public void Execute(Action<ISession> action, ISession session = null)
+        {
+            ExecuteFunc(x =>
+            {
+                action.Invoke(x); return true;
+            }, session);
+        }
+
+        public T ExecuteFunc<T>(Func<ISession, T> func, ISession session = null)
+        {
+            ITransaction transaction = null;
+            bool newSession = false;
+            try
+            {
+                if (session == null)
+                {
+                    mySessionFactory.OpenSession();
+                    newSession = true;
+                }
+
+                transaction = session.BeginTransaction();
+                var result = func.Invoke(session);
+                transaction.Commit();
+                return result;
+            }
+            catch
+            {
+                if (transaction != null)
+                    transaction.Rollback();
+                throw;
+            }
+            finally
+            {
+                if (newSession && session != null)
+                    session.Close();
+            }
         }
 
         #region Device-Transmission
@@ -46,64 +97,57 @@ namespace FWA.Logic
 
         public IList<Device> GetTLFData()
         {
-            IList<Device> result;
-
-            using (mySession.BeginTransaction())
+            var result = ExecuteFunc(session =>
             {
-                ICriteria criteria = mySession.CreateCriteria<Device>()
+                ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__TF%"));
 
-                result = criteria.List<Device>();
+                return criteria.List<Device>();
+            });
 
-            }
             _con.TFData = result;
             return result;
         }
 
         public IList<Device> GetLFData()
         {
-            IList<Device> result;
-
-            using (mySession.BeginTransaction())
+            var result = ExecuteFunc(session =>
             {
-                ICriteria criteria = mySession.CreateCriteria<Device>()
+                ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__LF%"));
 
-                result = criteria.List<Device>();
+                return criteria.List<Device>();
+            });
 
-            }
             _con.LFData = result;
             return result;
         }
 
         public IList<Device> GetMTFData()
         {
-            IList<Device> result;
-
-            using (mySession.BeginTransaction())
+            var result = ExecuteFunc(session =>
             {
-                ICriteria criteria = mySession.CreateCriteria<Device>()
+                ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__MF%"));
 
-                result = criteria.List<Device>();
+                return criteria.List<Device>();
+            });
 
-            }
             _con.MFData = result;
             return result;
         }
 
         public IList<Device> GetHallData()
         {
-            IList<Device> result;
-
-            using (mySession.BeginTransaction())
+            var result = ExecuteFunc(session =>
             {
-                ICriteria criteria = mySession.CreateCriteria<Device>()
+                ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Eq("InvNumber", string.Empty));
 
-                result = criteria.List<Device>();
+                return criteria.List<Device>();
+            });
 
-            }
+
             _con.HallData = result;
             return result;
         }
@@ -115,30 +159,8 @@ namespace FWA.Logic
         public void PushOrUpdateDevice(Device device)
         {
             //Not much to say here. Device is pushed to DB
-            using (mySession.BeginTransaction())
-            {
-
-                mySession.SaveOrUpdate(device);
-                mySession.Transaction.Commit();
-            }
+            Execute(session => session.SaveOrUpdate(device));
         }
-
-        //public void UpdateDevice(Device device)
-        //{
-        //    Device retr = mySession.Get<Device>(device.ID);
-        //    retr.Name = device.Name;
-        //    retr.InvNumber = device.InvNumber;
-        //    retr.AnnualChecks = device.AnnualChecks;
-        //    retr.Comment = device.Comment;
-        //    retr.KindOfCheck = device.KindOfCheck;
-        //    retr.NeedsCheckcard = device.NeedsCheckcard;
-
-        //    using (ITransaction trans = mySession.BeginTransaction())
-        //    {
-        //        mySession.Update(retr);
-        //        trans.Commit();
-        //    }
-        //}
 
         /// <summary>
         /// Basically does what the name promises. Goes through the generic list and pushes every Device in it
@@ -146,7 +168,7 @@ namespace FWA.Logic
         /// <param name="list">What would you guess this is for? :D</param>
         public void PushListOfDevices(List<Device> list)
         {
-            foreach(Device d in list)
+            foreach (Device d in list)
             {
                 this.PushOrUpdateDevice(d);
             }
@@ -158,17 +180,12 @@ namespace FWA.Logic
 
         public void PushOrUpdateCheck(Check check)
         {
-            using (mySession.BeginTransaction())
-            {
-                //Not much to say here. Check is pushed to DB
-                mySession.SaveOrUpdate(check);
-                mySession.Transaction.Commit();
-            }
+            Execute(session => session.SaveOrUpdate(check));
         }
 
         public void PushListOfChecks(List<Check> list)
         {
-            foreach(Check c in list)
+            foreach (Check c in list)
             {
                 this.PushOrUpdateCheck(c);
             }
@@ -195,23 +212,15 @@ namespace FWA.Logic
             string salt = Crypter.Blowfish.GenerateSalt();
             string pwHash = Crypter.Blowfish.Crypt(pwBytes, salt);
 
-            User user;
-
-            using (mySession.BeginTransaction())
+            var user = new User
             {
-                //Creating a User object with the entered Data and the encryption
-                user = new User
-                {
-                    Name = name,
-                    EMail = email,
-                    Hash = pwHash,
-                    Salt = salt
-                };
+                Name = name,
+                EMail = email,
+                Hash = pwHash,
+                Salt = salt
+            };
 
-                //NHibernate pushes the object to my Database, at the end of using-clause all resources are recycled
-                mySession.Save(user);
-                mySession.Transaction.Commit();
-            }
+            Insert(user, InsertionMode.Save);
 
             return user;
         }
@@ -225,41 +234,29 @@ namespace FWA.Logic
         /// <returns></returns>
         public bool UserDataCorrect(string name, string password)
         {
-            User user;
-
-            using (mySession.BeginTransaction())
+            //All items in the user table matching the criteria go here
+            var list = ExecuteFunc(session => 
             {
-                string searching = string.Empty;
+                var criteria = session.CreateCriteria<User>()
+                                .Add(Restrictions.Eq(name.Contains("@") ? "EMail" : "Name", name));
+                return criteria.List<User>();
+            });
 
-                //Is the entered name an email address?
-                if (name.Contains("@"))
-                    searching = "EMail";
-                else searching = "Name";
+            //if there was one user matching the details (which should be) the data is stored for next steps
+            var user = list.Single();
 
-                //Declaring a Criteria the database is to be searched for, either mail or name
-                ICriteria criteria = mySession.CreateCriteria<User>()
-                    .Add(Restrictions.Eq(searching, name));
-
-                //All items in the user table matching the criteria go here
-                IList<User> list = criteria.List<User>();
-
-                //if there was one user matching the details (which should be) the data is stored for next steps
-                user = list.Single();
-               
-                mySession.Transaction.Commit();
-            }
 
             //Entered password is again put into Byte[] to be encrypted with the same salt again
             var pwBytes = Encoding.UTF8.GetBytes(password.ToCharArray());
             string localHash = Crypter.Blowfish.Crypt(pwBytes, user.Salt);
 
-            //If both hashes are the same, we can be shure that the entered password is correct
+            //If both hashes are the same, we can be sure that the entered password is correct
             if (localHash.Equals(user.Hash))
             {
                 _con.ConnectedUser = user;
                 return true;
             }
-            else return false;
+            return false;
         }
 
         #endregion
@@ -269,9 +266,12 @@ namespace FWA.Logic
         /// </summary>
         public void Dispose()
         {
-            mySession.Disconnect();
-            mySession.Dispose();
             mySessionFactory.Dispose();
         }
+    }
+
+    public enum InsertionMode
+    {
+        Save, Update, SaveOrUpdate
     }
 }
