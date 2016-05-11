@@ -7,6 +7,11 @@ using System.Text;
 using CryptSharp;
 using NHibernate;
 using System;
+using FluentNHibernate.Cfg;
+using System.Reflection;
+using FWA.Logic.Mappings;
+using NHibernate.Tool.hbm2ddl;
+using FluentNHibernate.Cfg.Db;
 
 namespace FWA.Logic
 {
@@ -14,75 +19,14 @@ namespace FWA.Logic
     /// Handles everything a database connection is used for
     /// Controls user transmitting as well as device transmitting
     /// </summary>
-    public class DBHandler : IDisposable
+    public class DBHandler
     {
-        private readonly Configuration myConfiguration;
-        private readonly ISessionFactory mySessionFactory;
         private readonly Control _con;
 
         public DBHandler(Control con)
         {
             //Initializing NHibernate's necessary Objects
             _con = con;
-            myConfiguration = new Configuration();
-            myConfiguration.Configure();
-            myConfiguration.AddAssembly(typeof(Check).Assembly);
-            new NHibernate.Tool.hbm2ddl.SchemaExport(myConfiguration).Execute(false, true, false);
-            mySessionFactory = myConfiguration.BuildSessionFactory();
-        }
-
-        public void Insert(object obj, InsertionMode mode = InsertionMode.SaveOrUpdate, ISession session = null)
-        {
-            Execute(x =>
-            {
-                switch (mode)
-                {
-                    case InsertionMode.Save:
-                        x.Save(obj); break;
-                    case InsertionMode.Update:
-                        x.Update(obj); break;
-                    default:
-                        x.SaveOrUpdate(obj); break;
-                }
-            }, session);
-        }
-
-        public void Execute(Action<ISession> action, ISession session = null)
-        {
-            ExecuteFunc(x =>
-            {
-                action.Invoke(x); return true;
-            }, session);
-        }
-
-        public T ExecuteFunc<T>(Func<ISession, T> func, ISession session = null)
-        {
-            ITransaction transaction = null;
-            bool newSession = false;
-            try
-            {
-                if (session == null)
-                {
-                    mySessionFactory.OpenSession();
-                    newSession = true;
-                }
-
-                transaction = session.BeginTransaction();
-                var result = func.Invoke(session);
-                transaction.Commit();
-                return result;
-            }
-            catch
-            {
-                if (transaction != null)
-                    transaction.Rollback();
-                throw;
-            }
-            finally
-            {
-                if (newSession && session != null)
-                    session.Close();
-            }
         }
 
         #region Device-Transmission
@@ -97,7 +41,7 @@ namespace FWA.Logic
 
         public IList<Device> GetTLFData()
         {
-            var result = ExecuteFunc(session =>
+            var result = DBAccess.ExecuteFunc(session =>
             {
                 ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__TF%"));
@@ -111,7 +55,7 @@ namespace FWA.Logic
 
         public IList<Device> GetLFData()
         {
-            var result = ExecuteFunc(session =>
+            var result = DBAccess.ExecuteFunc(session =>
             {
                 ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__LF%"));
@@ -125,7 +69,7 @@ namespace FWA.Logic
 
         public IList<Device> GetMTFData()
         {
-            var result = ExecuteFunc(session =>
+            var result = DBAccess.ExecuteFunc(session =>
             {
                 ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Like("InvNumber", "__MF%"));
@@ -139,7 +83,7 @@ namespace FWA.Logic
 
         public IList<Device> GetHallData()
         {
-            var result = ExecuteFunc(session =>
+            var result = DBAccess.ExecuteFunc(session =>
             {
                 ICriteria criteria = session.CreateCriteria<Device>()
                     .Add(Restrictions.Eq("InvNumber", string.Empty));
@@ -159,7 +103,7 @@ namespace FWA.Logic
         public void PushOrUpdateDevice(Device device)
         {
             //Not much to say here. Device is pushed to DB
-            Execute(session => session.SaveOrUpdate(device));
+            DBAccess.Insert(device);
         }
 
         /// <summary>
@@ -180,7 +124,7 @@ namespace FWA.Logic
 
         public void PushOrUpdateCheck(Check check)
         {
-            Execute(session => session.SaveOrUpdate(check));
+            DBAccess.Insert(check);
         }
 
         public void PushListOfChecks(List<Check> list)
@@ -220,7 +164,7 @@ namespace FWA.Logic
                 Salt = salt
             };
 
-            Insert(user, InsertionMode.Save);
+            DBAccess.Insert(user, InsertionMode.Save);
 
             return user;
         }
@@ -235,7 +179,7 @@ namespace FWA.Logic
         public bool UserDataCorrect(string name, string password)
         {
             //All items in the user table matching the criteria go here
-            var list = ExecuteFunc(session => 
+            var list = DBAccess.ExecuteFunc(session =>
             {
                 var criteria = session.CreateCriteria<User>()
                                 .Add(Restrictions.Eq(name.Contains("@") ? "EMail" : "Name", name));
@@ -260,14 +204,6 @@ namespace FWA.Logic
         }
 
         #endregion
-
-        /// <summary>
-        /// Closes all connections and disposes all inner objects
-        /// </summary>
-        public void Dispose()
-        {
-            mySessionFactory.Dispose();
-        }
     }
 
     public enum InsertionMode

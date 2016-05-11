@@ -17,9 +17,11 @@ namespace FWA.Logic
         public event DataListChanged MFDataChanged;
         public event DataListChanged HallDataChanged;
 
+        private readonly DBHandler handler;
+
         public Control()
         {
-
+            handler = new DBHandler(this);
         }
 
         public IList<Device> DataListByName(string name)
@@ -47,7 +49,7 @@ namespace FWA.Logic
         /// <returns></returns>
         public List<Device> DevicesByName(string name, IList<Device> source)
         {
-            List<Device> list = new List<Device>();
+            var list = new List<Device>();
 
             foreach(Device d in source)
             {
@@ -65,7 +67,7 @@ namespace FWA.Logic
         /// <returns></returns>
         public List<Device> TrimList(IList<Device> source)
         {
-            List<Device> list = new List<Device>();
+            var list = new List<Device>();
 
             foreach(Device d in source)
             {
@@ -89,7 +91,7 @@ namespace FWA.Logic
         {
             get
             {
-                return new DBHandler(this);
+                return handler;
             }
         }
 
