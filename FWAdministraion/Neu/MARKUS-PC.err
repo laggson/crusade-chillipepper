@@ -1,0 +1,283 @@
+2016-05-12T13:35:18.564804Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:35:18.565312Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-12T13:35:20.113140Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2016-05-12T13:35:20.474825Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2016-05-12T13:35:20.633633Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 5f424b4c-1846-11e6-89d3-902b349d4617.
+2016-05-12T13:35:20.707694Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2016-05-12T13:35:20.721196Z 1 [Note] A temporary password is generated for root@localhost: 7t%U-LhrEdd3
+2016-05-12T13:36:44.722356Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:36:44.722356Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-12T13:36:44.742204Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe (mysqld 5.7.12-log) starting as process 4220 ...
+2016-05-12T13:36:44.756167Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T13:36:44.757168Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T13:36:44.758168Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T13:36:44.758668Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T13:36:44.759668Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-05-12T13:36:44.761669Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T13:36:44.762169Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T13:36:44.840760Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-05-12T13:36:44.843235Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T13:36:44.901710Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-05-12T13:36:45.138122Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-05-12T13:36:45.140625Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-05-12T13:36:45.281185Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-05-12T13:36:45.287185Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-05-12T13:36:45.288686Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-05-12T13:36:45.289686Z 0 [Note] InnoDB: Waiting for purge to start
+2016-05-12T13:36:45.348274Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 2523366
+2016-05-12T13:36:45.349758Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-05-12T13:36:45.349758Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\Neu\ib_buffer_pool
+2016-05-12T13:36:45.366818Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-05-12T13:36:45.368318Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-05-12T13:36:45.369318Z 0 [Note] IPv6 is available.
+2016-05-12T13:36:45.369818Z 0 [Note]   - '::' resolves to '::';
+2016-05-12T13:36:45.370818Z 0 [Note] Server socket created on IP: '::'.
+2016-05-12T13:36:45.392321Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160512 15:36:45
+2016-05-12T13:36:45.482845Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-05-12T13:36:45.483347Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe: ready for connections.
+Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-05-12T13:36:46.627908Z 2 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:37:07.934734Z 3 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:37:08.033587Z 4 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:37:10.882056Z 5 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:37:16.116561Z 6 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:37:17.219899Z 7 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:37:17.235397Z 8 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:37:19.720275Z 9 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:40:03.772091Z 11 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:40:12.597494Z 12 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:40:58.341360Z 13 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:41:22.376735Z 14 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:41:29.717348Z 15 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:41:34.333742Z 16 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:41:44.366047Z 17 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:46:15.436886Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:46:15.436886Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2016-05-12T13:46:15.437413Z 0 [Note] mysqld (mysqld 5.7.12) starting as process 10436 ...
+2016-05-12T13:46:15.454389Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T13:46:15.456389Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T13:46:15.456890Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T13:46:15.458390Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T13:46:15.460390Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T13:46:15.461390Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T13:46:15.537978Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2016-05-12T13:46:15.553498Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T13:46:15.649562Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-05-12T13:46:15.671067Z 0 [Note] InnoDB: Log scan progressed past the checkpoint lsn 2523385
+2016-05-12T13:46:15.672081Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 2523394
+2016-05-12T13:46:15.675066Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 2523394
+2016-05-12T13:46:15.676066Z 0 [Note] InnoDB: Database was not shutdown normally!
+2016-05-12T13:46:15.677066Z 0 [Note] InnoDB: Starting crash recovery.
+2016-05-12T13:46:15.986724Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2016-05-12T13:46:15.988224Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-05-12T13:46:15.989724Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-05-12T13:46:16.125274Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-05-12T13:46:16.131778Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-05-12T13:46:16.132778Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-05-12T13:46:16.134278Z 0 [Note] InnoDB: Waiting for purge to start
+2016-05-12T13:46:16.192798Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 2523394
+2016-05-12T13:46:16.193798Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\Neu\ib_buffer_pool
+2016-05-12T13:46:16.194297Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-05-12T13:46:16.254831Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-05-12T13:46:16.259805Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-05-12T13:46:16.260803Z 0 [Note] IPv6 is available.
+2016-05-12T13:46:16.261303Z 0 [Note]   - '::' resolves to '::';
+2016-05-12T13:46:16.262303Z 0 [Note] Server socket created on IP: '::'.
+2016-05-12T13:46:16.290834Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160512 15:46:16
+2016-05-12T13:46:16.370358Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-05-12T13:46:16.371358Z 0 [Note] Execution of init_file 'C:\test.txt' started.
+2016-05-12T13:46:16.373359Z 0 [Note] Execution of init_file 'C:\test.txt' ended.
+2016-05-12T13:46:16.374359Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.12'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-05-12T13:47:58.989431Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:47:58.989931Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2016-05-12T13:47:58.989931Z 0 [Note] mysqld (mysqld 5.7.12) starting as process 804 ...
+2016-05-12T13:47:59.007433Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T13:47:59.008433Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T13:47:59.009433Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T13:47:59.010433Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T13:47:59.011935Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T13:47:59.012934Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T13:47:59.092444Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2016-05-12T13:47:59.108446Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T13:47:59.127949Z 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2016-05-12T13:47:59.128949Z 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2016-05-12T13:47:59.129949Z 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2016-05-12T13:47:59.332476Z 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2016-05-12T13:47:59.333477Z 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2016-05-12T13:47:59.333975Z 0 [ERROR] Failed to initialize plugins.
+2016-05-12T13:47:59.334975Z 0 [ERROR] Aborting
+
+2016-05-12T13:47:59.335477Z 0 [Note] Binlog end
+2016-05-12T13:47:59.336477Z 0 [Note] Shutting down plugin 'CSV'
+2016-05-12T13:47:59.337475Z 0 [Note] mysqld: Shutdown complete
+
+2016-05-12T13:49:13.944256Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:49:13.944755Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-12T13:49:13.946767Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld (mysqld 5.7.12-log) starting as process 824 ...
+2016-05-12T13:49:13.959785Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T13:49:13.960805Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T13:49:13.961285Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T13:49:13.962284Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T13:49:13.963283Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-05-12T13:49:13.964785Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T13:49:13.964785Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T13:49:14.033228Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-05-12T13:49:14.035728Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T13:49:14.052753Z 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2016-05-12T13:49:14.053756Z 0 [ERROR] InnoDB: The innodb_system data file 'ibdata1' must be writable
+2016-05-12T13:49:14.054746Z 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2016-05-12T13:49:14.258616Z 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2016-05-12T13:49:14.260617Z 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2016-05-12T13:49:14.262617Z 0 [ERROR] Failed to initialize plugins.
+2016-05-12T13:49:14.264618Z 0 [ERROR] Aborting
+
+2016-05-12T13:49:14.266119Z 0 [Note] Binlog end
+2016-05-12T13:49:14.267118Z 0 [Note] Shutting down plugin 'CSV'
+2016-05-12T13:49:14.269620Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld: Shutdown complete
+
+2016-05-12T13:50:45.896459Z 4 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:54:18.065856Z 8 [Note] Access denied for user 'root'@'localhost' (using password: NO)
+2016-05-12T13:56:55.715769Z 15 [Note] Aborted connection 15 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-12T13:57:35.453654Z 16 [Note] Access denied for user 'root'@'localhost' (using password: YES)
+2016-05-12T13:57:40.390139Z 0 [Note] mysqld: Normal shutdown
+
+2016-05-12T13:57:40.391140Z 0 [Note] Giving 4 client threads a chance to die gracefully
+2016-05-12T13:57:40.392140Z 0 [Note] Shutting down slave threads
+2016-05-12T13:57:42.393303Z 0 [Note] Forcefully disconnecting 3 remaining clients
+2016-05-12T13:57:42.396300Z 0 [Warning] mysqld: Forcing close of thread 13  user: 'root'
+
+2016-05-12T13:57:42.399300Z 0 [Warning] mysqld: Forcing close of thread 9  user: 'root'
+
+2016-05-12T13:57:42.403801Z 0 [Warning] mysqld: Forcing close of thread 10  user: 'root'
+
+2016-05-12T13:57:42.409801Z 0 [Note] Event Scheduler: Purging the queue. 0 events
+2016-05-12T13:57:42.413302Z 0 [Note] Binlog end
+2016-05-12T13:57:42.475808Z 0 [Note] Shutting down plugin 'ngram'
+2016-05-12T13:57:42.476808Z 0 [Note] Shutting down plugin 'partition'
+2016-05-12T13:57:42.477308Z 0 [Note] Shutting down plugin 'BLACKHOLE'
+2016-05-12T13:57:42.477809Z 0 [Note] Shutting down plugin 'ARCHIVE'
+2016-05-12T13:57:42.478809Z 0 [Note] Shutting down plugin 'PERFORMANCE_SCHEMA'
+2016-05-12T13:57:42.479308Z 0 [Note] Shutting down plugin 'MRG_MYISAM'
+2016-05-12T13:57:42.480309Z 0 [Note] Shutting down plugin 'MyISAM'
+2016-05-12T13:57:42.481309Z 0 [Note] Shutting down plugin 'INNODB_SYS_VIRTUAL'
+2016-05-12T13:57:42.482311Z 0 [Note] Shutting down plugin 'INNODB_SYS_DATAFILES'
+2016-05-12T13:57:42.483310Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLESPACES'
+2016-05-12T13:57:42.483811Z 0 [Note] Shutting down plugin 'INNODB_SYS_FOREIGN_COLS'
+2016-05-12T13:57:42.484310Z 0 [Note] Shutting down plugin 'INNODB_SYS_FOREIGN'
+2016-05-12T13:57:42.485311Z 0 [Note] Shutting down plugin 'INNODB_SYS_FIELDS'
+2016-05-12T13:57:42.486310Z 0 [Note] Shutting down plugin 'INNODB_SYS_COLUMNS'
+2016-05-12T13:57:42.486811Z 0 [Note] Shutting down plugin 'INNODB_SYS_INDEXES'
+2016-05-12T13:57:42.487811Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLESTATS'
+2016-05-12T13:57:42.488311Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLES'
+2016-05-12T13:57:42.489311Z 0 [Note] Shutting down plugin 'INNODB_FT_INDEX_TABLE'
+2016-05-12T13:57:42.489811Z 0 [Note] Shutting down plugin 'INNODB_FT_INDEX_CACHE'
+2016-05-12T13:57:42.490811Z 0 [Note] Shutting down plugin 'INNODB_FT_CONFIG'
+2016-05-12T13:57:42.491311Z 0 [Note] Shutting down plugin 'INNODB_FT_BEING_DELETED'
+2016-05-12T13:57:42.492312Z 0 [Note] Shutting down plugin 'INNODB_FT_DELETED'
+2016-05-12T13:57:42.492812Z 0 [Note] Shutting down plugin 'INNODB_FT_DEFAULT_STOPWORD'
+2016-05-12T13:57:42.493312Z 0 [Note] Shutting down plugin 'INNODB_METRICS'
+2016-05-12T13:57:42.493811Z 0 [Note] Shutting down plugin 'INNODB_TEMP_TABLE_INFO'
+2016-05-12T13:57:42.494812Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_POOL_STATS'
+2016-05-12T13:57:42.495311Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_PAGE_LRU'
+2016-05-12T13:57:42.495815Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_PAGE'
+2016-05-12T13:57:42.496313Z 0 [Note] Shutting down plugin 'INNODB_CMP_PER_INDEX_RESET'
+2016-05-12T13:57:42.497313Z 0 [Note] Shutting down plugin 'INNODB_CMP_PER_INDEX'
+2016-05-12T13:57:42.497814Z 0 [Note] Shutting down plugin 'INNODB_CMPMEM_RESET'
+2016-05-12T13:57:42.498314Z 0 [Note] Shutting down plugin 'INNODB_CMPMEM'
+2016-05-12T13:57:42.498814Z 0 [Note] Shutting down plugin 'INNODB_CMP_RESET'
+2016-05-12T13:57:42.499814Z 0 [Note] Shutting down plugin 'INNODB_CMP'
+2016-05-12T13:57:42.500315Z 0 [Note] Shutting down plugin 'INNODB_LOCK_WAITS'
+2016-05-12T13:57:42.500817Z 0 [Note] Shutting down plugin 'INNODB_LOCKS'
+2016-05-12T13:57:42.501316Z 0 [Note] Shutting down plugin 'INNODB_TRX'
+2016-05-12T13:57:42.501812Z 0 [Note] Shutting down plugin 'InnoDB'
+2016-05-12T13:57:42.502312Z 0 [Note] InnoDB: FTS optimize thread exiting.
+2016-05-12T13:57:42.503312Z 0 [Note] InnoDB: Starting shutdown...
+2016-05-12T13:57:42.604325Z 0 [Note] InnoDB: Dumping buffer pool(s) to D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\Neu\ib_buffer_pool
+2016-05-12T13:57:42.607825Z 0 [Note] InnoDB: Buffer pool(s) dump completed at 160512 15:57:42
+2016-05-12T13:57:43.406288Z 0 [Note] InnoDB: Shutdown completed; log sequence number 2624026
+2016-05-12T13:57:43.409291Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2016-05-12T13:57:43.410288Z 0 [Note] Shutting down plugin 'MEMORY'
+2016-05-12T13:57:43.411291Z 0 [Note] Shutting down plugin 'CSV'
+2016-05-12T13:57:43.411791Z 0 [Note] Shutting down plugin 'sha256_password'
+2016-05-12T13:57:43.412291Z 0 [Note] Shutting down plugin 'mysql_native_password'
+2016-05-12T13:57:43.413291Z 0 [Note] Shutting down plugin 'binlog'
+2016-05-12T13:57:43.414289Z 0 [Note] mysqld: Shutdown complete
+
+2016-05-12T13:59:16.067104Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:59:16.067104Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-12T13:59:16.070105Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld (mysqld 5.7.12-log) starting as process 5424 ...
+2016-05-12T13:59:16.085108Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T13:59:16.085108Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T13:59:16.086593Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T13:59:16.087607Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T13:59:16.088599Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-05-12T13:59:16.090101Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T13:59:16.091101Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T13:59:16.164621Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-05-12T13:59:16.167136Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T13:59:16.235198Z 0 [ERROR] InnoDB: .\ib_logfile0 can't be opened in read-write mode.
+2016-05-12T13:59:16.236214Z 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2016-05-12T13:59:16.438346Z 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2016-05-12T13:59:16.439347Z 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2016-05-12T13:59:16.440346Z 0 [ERROR] Failed to initialize plugins.
+2016-05-12T13:59:16.440846Z 0 [ERROR] Aborting
+
+2016-05-12T13:59:16.441347Z 0 [Note] Binlog end
+2016-05-12T13:59:16.441844Z 0 [Note] Shutting down plugin 'CSV'
+2016-05-12T13:59:16.442847Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld: Shutdown complete
+
+2016-05-12T13:59:55.129980Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T13:59:55.129980Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-12T13:59:55.132481Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld (mysqld 5.7.12-log) starting as process 11548 ...
+2016-05-12T13:59:55.148001Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T13:59:55.149000Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T13:59:55.149501Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T13:59:55.150501Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T13:59:55.151501Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-05-12T13:59:55.153501Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T13:59:55.154001Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T13:59:55.227494Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-05-12T13:59:55.229988Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T13:59:55.304496Z 0 [ERROR] InnoDB: .\ib_logfile0 can't be opened in read-write mode.
+2016-05-12T13:59:55.305496Z 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error
+2016-05-12T13:59:55.507641Z 0 [ERROR] Plugin 'InnoDB' init function returned error.
+2016-05-12T13:59:55.508140Z 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.
+2016-05-12T13:59:55.509139Z 0 [ERROR] Failed to initialize plugins.
+2016-05-12T13:59:55.509640Z 0 [ERROR] Aborting
+
+2016-05-12T13:59:55.510140Z 0 [Note] Binlog end
+2016-05-12T13:59:55.510639Z 0 [Note] Shutting down plugin 'CSV'
+2016-05-12T13:59:55.511638Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld: Shutdown complete
+
+2016-05-12T14:00:26.363539Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-12T14:00:26.363539Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-12T14:00:26.367039Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld (mysqld 5.7.12-log) starting as process 3804 ...
+2016-05-12T14:00:26.385041Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-12T14:00:26.386042Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-12T14:00:26.387042Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-12T14:00:26.388042Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-12T14:00:26.389043Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-05-12T14:00:26.391043Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-12T14:00:26.392043Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-12T14:00:26.466052Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-05-12T14:00:26.469552Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-12T14:00:26.556625Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-05-12T14:00:26.797612Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-05-12T14:00:26.799114Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-05-12T14:00:26.945203Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-05-12T14:00:26.951706Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-05-12T14:00:26.952706Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-05-12T14:00:26.989755Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 2624026
+2016-05-12T14:00:26.990755Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\Neu\ib_buffer_pool
+2016-05-12T14:00:26.991255Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-05-12T14:00:27.032263Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-05-12T14:00:27.033763Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-05-12T14:00:27.034763Z 0 [Note] IPv6 is available.
+2016-05-12T14:00:27.035261Z 0 [Note]   - '::' resolves to '::';
+2016-05-12T14:00:27.035761Z 0 [Note] Server socket created on IP: '::'.
+2016-05-12T14:00:27.116798Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160512 16:00:27
+2016-05-12T14:00:27.182844Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-05-12T14:00:27.183335Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld: ready for connections.
+Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-05-12T14:02:11.395938Z 3 [Note] Aborted connection 3 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)

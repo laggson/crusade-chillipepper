@@ -17,7 +17,7 @@ namespace FWA.Logic.Mappings
             Map(x => x.EMail).Column("UserEMail");
             Map(x => x.Hash).Column("UserPwHash");
             Map(x => x.Salt).Column("UserSalt");
-            Map(x => x.AccountType).Column("AccountTypeID");
+            Map(x => x.AccountType).Column("AccountTypeID").CustomType<int>();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace FWA.Logic
             return MySQLConfiguration.Standard.ConnectionString(x => x.Server("127.0.0.1")
                                                                       .Database("fwadministration")
                                                                       .Username("fwa_app")
-                                                                      .Password("kacken123"));
+                                                                      .Password("r@Fckx!3bbK7nRbh"));
         }
 
         public static ISession OpenSession()
