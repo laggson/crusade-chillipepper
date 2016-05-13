@@ -1,4 +1,5 @@
 ﻿using FWA.Logic.Storage;
+using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -20,30 +21,27 @@ namespace FWA.Gui.Content
 
         private void Table_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            //The ID Column is hidden bc it is unnecessary for use
-            //if (e.Column.Header.ToString().Equals("ID"))
-            //    e.Cancel = true;
-            //else 
-            //The Column header is set to the Display name instead of the internal name
             e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
         }
 
         private void Table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // TODO: Öffnet neues Fenster, wo die Items aufgelistet sind die mehrfach da sind
-            // Bsp: Ein Verkehrsleitkegel wird angezeigt, bei doppeklick sieht man liste mit allen 10
             if (Table.ItemsSource != null)
             {
                 _main.Test(Table.SelectedItem as Device, this.Name);
 
-                //List<Check> items = new List<Check>();
+                //Zu Testzwecken:
+
                 //Device d = Table.SelectedItem as Device;
-                //items.Add(new Check(d));
-                //MahApps.Metro.Controls.MetroWindow w = new MahApps.Metro.Controls.MetroWindow();
-                //DataGrid dg = new DataGrid();
-                //dg.ItemsSource = items;
-                //w.Content = dg;
-                //w.Show();
+                //Check  c = new Check(d)
+                //{
+                //    //Name and InvNumber set automatically in Constructor
+                //    ID = d.ID,
+                //    DateChecked = DateTime.Now,
+                //    WhoChecked = _main.Control.ConnectedUser,
+                //    CheckType = CheckType.OK
+                //};
+                //_main.Control.DBHandler.PushOrUpdateCheck(c);
             }
         }
 
