@@ -281,3 +281,5 @@ Version: '5.7.12'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2016-05-12T14:00:27.183335Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld: ready for connections.
 Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2016-05-12T14:02:11.395938Z 3 [Note] Aborted connection 3 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-12T14:19:39.347006Z 4 [Note] Aborted connection 4 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-12T14:22:15.613396Z 5 [Note] Aborted connection 5 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
