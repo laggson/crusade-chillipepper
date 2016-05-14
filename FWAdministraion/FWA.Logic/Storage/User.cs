@@ -5,7 +5,6 @@
     /// </summary>
     public class User : IStorageItem
     {
-
         public virtual int ID
         {
             get; set;
@@ -22,8 +21,7 @@
         }
 
         public virtual string Hash
-        {
-            
+        {            
             get; set;
         }
 

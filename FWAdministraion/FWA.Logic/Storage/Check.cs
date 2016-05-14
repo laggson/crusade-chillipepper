@@ -1,76 +1,38 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 
 namespace FWA.Logic.Storage
 {
-    public class Check : IStorageItem
+    public class Check
     {
-        Device _device;
-
-        public Check() { }
-
-        public Check(Device d)
-        {
-            _device = d;
-
-#pragma warning disable RECS0021 // Warns about calls to virtual member functions occuring in the constructor
-            Name = d.Name;
-            InvNumber = d.InvNumber;
-#pragma warning restore RECS0021 // Warns about calls to virtual member functions occuring in the constructor
-        }
-
         public virtual int ID
         {
             get; set;
         }
 
-        public virtual string Name
+        public virtual int DeviceID
         {
-            get
-            {
-                return _device.Name;
-            }
-
-            set
-            {
-                _device.Name = value;
-            }
+            get { return Device?.ID ?? -1; }
+            set { Device = DBAccess.GetById<Device>(value); }
         }
 
-        [DisplayName("Inventar-Nr.")]
-        public virtual string InvNumber
-        {
-            get
-            {
-                return _device.InvNumber;
-            }
-            set
-            {
-                _device.InvNumber = value;
-            }
-        }
-
-        public virtual DateTime DateChecked
+        public virtual Device Device
         {
             get; set;
         }
 
-        [DisplayName("Geprüft am")]
-        public virtual string StringDate
+        public virtual int TesterID
         {
-            get { return DateChecked.ToString("dd/MM/yyyy"); }
-            set { DateChecked = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.CurrentCulture); }
+            get { return Tester?.ID ?? -1; }
+            set { Tester = DBAccess.GetById<User>(value); }
         }
 
-        public virtual int WhoCheckedID
+        public virtual User Tester
         {
-            get { return WhoChecked.ID; }
-            set { WhoChecked = DBAccess.GetById<User>(value); }
+            get; set;
         }
 
-        [DisplayName("Prüfer")]
-        public virtual User WhoChecked
+        public virtual DateTime DateChecked
         {
             get; set;
         }
@@ -91,6 +53,24 @@ namespace FWA.Logic.Storage
         public virtual string Comment
         {
             get; set;
+        }
+
+        [DisplayName("Geprüft am")]
+        public virtual string DateCheckedString
+        {
+            get { return DateChecked.ToShortDateString(); }
+        }
+
+        [DisplayName("Inventar-Nr.")]
+        public virtual string DeviceInvNumber
+        {
+            get { return Device?.InvNumber ?? string.Empty; }
+        }
+
+        [DisplayName("Prüfer")]
+        public virtual string TesterName
+        {
+            get { return Tester?.Name ?? string.Empty; }
         }
     }
 

@@ -12,14 +12,13 @@ namespace FWA.Logic.Mappings
     {
         public CheckMapping()
         {
-            Id(x => x.ID).Column("CheckID").GeneratedBy.Native();
-            Map(x => x.Name).Column("CheckName");
-            Map(x => x.InvNumber).Column("CheckInvNumber");
-            Map(x => x.StringDate).Column("CheckDate");
-            Map(x => x.WhoCheckedID).Column("DeviceUserID");
-            Map(x => x.CheckType).Column("CheckTypeID");
-            Map(x => x.Lack).Column("DeviceLack");
-            Map(x => x.Comment).Column("DeviceComment");
+            Id(x => x.ID).GeneratedBy.Native();
+            Map(x => x.DeviceID);
+            Map(x => x.TesterID);
+            Map(x => x.DateChecked);
+            Map(x => x.CheckType);
+            Map(x => x.Lack);
+            Map(x => x.Comment);
         }
     }
 }

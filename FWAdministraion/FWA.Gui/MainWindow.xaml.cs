@@ -60,12 +60,12 @@ namespace FWA.Gui
 
             foreach(Device d in devices)
             {
-                checks.Add(new Check(d)
+                checks.Add(new Check
                 {
-                    //Name and InvNumber set automatically in Constructor
                     ID = d.ID,
+                    Device = d,
                     DateChecked = DateTime.Now,
-                    WhoChecked = Control.ConnectedUser,
+                    Tester = Control.ConnectedUser,
                     CheckType = CheckType.OK
                 });
             }
