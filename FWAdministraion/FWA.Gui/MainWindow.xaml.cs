@@ -62,7 +62,6 @@ namespace FWA.Gui
             {
                 checks.Add(new Check
                 {
-                    ID = d.ID,
                     Device = d,
                     DateChecked = DateTime.Now,
                     Tester = Control.ConnectedUser,
