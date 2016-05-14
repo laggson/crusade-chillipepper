@@ -4,6 +4,8 @@ using FWA.Logic.Mappings;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FWA.Logic
 {
@@ -40,7 +42,7 @@ namespace FWA.Logic
 
         public static void Insert(object obj, InsertionMode mode = InsertionMode.SaveOrUpdate, ISession session = null)
         {
-            Execute(x =>
+            ExecuteInTransaction(x =>
             {
                 switch (mode)
                 {
@@ -54,23 +56,55 @@ namespace FWA.Logic
             }, session);
         }
 
-        public static T GetById<T>(object id)
+        public static T GetById<T>(object id, ISession session = null)
         {
-            return ExecuteFunc(x => x.Get<T>(id));
+            return ExecuteFuncInTransaction(s => s.Get<T>(id), session);
         }
 
-        public static void Execute(Action<ISession> action, ISession session = null)
+        public static List<T> GetByCriteria<T>(Action<ICriteria> criteriaEditor, ISession session = null)
+            where T : class
         {
-            ExecuteFunc(x =>
+            return ExecuteFuncInTransaction(s =>
+            {
+                var criteria = s.CreateCriteria<T>();
+                criteriaEditor.Invoke(criteria);
+                return criteria.List<T>().ToList();
+            }, session);
+        }
+
+        public static void ExecuteInTransaction(Action<ISession> action, ISession session = null)
+        {
+            ExecuteFuncInTransaction(x =>
             {
                 action.Invoke(x); return true;
             }, session);
         }
 
-        public static T ExecuteFunc<T>(Func<ISession, T> func, ISession session = null)
+        public static T ExecuteFuncInTransaction<T>(Func<ISession, T> func, ISession session = null)
         {
-            ITransaction transaction = null;
+            return ExecuteInNewOrExistingSession(s => 
+            {
+                ITransaction transaction = null;
+                try
+                {
+                    transaction = s.BeginTransaction();
+                    var result = func.Invoke(s);
+                    transaction.Commit();
+                    return result;
+                }
+                catch
+                {
+                    if (transaction != null)
+                        transaction.Rollback();
+                    throw;
+                }
+            }, session);
+        }
+
+        private static T ExecuteInNewOrExistingSession<T>(Func<ISession, T> func, ISession session)
+        {
             bool newSession = false;
+            T result;
             try
             {
                 if (session == null)
@@ -78,23 +112,19 @@ namespace FWA.Logic
                     session = SessionFactory.OpenSession();
                     newSession = true;
                 }
-
-                transaction = session.BeginTransaction();
-                var result = func.Invoke(session);
-                transaction.Commit();
-                return result;
-            }
-            catch
-            {
-                if (transaction != null)
-                    transaction.Rollback();
-                throw;
+                result = func.Invoke(session);
             }
             finally
             {
                 if (newSession && session != null)
                     session.Close();
             }
+            return result;
         }
+    }
+
+    public enum InsertionMode
+    {
+        Save, Update, SaveOrUpdate
     }
 }

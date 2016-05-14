@@ -1,17 +1,9 @@
 ﻿using System.Collections.Generic;
 using NHibernate.Criterion;
 using FWA.Logic.Storage;
-using NHibernate.Cfg;
 using System.Linq;
 using System.Text;
 using CryptSharp;
-using NHibernate;
-using System;
-using FluentNHibernate.Cfg;
-using System.Reflection;
-using FWA.Logic.Mappings;
-using NHibernate.Tool.hbm2ddl;
-using FluentNHibernate.Cfg.Db;
 
 namespace FWA.Logic
 {
@@ -41,13 +33,7 @@ namespace FWA.Logic
 
         public IList<Device> GetTLFData()
         {
-            var result = DBAccess.ExecuteFunc(session =>
-            {
-                ICriteria criteria = session.CreateCriteria<Device>()
-                    .Add(Restrictions.Like("InvNumber", "__TF%"));
-
-                return criteria.List<Device>();
-            });
+            var result = DBAccess.GetByCriteria<Device>(c => c.Add(Restrictions.Like("InvNumber", "__TF%")));
 
             _con.TFData = result;
             return result;
@@ -55,13 +41,7 @@ namespace FWA.Logic
 
         public IList<Device> GetLFData()
         {
-            var result = DBAccess.ExecuteFunc(session =>
-            {
-                ICriteria criteria = session.CreateCriteria<Device>()
-                    .Add(Restrictions.Like("InvNumber", "__LF%"));
-
-                return criteria.List<Device>();
-            });
+            var result = DBAccess.GetByCriteria<Device>(c => c.Add(Restrictions.Like("InvNumber", "__LF%")));
 
             _con.LFData = result;
             return result;
@@ -69,13 +49,7 @@ namespace FWA.Logic
 
         public IList<Device> GetMTFData()
         {
-            var result = DBAccess.ExecuteFunc(session =>
-            {
-                ICriteria criteria = session.CreateCriteria<Device>()
-                    .Add(Restrictions.Like("InvNumber", "__MF%"));
-
-                return criteria.List<Device>();
-            });
+            var result = DBAccess.GetByCriteria<Device>(c => c.Add(Restrictions.Like("InvNumber", "__MF%")));
 
             _con.MFData = result;
             return result;
@@ -83,14 +57,7 @@ namespace FWA.Logic
 
         public IList<Device> GetHallData()
         {
-            var result = DBAccess.ExecuteFunc(session =>
-            {
-                ICriteria criteria = session.CreateCriteria<Device>()
-                    .Add(Restrictions.Eq("InvNumber", string.Empty));
-
-                return criteria.List<Device>();
-            });
-
+            var result = DBAccess.GetByCriteria<Device>(c => c.Add(Restrictions.Like("InvNumber", string.Empty)));
 
             _con.HallData = result;
             return result;
@@ -179,12 +146,7 @@ namespace FWA.Logic
         public bool UserDataCorrect(string name, string password)
         {
             //All items in the user table matching the criteria go here
-            var list = DBAccess.ExecuteFunc(session =>
-            {
-                var criteria = session.CreateCriteria<User>()
-                                .Add(Restrictions.Eq(name.Contains("@") ? "EMail" : "Name", name));
-                return criteria.List<User>();
-            });
+            var list = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(name.Contains("@") ? "EMail" : "Name", name)));
 
             //if there was one user matching the details (which should be) the data is stored for next steps
             var user = list.Single();
@@ -204,10 +166,5 @@ namespace FWA.Logic
         }
 
         #endregion
-    }
-
-    public enum InsertionMode
-    {
-        Save, Update, SaveOrUpdate
     }
 }
