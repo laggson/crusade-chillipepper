@@ -10,21 +10,9 @@ namespace FWA.Logic.Storage
             get; set;
         }
 
-        public virtual int DeviceID
-        {
-            get { return Device?.ID ?? -1; }
-            set { Device = DBAccess.GetById<Device>(value); }
-        }
-
         public virtual Device Device
         {
             get; set;
-        }
-
-        public virtual int TesterID
-        {
-            get { return Tester?.ID ?? -1; }
-            set { Tester = DBAccess.GetById<User>(value); }
         }
 
         public virtual User Tester

@@ -13,8 +13,8 @@ namespace FWA.Logic.Mappings
         public CheckMapping()
         {
             Id(x => x.ID).GeneratedBy.Native();
-            Map(x => x.DeviceID);
-            Map(x => x.TesterID);
+            References(x => x.Device);
+            References(x => x.Tester);
             Map(x => x.DateChecked);
             Map(x => x.CheckType);
             Map(x => x.Lack);
