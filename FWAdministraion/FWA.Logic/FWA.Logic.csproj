@@ -108,6 +108,8 @@
     <Compile Include="Control.cs" />
     <Compile Include="DBAccess.cs" />
     <Compile Include="DBHandler.cs" />
+    <Compile Include="Exceptions\AuthenticationException.cs" />
+    <Compile Include="Exceptions\InsufficientRightsException.cs" />
     <Compile Include="Mappings\CheckMapping.cs" />
     <Compile Include="Mappings\DeviceMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Storage\Device.cs" />
     <Compile Include="Storage\IStorageItem.cs" />
     <Compile Include="Storage\User.cs" />
+    <Compile Include="DBAuthentication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

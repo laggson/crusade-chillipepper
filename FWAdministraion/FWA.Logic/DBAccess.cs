@@ -4,12 +4,13 @@ using FWA.Logic.Mappings;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FWA.Logic
 {
-    public static class DBAccess
+    internal static class DBAccess
     {
         public static ISessionFactory SessionFactory { get; }
 
@@ -40,20 +41,33 @@ namespace FWA.Logic
             return SessionFactory.OpenSession();
         }
 
-        public static void Insert(object obj, InsertionMode mode = InsertionMode.SaveOrUpdate, ISession session = null)
+        public static void InsertMultiple(IEnumerable objects, InsertionMode mode = InsertionMode.SaveOrUpdate, ISession session = null)
         {
             ExecuteInTransaction(x =>
             {
-                switch (mode)
+                foreach (var obj in objects)
                 {
-                    case InsertionMode.Save:
-                        x.Save(obj); break;
-                    case InsertionMode.Update:
-                        x.Update(obj); break;
-                    default:
-                        x.SaveOrUpdate(obj); break;
+                    InternalInsert(obj, mode, x);
                 }
             }, session);
+        }
+
+        public static void Insert(object obj, InsertionMode mode = InsertionMode.SaveOrUpdate, ISession session = null)
+        {
+            ExecuteInTransaction(x => InternalInsert(obj, mode, x), session);
+        }
+
+        private static void InternalInsert(object obj, InsertionMode mode, ISession session)
+        {
+            switch (mode)
+            {
+                case InsertionMode.Save:
+                    session.Save(obj); break;
+                case InsertionMode.Update:
+                    session.Update(obj); break;
+                default:
+                    session.SaveOrUpdate(obj); break;
+            }
         }
 
         public static T GetById<T>(object id, ISession session = null)
@@ -82,7 +96,7 @@ namespace FWA.Logic
 
         public static T ExecuteFuncInTransaction<T>(Func<ISession, T> func, ISession session = null)
         {
-            return ExecuteInNewOrExistingSession(s => 
+            return ExecuteInNewOrExistingSession(s =>
             {
                 ITransaction transaction = null;
                 try
