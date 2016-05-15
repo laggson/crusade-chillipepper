@@ -1,10 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
 using FWA.Logic.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FWA.Logic.Mappings
 {

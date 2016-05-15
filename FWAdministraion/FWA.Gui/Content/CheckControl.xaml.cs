@@ -1,4 +1,6 @@
 ﻿using FWA.Logic.Storage;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,27 +11,25 @@ namespace FWA.Gui.Content
     /// </summary>
     public partial class CheckControl : UserControl
     {
-        MainWindow _parent;
-
-        public CheckControl(MainWindow parent)
+        public CheckControl()
         {
             InitializeComponent();
-            _parent = parent;
         }
+
+        public event ChecksFinishedListener ChecksFinished;
+        public delegate void ChecksFinishedListener(object sender, ChecksFinishedEventArgs e);
 
         private void ButtonFinish_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Änderungen in DB speichern
-            foreach(Check c in Table.Items)
-            {
-                _parent.Control.DBHandler.PushOrUpdateCheck(c);
-            }
-            _parent.CloseTab(this.GetHashCode());
+            ChecksFinished?.Invoke(this, new ChecksFinishedEventArgs
+                                         {
+                                             Checks = Table.Items.OfType<Check>().ToArray()
+                                         });
         }
 
         private void Table_AutoGeneratingColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            switch(e.Column.Header.ToString())
+            switch (e.Column.Header.ToString())
             {
                 case "DateChecked":
                     e.Cancel = true;
@@ -50,10 +50,15 @@ namespace FWA.Gui.Content
                 default:
                     e.Column.IsReadOnly = true;
                     break;
-                    
+
             }
 
             e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
         }
+    }
+
+    public class ChecksFinishedEventArgs : EventArgs
+    {
+        public Check[] Checks { get; set; }
     }
 }

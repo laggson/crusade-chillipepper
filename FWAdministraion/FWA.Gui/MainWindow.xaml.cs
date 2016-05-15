@@ -1,6 +1,5 @@
 ﻿#define Debug
 using MahApps.Metro.Controls.Dialogs;
-using CControl = FWA.Logic.Control;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,9 +7,11 @@ using FWA.Gui.Content;
 using System.Windows;
 using System;
 using System.Linq;
-using System.Diagnostics;
 using FWA.Logic.Storage;
-using System.Collections;
+using System.Threading.Tasks;
+using FWA.Logic;
+using FWA.Gui.Logic;
+using FWA.Logic.Exceptions;
 
 namespace FWA.Gui
 {
@@ -19,68 +20,118 @@ namespace FWA.Gui
     /// </summary>
     public partial class MainWindow
     {
-        private Dictionary<string, OverviewControl> _tabs = new Dictionary<string, OverviewControl>();
+        public DBAuthentication Database { get; set; }
+
+        public User CurrentUser { get { return Database?.CurrentUser; } }
+
+        public readonly DeviceCategory[] Categorys =
+        {
+            new DeviceCategory("TLF", "__TF%"),
+            new DeviceCategory("LF","__LF%"),
+            new DeviceCategory("MTF", "__MF%"),
+            new DeviceCategory("Halle", string.Empty)
+        };
+
+        public OverviewControl[] Tabs
+        {
+            get
+            {
+                return Dispatcher.Invoke(() =>
+                    mainMenu.ItemsSource.
+                    OfType<TabItem>().
+                    Select(t => t.Content).
+                    OfType<OverviewControl>().
+                    ToArray());
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
-            Control = new CControl();
-            Control.TFDataChanged += Control_TFDataChanged;
-            Control.LFDataChanged += Control_LFDataChanged;
-            Control.MFDataChanged += Control_MFDataChanged;
-            Control.HallDataChanged += Control_HallDataChanged;
 
-            Tabs.Add("TLF", new OverviewControl(this, "TLF"));
-            Tabs.Add("LF", new OverviewControl(this, "LF"));
-            //Tabs.Add("MTF", new FWControl(this, "MTF"));
-            Tabs.Add("Halle", new OverviewControl(this, "Halle"));
-            this.SetItemssource();
-
+            mainMenu.ItemsSource = Categorys.Select(x =>
+                new TabItem
+                {
+                    Header = x.DisplayName,
+                    Content = NewOverviewControl(x)
+                }).ToList();
         }
 
-        public CControl Control
+        private OverviewControl NewOverviewControl(DeviceCategory category)
         {
-            get; set;
+            var result = new OverviewControl(category);
+            result.DeviceDoubleClicked += Overview_DeviceDoubleClicked;
+            result.DeviceEdited += Overview_DeviceEdited;
+            return result;
         }
 
-        public void Test(Device device, string name)
+        private void ExecuteIfDatabaseAvailable(Action<DBAuthentication> action)
+        {
+            var db = Database;
+            if (db == null)
+            {
+                AlertNoDatabaseConnection();
+            }
+            else
+            {
+                action.Invoke(db);
+            }
+        }
+
+        private void AlertNoDatabaseConnection()
+        {
+            MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
+        }
+
+        public void Test(Device device, string name, DBAuthentication db)
         {
             //The new Tab is created, named and added to the ItemsSource, which has to be assigned again.
-            List<TabItem> test = mainMenu.ItemsSource as List<TabItem>;
-            TabItem tab = new TabItem();
+            var test = mainMenu.ItemsSource as List<TabItem>;
+            var tab = new TabItem();
             tab.Header = "Test " + device.Name;
             test.Add(tab);
             mainMenu.ItemsSource = null;
             mainMenu.ItemsSource = test;
 
             //The DeviceCheck is initialized and gets the data, filtered by name, as Itemssource
-            CheckControl controller = new CheckControl(this);
-            List<Device> devices = Control.DevicesByName(device.Name, Control.DataListByName(name));
-            List<Check> checks = new List<Check>();
+            var controller = new CheckControl();
+            controller.ChecksFinished += Controller_ChecksFinished;
+            var devices = GetDevicesByTabName(name, db).Where(x => x.Name.Equals(device.Name));
+            var checks = new List<Check>();
 
-            foreach(Device d in devices)
+            foreach (Device d in devices)
             {
                 checks.Add(new Check
                 {
                     Device = d,
                     DateChecked = DateTime.Now,
-                    Tester = Control.ConnectedUser,
+                    Tester = CurrentUser,
                     CheckType = CheckType.OK
                 });
             }
-            
+
             controller.Table.ItemsSource = checks;
             tab.Content = controller;
             mainMenu.SelectedItem = tab;
         }
 
-        public void CloseTab(int hash)
+        private List<Device> GetDevicesByTabName(string name, DBAuthentication db)
         {
-            List<TabItem> tabs = mainMenu.ItemsSource as List<TabItem>;
+            string invNumberLike = Categorys.First(x => name.Equals(x.DisplayName))?.InvNumberLike;
 
-            foreach(TabItem tab in tabs)
+            if (invNumberLike == null)
+                return new List<Device>();
+
+            return db.GetDevicesByInvNumberType(invNumberLike);
+        }
+
+        public void CloseTab(int contentHash)
+        {
+            var tabs = mainMenu.ItemsSource as List<TabItem>;
+
+            foreach (TabItem tab in tabs)
             {
-                if(tab.Content.GetHashCode() == hash)
+                if (tab.Content.GetHashCode() == contentHash)
                 {
                     mainMenu.ItemsSource = null;
                     tabs.Remove(tab);
@@ -90,24 +141,9 @@ namespace FWA.Gui
             }
         }
 
-        private void SetItemssource()
+        public void MsgBox(string header, string message)
         {
-            List<TabItem> test = new List<TabItem>();
-
-            foreach (var v in Tabs)
-            {
-                TabItem t = new TabItem();
-                t.Header = v.Key;
-                t.Content = v.Value;
-                test.Add(t);
-            }
-            mainMenu.ItemsSource = test;
-        }
-
-        public async void MsgBox(string header, string message)
-        {
-            //await this.ShowMessageAsync(header, message);
-            await MaterialDesignThemes.Wpf.DialogHost.Show(message);
+            Task.Run(() => MaterialDesignThemes.Wpf.DialogHost.Show(string.Format("{0}:{1}{2}", header, Environment.NewLine, message)));
         }
 
         /// <summary>
@@ -115,111 +151,88 @@ namespace FWA.Gui
         /// </summary>
         public void RefreshLoginName()
         {
-            if (Control.ConnectedUser != null)
-                TxtLogin.Text = "Angemeldet als " + Control.ConnectedUser?.Name;
-            else TxtLogin.Text = "Nicht angemeldet";
+            Dispatcher.Invoke(() => TxtLogin.Text = CurrentUser?.Name ?? "Nicht angemeldet");
         }
 
-        public Dictionary<string, OverviewControl> Tabs
+        private void Login()
         {
-            get
+            try
             {
-                return _tabs;
+                var loginResult = LoginWindow.RequestLogin(this);
+                var db = new DBAuthentication(loginResult.Username, loginResult.Password);
+                Database = db;
+
+                foreach (var overviewControl in Tabs)
+                {
+                    overviewControl.LoadValuesFromDatabase(db);
+                }
+
+                RefreshLoginName();
             }
-            set
+            catch (AuthenticationException ex)
             {
-                _tabs = value;
+                Database = null;
+                MsgBox("Warnung", string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message));
+            }
+        }
+
+        private void Logout()
+        {
+            string msg = "Sind sie sicher, dass sie den Benutzer " + CurrentUser?.Name + " abmelden wollen";
+            var result = Dispatcher.Invoke(() =>
+            {
+                var task = this.ShowMessageAsync("Warnung", msg, MessageDialogStyle.AffirmativeAndNegative);
+                task.Start();
+                task.Wait();
+                return task.Result;
+            });
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                foreach (var overviewControl in Tabs)
+                {
+                    overviewControl.Clear();
+                }
+
+                Database = null;
+                RefreshLoginName();
             }
         }
 
         #region Events
 
-        private void Control_TFDataChanged(object sender, EventArgs e)
+        private void Controller_ChecksFinished(object sender, ChecksFinishedEventArgs e)
         {
-            OverviewControl usedTab;
-            Tabs.TryGetValue("TLF", out usedTab);
-            usedTab.Table.ItemsSource = Control.TrimList(Control.TFData);
+            ExecuteIfDatabaseAvailable(db =>
+            {
+                db.InsertMultiple(e.Checks);
+                CloseTab(sender.GetHashCode());
+            });
         }
 
-        private void Control_LFDataChanged(object sender, EventArgs e)
+        private void Overview_DeviceEdited(object sender, DeviceEventArgs e)
         {
-            OverviewControl usedTab;
-            Tabs.TryGetValue("LF", out usedTab);
-            usedTab.Table.ItemsSource = Control.TrimList(Control.LFData);
+            ExecuteIfDatabaseAvailable(db => db.Insert(e.Device));
         }
 
-        private void Control_MFDataChanged(object sender, EventArgs e)
+        private void Overview_DeviceDoubleClicked(object sender, DeviceEventArgs e)
         {
-            OverviewControl usedTab;
-            Tabs.TryGetValue("MTF", out usedTab);
-            if (usedTab != null)
-                usedTab.Table.ItemsSource = Control.MFData;
-        }
-
-        private void Control_HallDataChanged(object sender, EventArgs e)
-        {
-            OverviewControl usedTab;
-            Tabs.TryGetValue("Halle", out usedTab);
-            usedTab.Table.ItemsSource = Control.HallData;
+            ExecuteIfDatabaseAvailable(db =>
+            {
+                Dispatcher.Invoke(() => Test(e.Device, e.ControlName, db));
+            });
         }
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (Control.ConnectedUser != null)
+            if (Database != null)
             {
-                this.Logout();
+                Task.Run(new Action(Logout));
             }
             else
             {
-                LoginWindow log = new LoginWindow(this);
-                log.Show();
+                Task.Run(new Action(Login));
             }
-
-        }
-
-        private async void Logout()
-        {
-            string msg = "Sind sie sicher, dass sie den Benutzer " + Control.ConnectedUser?.Name + " abmelden wollen";
-            var result = await this.ShowMessageAsync("Warnung", msg, MessageDialogStyle.AffirmativeAndNegative);
-
-            if (result == MessageDialogResult.Affirmative)
-            {
-
-                OverviewControl usedTab;
-                Tabs.TryGetValue("TLF", out usedTab);
-                usedTab.Table.ItemsSource = null;
-
-                Tabs.TryGetValue("LF", out usedTab);
-                usedTab.Table.ItemsSource = null;
-
-                Tabs.TryGetValue("MTF", out usedTab);
-                if(usedTab != null)
-                usedTab.Table.ItemsSource = null;
-
-                Tabs.TryGetValue("Halle", out usedTab);
-                usedTab.Table.ItemsSource = null;
-
-                Control.ConnectedUser = null;
-                this.RefreshLoginName();
-            }
-        }
-
-        public void logintemptestzeug()
-        {
-
-#if Debug
-            Control.ConnectedUser = new User()
-            {
-                ID = 0,
-                Name = "hs",
-                EMail = "hermann.schmidt24@freenet.de",
-                Hash = "$2a$06$T0lScnYf7KXijnGzshe74OHrpO5nJap3XwFaKTVBZIBzVX5ZnlRgu",
-                Salt = "$2a$06$T0lScnYf7KXijnGzshe74O",
-                AccountType = FWA.Logic.Storage.AccountType.User
-            };
-            this.RefreshLoginName();
-            Control.DBHandler.GetAllDeviceData();
-#endif
         }
 
         /// <summary>
@@ -241,8 +254,18 @@ namespace FWA.Gui
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "FWAdministration v" + Control.GetVersion();
+            this.Title = "FWAdministration v" + GetVersion();
             //this.logintemptestzeug();
+        }
+
+        /// <summary>
+        /// Reads the current assembly version from the AssemblyInfo.cs and returns it merged to one string
+        /// </summary>
+        /// <returns></returns>
+        public string GetVersion()
+        {
+            System.Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            return ver.Major + "." + ver.Minor + "." + ver.Build;
         }
 
         #endregion
@@ -271,10 +294,7 @@ namespace FWA.Gui
         /// </summary>
         private void LowerMenuIndex()
         {
-            if (mainMenu.SelectedIndex == 0)
-            {
-                mainMenu.SelectedIndex = mainMenu.Items.Count - 1;
-            }
+            mainMenu.SelectedIndex = mainMenu.SelectedIndex == 0 ? mainMenu.Items.Count - 1 : mainMenu.SelectedIndex - 1;
         }
 
         /// <summary>
@@ -282,10 +302,7 @@ namespace FWA.Gui
         /// </summary>
         private void RaiseMenuIndex()
         {
-            if (mainMenu.SelectedIndex == mainMenu.Items.Count - 1)
-            {
-                mainMenu.SelectedIndex = 0;
-            }
+            mainMenu.SelectedIndex = mainMenu.SelectedIndex + 1 % mainMenu.Items.Count;
         }
 
         #endregion

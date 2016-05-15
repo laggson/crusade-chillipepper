@@ -12,7 +12,7 @@ namespace FWA.Logic
 {
     public class DBAuthentication
     {
-        readonly User _currentUser;
+        public User CurrentUser { get; }
 
         public DBAuthentication(string username, byte[] password)
         {
@@ -25,14 +25,20 @@ namespace FWA.Logic
                 throw new AuthenticationException(username, "Multiple users found. Please fix your goddamn database");
 
             var user = userlist.Single();
-
             string newHash = Crypter.Blowfish.Crypt(password, user.Salt);
+
+            //Clear password array
+            for (int i = 0; i < password.Length; i++)
+            {
+                password[i] = byte.MinValue;
+            }
+
             if (!newHash.Equals(user.Hash))
             {
                 throw new AuthenticationException(username, "Wrong password");
             }
 
-            _currentUser = user;
+            CurrentUser = user;
         }
 
         public List<Device> GetDevicesByInvNumberType(string invNumberLike)
@@ -48,7 +54,7 @@ namespace FWA.Logic
 
         public void InsertMultiple(IEnumerable objects)
         {
-            foreach(var obj in objects)
+            foreach (var obj in objects)
             {
                 AssertInsert(obj);
             }
@@ -97,7 +103,7 @@ namespace FWA.Logic
                 throw new ArgumentException(string.Format("A user with the username {0} already exists", username));
             }
 
-            if (DBAccess.GetByCriteria<User>(c=> c.Add(Restrictions.Eq("EMail", email)), session).Count > 0)
+            if (DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq("EMail", email)), session).Count > 0)
             {
                 throw new ArgumentException(string.Format("A user with the email {0} already exists", email));
             }
@@ -105,14 +111,14 @@ namespace FWA.Logic
 
         public bool HasRights(AccountType needed)
         {
-            return (int)needed <= (int)_currentUser.AccountType;
+            return (int)needed <= (int)CurrentUser.AccountType;
         }
 
         public void AssertRights(AccountType needed, string action = "")
         {
             if (!HasRights(needed))
             {
-                throw new InsufficientRightsException(_currentUser, needed, action);
+                throw new InsufficientRightsException(CurrentUser, needed, action);
             }
         }
     }

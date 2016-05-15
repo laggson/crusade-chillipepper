@@ -1,5 +1,6 @@
-﻿using FWA.Logic;
-
+﻿using System.Text;
+using System.Threading;
+using System.Windows;
 
 namespace FWA.Gui.Content
 {
@@ -9,14 +10,29 @@ namespace FWA.Gui.Content
     /// </summary>
     public partial class LoginWindow
     {
-        MainWindow _main;
+        public static LoginWindowResult RequestLogin(Window owner)
+        {
+            var window = Application.Current.Dispatcher.Invoke(() => new LoginWindow(owner));
+            var result = window.WaitForLoginClick();
+            Application.Current.Dispatcher.Invoke(() => window.Close());
+            return result;
+        }
 
-        public LoginWindow(MainWindow main)
+        private readonly ManualResetEvent resetEvent = new ManualResetEvent(false);
+        private LoginWindowResult result;
+
+        private LoginWindow(Window owner)
         {
             InitializeComponent();
-            _main = main;
-            this.Owner = _main;
-            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            this.Owner = owner;
+            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            Show();
+        }
+
+        public LoginWindowResult WaitForLoginClick()
+        {
+            resetEvent.WaitOne();
+            return result;
         }
 
         private void BtnLogin_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -27,16 +43,8 @@ namespace FWA.Gui.Content
             //The following is only called, if both textboxes are not empty
             if (!string.Empty.Equals(name) && !string.Empty.Equals(pw))
             {
-                if(_main.Control.DBHandler.UserDataCorrect(name, pw))
-                {
-                    // Write the name of the new user into the button and
-                    // Get all the devices from the database, which are filled
-                    // into the tables
-                    _main.RefreshLoginName();
-                    _main.Control.DBHandler.GetAllDeviceData();
-                    this.Close();
-                }
-                else _main.MsgBox("Fehler", "Die Nutzerdaten waren ungültig.");
+                result = new LoginWindowResult { Username = name, Password = Encoding.UTF8.GetBytes(pw) };
+                resetEvent.Set();
             }
         }
 
@@ -54,5 +62,11 @@ namespace FWA.Gui.Content
             // After the frame is opened, TxtName automatically gets the focus. For easier use.
             TxtName.Focus();
         }
+    }
+
+    public class LoginWindowResult
+    {
+        public string Username { get; set; }
+        public byte[] Password { get; set; }
     }
 }

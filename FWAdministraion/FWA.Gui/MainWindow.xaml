@@ -55,5 +55,5 @@
         </Metro:WindowCommands>
     </Metro:MetroWindow.RightWindowCommands>
 
-    <dragablz:TabablzControl x:Name="mainMenu" ItemsSource="{Binding}" />
+    <dragablz:TabablzControl x:Name="mainMenu" />
 </Metro:MetroWindow>
