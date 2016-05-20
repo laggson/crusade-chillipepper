@@ -28,7 +28,7 @@ namespace FWA.Gui
         {
             new DeviceCategory("TLF", "__TF%"),
             new DeviceCategory("LF","__LF%"),
-            new DeviceCategory("MTF", "__MF%"),
+            //new DeviceCategory("MTF", "__MF%"),
             new DeviceCategory("Halle", string.Empty)
         };
 
@@ -141,9 +141,10 @@ namespace FWA.Gui
             }
         }
 
-        public void MsgBox(string header, string message)
+        public async Task<MessageDialogResult> MsgBox(string header, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
         {
-            Task.Run(() => MaterialDesignThemes.Wpf.DialogHost.Show(string.Format("{0}:{1}{2}", header, Environment.NewLine, message)));
+            // Task.Run(() => MaterialDesignThemes.Wpf.DialogHost.Show(string.Format("{0}:{1}{2}", header, Environment.NewLine, message)));
+            return await Task.Run(() => this.ShowMessageAsync(header, message, style));
         }
 
         /// <summary>
@@ -254,18 +255,7 @@ namespace FWA.Gui
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "FWAdministration v" + GetVersion();
-            //this.logintemptestzeug();
-        }
-
-        /// <summary>
-        /// Reads the current assembly version from the AssemblyInfo.cs and returns it merged to one string
-        /// </summary>
-        /// <returns></returns>
-        public string GetVersion()
-        {
-            System.Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return ver.Major + "." + ver.Minor + "." + ver.Build;
+            this.Title = "FWAdministration v" + AwkwardFlyingClassInBackground.GetVersion();
         }
 
         #endregion

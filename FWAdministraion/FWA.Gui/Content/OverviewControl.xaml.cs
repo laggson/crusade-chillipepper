@@ -62,7 +62,10 @@ namespace FWA.Gui.Content
 
         private void Table_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
+            if (e.Column.Header.ToString().Equals("ID"))
+                e.Cancel = true;
+            else
+                e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
         }
 
         private void Table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -74,19 +77,6 @@ namespace FWA.Gui.Content
                     Device = Table.SelectedItem as Device,
                     ControlName = Name
                 });
-
-                //Zu Testzwecken:
-
-                //Device d = Table.SelectedItem as Device;
-                //Check  c = new Check(d)
-                //{
-                //    //Name and InvNumber set automatically in Constructor
-                //    ID = d.ID,
-                //    DateChecked = DateTime.Now,
-                //    WhoChecked = _main.Control.ConnectedUser,
-                //    CheckType = CheckType.OK
-                //};
-                //_main.Control.DBHandler.PushOrUpdateCheck(c);
             }
         }
 

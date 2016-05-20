@@ -10,17 +10,31 @@ namespace FWA.Logic.Storage
             get; set;
         }
 
+        [DisplayName("Gegenstand")]
         public virtual Device Device
         {
             get; set;
         }
 
-        public virtual User Tester
+        [DisplayName("Inventar-Nr.")]
+        public virtual string DeviceInvNumber
+        {
+            get { return Device?.InvNumber ?? string.Empty; }
+        }
+
+        public virtual DateTime DateChecked
         {
             get; set;
         }
 
-        public virtual DateTime DateChecked
+        [DisplayName("Geprüft am")]
+        public virtual string DateCheckedString
+        {
+            get { return DateChecked.ToShortDateString(); }
+        }
+
+        [DisplayName("Prüfer")]
+        public virtual User Tester
         {
             get; set;
         }
@@ -41,24 +55,6 @@ namespace FWA.Logic.Storage
         public virtual string Comment
         {
             get; set;
-        }
-
-        [DisplayName("Geprüft am")]
-        public virtual string DateCheckedString
-        {
-            get { return DateChecked.ToShortDateString(); }
-        }
-
-        [DisplayName("Inventar-Nr.")]
-        public virtual string DeviceInvNumber
-        {
-            get { return Device?.InvNumber ?? string.Empty; }
-        }
-
-        [DisplayName("Prüfer")]
-        public virtual string TesterName
-        {
-            get { return Tester?.Name ?? string.Empty; }
         }
     }
 

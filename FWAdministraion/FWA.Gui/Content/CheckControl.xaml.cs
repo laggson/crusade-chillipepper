@@ -31,6 +31,10 @@ namespace FWA.Gui.Content
         {
             switch (e.Column.Header.ToString())
             {
+                case "ID":
+                    e.Cancel = true;
+                    return;
+
                 case "DateChecked":
                     e.Cancel = true;
                     return;

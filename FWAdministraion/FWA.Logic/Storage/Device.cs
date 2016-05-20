@@ -10,9 +10,7 @@ namespace FWA.Logic.Storage
 
         public override string ToString()
         {
-            string s = ID + ";" + Name + ";" + InvNumber + ";" + NeedsCheckcard + ";" + AnnualChecks + ";";
-
-            return s;
+            return Name;
         }
 
         [DisplayName("ID")]
