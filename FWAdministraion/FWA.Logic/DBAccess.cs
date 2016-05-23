@@ -24,7 +24,7 @@ namespace FWA.Logic
             return Fluently.Configure()
                     .Database(GetDatabase())
                     .Mappings(m => m.FluentMappings.AddFromAssemblyOf<UserMapping>())
-                    //.ExposeConfiguration(c => new SchemaUpdate(c).Execute(true, true))
+                    .ExposeConfiguration(c => new SchemaUpdate(c).Execute(true, true))
                     .BuildSessionFactory();
         }
 

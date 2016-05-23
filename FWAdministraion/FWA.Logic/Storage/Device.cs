@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace FWA.Logic.Storage
 {
@@ -7,6 +8,7 @@ namespace FWA.Logic.Storage
     /// </summary>
     public class Device : IStorageItem
     {
+        private int[] _monthsToCheck;
 
         public override string ToString()
         {
@@ -18,6 +20,22 @@ namespace FWA.Logic.Storage
         {
             get; set;
         }
+
+        //public int[] MonthsToCheck
+        //{
+        //    get {
+        //        return _monthsToCheck;
+        //    }
+
+        //    set
+        //    {
+        //        if (value.Length < this?.AnnualChecks)
+        //        {
+        //            _monthsToCheck = value;
+        //        }
+        //        else Console.WriteLine("Angehägtes Array ist zu lang für die angegebene Zahl an jährlichen Prüfungen. Lol");
+        //    }
+        //}
 
         [DisplayName("Name")]
         public virtual string Name

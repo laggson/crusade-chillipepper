@@ -16,14 +16,24 @@ using FWA.Logic.Exceptions;
 namespace FWA.Gui
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// This is the main window (o_O) and therefor does some stuff a Main Window does. Is created as main class of the Gui package.
     /// </summary>
     public partial class MainWindow
     {
+        /// <summary>
+        /// Stores the DBAuthentication object, which is used for checking, if there's any user connected
+        /// (If not, there's not much happening in here)
+        /// </summary>
         public DBAuthentication Database { get; set; }
 
+        /// <summary>
+        /// Returns the User object that is stored in the Database object
+        /// </summary>
         public User CurrentUser { get { return Database?.CurrentUser; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly DeviceCategory[] Categorys =
         {
             new DeviceCategory("TLF", "__TF%"),

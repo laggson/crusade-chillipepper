@@ -48,6 +48,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\FWA.Gui.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -145,11 +146,9 @@
       <DependentUpon>OverviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\DeviceCategory.cs" />
-    <Compile Include="Logic\HintAssist.cs" />
     <Compile Include="Content\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Logic\NotEmptyValidationRule.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

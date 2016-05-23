@@ -19,10 +19,10 @@ namespace FWA.Logic
             var userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
 
             if (userlist.Count < 1)
-                throw new AuthenticationException(username, "No such user");
+                throw new AuthenticationException(username, "Der Nutzer wurde nicht gefunden.");
 
             if (userlist.Count > 1)
-                throw new AuthenticationException(username, "Multiple users found. Please fix your goddamn database");
+                throw new AuthenticationException(username, "Mehrere Nutzer des Namens gefunden. Dein Entwickler ist inkompetent.");
 
             var user = userlist.Single();
             string newHash = Crypter.Blowfish.Crypt(password, user.Salt);
@@ -35,7 +35,7 @@ namespace FWA.Logic
 
             if (!newHash.Equals(user.Hash))
             {
-                throw new AuthenticationException(username, "Wrong password");
+                throw new AuthenticationException(username, "Falsches Passwort");
             }
 
             CurrentUser = user;
@@ -68,7 +68,7 @@ namespace FWA.Logic
                 throw new ArgumentNullException();
 
             if (obj is User)
-                throw new ArgumentException("Cannot insert Users");
+                throw new ArgumentException("Kann keine Benutzer einfügen.");
 
             AssertRights(AccountType.User, "Insertion of " + obj.GetType().FullName);
         }
@@ -100,12 +100,12 @@ namespace FWA.Logic
         {
             if (DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq("Name", username)), session).Count > 0)
             {
-                throw new ArgumentException(string.Format("A user with the username {0} already exists", username));
+                throw new ArgumentException(string.Format("Ein Benutzer mit dem Namen {0} existiert bereits.", username));
             }
 
             if (DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq("EMail", email)), session).Count > 0)
             {
-                throw new ArgumentException(string.Format("A user with the email {0} already exists", email));
+                throw new ArgumentException(string.Format("Ein Benutzer mit der EMail-Adresse {0} existiert bereits.", email));
             }
         }
 

@@ -13,8 +13,19 @@ namespace FWA.Gui.Content
     /// </summary>
     public partial class OverviewControl : UserControl
     {
+        /// <summary>
+        /// Dunno what to write here. It's just an event, bro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public delegate void DeviceEditedListener(object sender, DeviceEventArgs e);
+        /// <summary>
+        /// Will rise when a device was edited. Maybe used for storing the updated data, maybe removed later.
+        /// </summary>
         public event DeviceEditedListener DeviceEdited;
+        /// <summary>
+        /// Will rise when a device in the table is double clicked. Needed to open the check tab
+        /// </summary>
         public event DeviceEditedListener DeviceDoubleClicked;
 
         public DeviceCategory Category { get; set; }
@@ -26,6 +37,10 @@ namespace FWA.Gui.Content
             Category = category;
         }
 
+        /// <summary>
+        /// Uses the transmitted DBAuthentication to receive all devices matching to this object's global category and writes them into 'Table'
+        /// </summary>
+        /// <param name="db"></param>
         public void LoadValuesFromDatabase(DBAuthentication db)
         {
             var list = db.GetDevicesByInvNumberType(Category.InvNumberLike);
@@ -33,6 +48,9 @@ namespace FWA.Gui.Content
             Dispatcher.Invoke(() => Table.ItemsSource = list);
         }
 
+        /// <summary>
+        /// Clears the Table
+        /// </summary>
         public void Clear()
         {
             Table.ItemsSource = null;
@@ -60,6 +78,11 @@ namespace FWA.Gui.Content
             return list;
         }
 
+        /// <summary>
+        /// Hides the ID column and overwrites the header of the other columns by the definded ComponentModel.DisplayName
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Table_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.Column.Header.ToString().Equals("ID"))
@@ -68,6 +91,11 @@ namespace FWA.Gui.Content
                 e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
         }
 
+        /// <summary>
+        /// If the Table's Itemssource is not null, the DeviceDoubleClicked event is raised, containing the selected Device and the name of this tab.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (Table.ItemsSource != null)
@@ -80,6 +108,11 @@ namespace FWA.Gui.Content
             }
         }
 
+        /// <summary>
+        /// Is supposed to update the device object after it's data is changed in the Table. Not sure if I'm to leave this implemented...
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Table_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             // TODO: Transmitted Data has old value.
