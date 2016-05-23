@@ -35,7 +35,7 @@ namespace FWA.Gui.Content
 
         public void Clear()
         {
-            Dispatcher.Invoke(() => Table.ItemsSource = null);
+            Table.ItemsSource = null;
         }
 
         /// <summary>

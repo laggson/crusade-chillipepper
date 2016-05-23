@@ -35,7 +35,7 @@ namespace FWA.Gui.Content
             return result;
         }
 
-        private void BtnLogin_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             string name = TxtName.Text;
             string pw = TxtPassword.Password;
@@ -57,10 +57,13 @@ namespace FWA.Gui.Content
                 this.BtnLogin_Click(null, null);
         }
 
-        private void Login_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void Login_Loaded(object sender, RoutedEventArgs e)
         {
             // After the frame is opened, TxtName automatically gets the focus. For easier use.
             TxtName.Focus();
+
+            TxtName.Text = "hs";
+            TxtPassword.Password = "password";
         }
     }
 

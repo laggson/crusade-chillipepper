@@ -78,9 +78,9 @@ namespace FWA.Gui
             }
         }
 
-        private void AlertNoDatabaseConnection()
+        private async void AlertNoDatabaseConnection()
         {
-            MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
+            await MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
         }
 
         public void Test(Device device, string name, DBAuthentication db)
@@ -144,7 +144,8 @@ namespace FWA.Gui
         public async Task<MessageDialogResult> MsgBox(string header, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
         {
             // Task.Run(() => MaterialDesignThemes.Wpf.DialogHost.Show(string.Format("{0}:{1}{2}", header, Environment.NewLine, message)));
-            return await Task.Run(() => this.ShowMessageAsync(header, message, style));
+            var dialog = await this.ShowMessageAsync(header, message, style);
+            return dialog;
         }
 
         /// <summary>
@@ -155,7 +156,7 @@ namespace FWA.Gui
             Dispatcher.Invoke(() => TxtLogin.Text = CurrentUser?.Name ?? "Nicht angemeldet");
         }
 
-        private void Login()
+        private async void Login()
         {
             try
             {
@@ -173,31 +174,29 @@ namespace FWA.Gui
             catch (AuthenticationException ex)
             {
                 Database = null;
-                MsgBox("Warnung", string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message));
+                await Dispatcher.Invoke(() => MsgBox("Warnung", string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message)));
             }
         }
 
-        private void Logout()
+        private async void Logout()
         {
             string msg = "Sind sie sicher, dass sie den Benutzer " + CurrentUser?.Name + " abmelden wollen";
-            var result = Dispatcher.Invoke(() =>
-            {
-                var task = this.ShowMessageAsync("Warnung", msg, MessageDialogStyle.AffirmativeAndNegative);
-                task.Start();
-                task.Wait();
-                return task.Result;
-            });
 
-            if (result == MessageDialogResult.Affirmative)
+            await Dispatcher.Invoke(async () =>
             {
-                foreach (var overviewControl in Tabs)
+                var result = await this.MsgBox("Warnung", msg, MessageDialogStyle.AffirmativeAndNegative);
+                
+                if (result == MessageDialogResult.Affirmative)
                 {
-                    overviewControl.Clear();
-                }
+                    foreach (var overviewControl in Tabs)
+                    {
+                        overviewControl.Clear();
+                    }
 
-                Database = null;
-                RefreshLoginName();
-            }
+                    Database = null;
+                    RefreshLoginName();
+                }
+            });
         }
 
         #region Events
@@ -229,6 +228,7 @@ namespace FWA.Gui
             if (Database != null)
             {
                 Task.Run(new Action(Logout));
+                
             }
             else
             {

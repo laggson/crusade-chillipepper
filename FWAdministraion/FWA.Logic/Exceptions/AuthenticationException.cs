@@ -9,7 +9,7 @@ namespace FWA.Logic.Exceptions
         public string FailReasonMessage { get; }
 
         public AuthenticationException(string username, string msg)
-            : base(string.Format("Failed to authenticate as User '{0}': {1}", username, msg))
+            : base(string.Format("Anmeldung als Nutzer '{0}' fehlgeschlagen: {1}", username, msg))
         {
             Username = username;
             FailReasonMessage = msg;
