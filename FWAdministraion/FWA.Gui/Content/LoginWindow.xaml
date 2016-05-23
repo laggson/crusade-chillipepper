@@ -9,7 +9,7 @@
         xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         mc:Ignorable="d"
-        Title="Login" Width="220" Height="200"
+        Title="Login" Width="300" Height="200"
                    
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
@@ -33,19 +33,12 @@
                                  Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <TextBox Grid.Row="0" Grid.Column="1" Margin="5 20 5 20"
 				    x:Name="TxtName"
-				    local:HintAssist.Hint="Name oder E-Mail" KeyUp="Login_KeyUp">
-            <TextBox.Text>
-                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
+				    KeyUp="Login_KeyUp">
         </TextBox>
 
         <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Key" HorizontalAlignment="Center" 
                                  VerticalAlignment="Center" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" />
-        <PasswordBox Grid.Row="1" Grid.Column="1" local:HintAssist.Hint="Passwort" Margin="5 10 5 10" x:Name="TxtPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" KeyUp="Login_KeyUp" >
+        <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5 10 5 10" x:Name="TxtPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" KeyUp="Login_KeyUp" >
         </PasswordBox>
 
         <Button Grid.Row="2" Grid.Column="1" Margin="10 0 10 0" Content="Anmelden" Click="BtnLogin_Click" />

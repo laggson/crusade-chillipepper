@@ -3,84 +3,67 @@ using System.ComponentModel;
 
 namespace FWA.Logic.Storage
 {
-    public class Check : IStorageItem
+    public class Check
     {
-        Device _device;
-
-        public Check(Device d)
-        {
-            _device = d;
-            this.Name = d.Name;
-            this.InvNumber = d.InvNumber;
-        }
-
-        public int ID
+        public virtual int ID
         {
             get; set;
         }
 
-        public string Name
+        [DisplayName("Gegenstand")]
+        public virtual Device Device
         {
-            get
-            {
-                return _device.Name;
-            }
-
-            set
-            {
-                _device.Name = value;
-            }
+            get; set;
         }
 
         [DisplayName("Inventar-Nr.")]
-        public string InvNumber
+        public virtual string DeviceInvNumber
         {
-            get
-            {
-                return _device.InvNumber;
-            }
-            set
-            {
-                _device.InvNumber = value;
-            }
+            get { return Device?.InvNumber ?? string.Empty; }
         }
 
-        public DateTime DateChecked
+        public virtual DateTime DateChecked
         {
             get; set;
         }
 
         [DisplayName("Geprüft am")]
-        public string StringDate
+        public virtual string DateCheckedString
         {
-            get
-            {
-                return DateChecked.ToString("dd/MM/yyyy");
-            }
+            get { return DateChecked.ToShortDateString(); }
         }
-        
+
         [DisplayName("Prüfer")]
-        public User WhoChecked
+        public virtual User Tester
         {
             get; set;
         }
 
         [DisplayName("Zustand")]
-        public CheckType CheckType
+        public virtual CheckType CheckType
         {
             get; set;
         }
 
         [DisplayName("Mängel")]
-        public string Lack
+        public virtual string Lack
         {
             get; set;
         }
 
         [DisplayName("Bemerkung")]
-        public string Comment
+        public virtual string Comment
         {
             get; set;
         }
+    }
+
+    public enum CheckType
+    {
+        NotNeeded,
+        NotYetChecked,
+        OK,
+        LacksFound,
+        Repaired
     }
 }

@@ -19,7 +19,7 @@
         TextOptions.TextFormattingMode="Ideal" ShowIconOnTitleBar="False"
         TextOptions.TextRenderingMode="Auto"
                    
-        Height="700" Width="1050">
+        Height="800" Width="1200">
     <Metro:MetroWindow.RightWindowCommands>
         <Metro:WindowCommands>
             
@@ -55,5 +55,5 @@
         </Metro:WindowCommands>
     </Metro:MetroWindow.RightWindowCommands>
 
-    <dragablz:TabablzControl x:Name="mainMenu" ItemsSource="{Binding}" />
+    <dragablz:TabablzControl x:Name="mainMenu" />
 </Metro:MetroWindow>
