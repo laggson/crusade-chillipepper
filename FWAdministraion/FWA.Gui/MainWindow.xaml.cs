@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
 using FWA.Gui.Content;
@@ -32,7 +31,7 @@ namespace FWA.Gui
         {
             new DeviceCategory("TLF", "__TF%"),
             new DeviceCategory("LF","__LF%"),
-            //new DeviceCategory("MTF", "__MF%"), // Will be added later
+            new DeviceCategory("MTF", "__MF%"), // Will be added later
             new DeviceCategory("Halle", string.Empty)
         };
 
@@ -41,15 +40,7 @@ namespace FWA.Gui
         /// </summary>
         public OverviewControl[] Tabs
         {
-            get
-            {
-                return Dispatcher.Invoke(() =>
-                    mainMenu.ItemsSource.
-                    OfType<TabItem>().
-                    Select(t => t.Content).
-                    OfType<OverviewControl>().
-                    ToArray());
-            }
+            get; set;
         }
 
         /// <summary>
@@ -59,12 +50,16 @@ namespace FWA.Gui
         {
             InitializeComponent();
 
-            mainMenu.ItemsSource = Categorys.Select(x =>
-                new TabItem
-                {
-                    Header = x.DisplayName,
-                    Content = NewOverviewControl(x)
-                }).ToList();
+            this.InitControls();
+        }
+
+        private void InitControls()
+        {
+            Tabs = new OverviewControl[4];
+            for(int i = 0; i < Tabs.Length; i++)
+            {
+                Tabs[i] = NewOverviewControl(Categorys[i]);
+            }
         }
 
         private OverviewControl NewOverviewControl(DeviceCategory category)
@@ -88,9 +83,9 @@ namespace FWA.Gui
             }
         }
 
-        private async void AlertNoDatabaseConnection()
+        private void AlertNoDatabaseConnection()
         {
-            await MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
+            MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
         }
 
         /// <summary>
@@ -108,7 +103,7 @@ namespace FWA.Gui
             mainMenu.ItemsSource = null;
             mainMenu.ItemsSource = test;
             //mainMenu erhält neuen Tab mit namen 'Test ' + device.Name;
-            
+
             //neues CheckControl mit Event wenn fertig
             var controller = new CheckControl();
             controller.ChecksFinished += Controller_ChecksFinished;
@@ -173,10 +168,9 @@ namespace FWA.Gui
         /// <param name="message">Die Nachricht</param>
         /// <param name="style">Die Anzahl der anzuzeigenen Buttons</param>
         /// <returns>Das Ergebnis der vom Nutzer gewählten Aktion</returns>
-        public async Task<MessageDialogResult> MsgBox(string header, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
+        public MessageBoxResult MsgBox(string header, string message, MessageBoxButton style = MessageBoxButton.OK)
         {
-            var dialog = await this.ShowMessageAsync(header, message, style);
-            return dialog;
+            return MessageBox.Show(message, header, style);
         }
         
         /// <summary>
@@ -184,10 +178,10 @@ namespace FWA.Gui
         /// </summary>
         public void RefreshLoginName()
         {
-            Dispatcher.Invoke(() => TxtLogin.Text = "Angemeldet als " + CurrentUser?.Name ?? "Nicht angemeldet");
+            Dispatcher.Invoke(() => TxtLogin.Header = "Verbunden: " + CurrentUser?.Name ?? "Verbinden: Nicht verbunden");
         }
 
-        private async void Login()
+        private void Login()
         {
             try
             {
@@ -205,19 +199,19 @@ namespace FWA.Gui
             catch (AuthenticationException ex)
             {
                 Database = null;
-                await Dispatcher.Invoke(() => MsgBox("Warnung", string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message)));
+                MsgBox("Warnung", string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message));
             }
         }
 
-        private async void Logout()
+        private void Logout()
         {
             string msg = "Sind sie sicher, dass sie den Benutzer " + CurrentUser?.Name + " abmelden wollen";
 
-            await Dispatcher.Invoke(async () =>
+            Dispatcher.Invoke(() =>
             {
-                var result = await this.MsgBox("Warnung", msg, MessageDialogStyle.AffirmativeAndNegative);
+                var result = this.MsgBox("Warnung", msg, MessageBoxButton.YesNo);
                 
-                if (result == MessageDialogResult.Affirmative)
+                if (result == MessageBoxResult.Yes)
                 {
                     foreach (var overviewControl in Tabs)
                     {
@@ -258,15 +252,26 @@ namespace FWA.Gui
         {
             if (Database != null)
             {
-                Task.Run(new Action(Logout));
-                
+                MsgBox("Existing Login found", "Logout before you login");
             }
             else
             {
                 Task.Run(new Action(Login));
             }
         }
-        
+
+        private void ButtonLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (Database == null)
+            {
+                MsgBox("No Login found", "Login to logout");
+            }
+            else
+            {
+                Task.Run(new Action(Logout));
+            }
+        }
+
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
@@ -283,19 +288,27 @@ namespace FWA.Gui
         
         private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && Keyboard.IsKeyDown(Key.Tab))
+            if (Keyboard.IsKeyDown(Key.Tab) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
             {
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                     this.LowerMenuIndex();
                 else this.RaiseMenuIndex();
             }
+            else if ((Keyboard.IsKeyDown(Key.D1) || Keyboard.IsKeyDown(Key.NumPad1)) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                mainMenu.SelectedIndex = 0;
+            else if ((Keyboard.IsKeyDown(Key.D2) || Keyboard.IsKeyDown(Key.NumPad2)) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                mainMenu.SelectedIndex = 1;
+            else if ((Keyboard.IsKeyDown(Key.D3) || Keyboard.IsKeyDown(Key.NumPad3)) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                mainMenu.SelectedIndex = 2;
+            else if ((Keyboard.IsKeyDown(Key.D4) || Keyboard.IsKeyDown(Key.NumPad4)) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                mainMenu.SelectedIndex = 3;
         }
-        
+
         private void LowerMenuIndex()
         {
             mainMenu.SelectedIndex = mainMenu.SelectedIndex == 0 ? mainMenu.Items.Count - 1 : mainMenu.SelectedIndex - 1;
         }
-        
+
         private void RaiseMenuIndex()
         {
             mainMenu.SelectedIndex = mainMenu.SelectedIndex + 1 % mainMenu.Items.Count;

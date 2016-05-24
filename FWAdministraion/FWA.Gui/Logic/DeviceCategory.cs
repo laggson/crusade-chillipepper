@@ -1,4 +1,6 @@
-﻿namespace FWA.Gui.Logic
+﻿using FWA.Gui.Content;
+
+namespace FWA.Gui.Logic
 {
     /// <summary>
     /// Die Kategorie, nach der Gegenstände in die Tabs einsortiert werden.
