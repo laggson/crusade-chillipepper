@@ -22,7 +22,7 @@
         Height="800" Width="1200">
     <Metro:MetroWindow.RightWindowCommands>
         <Metro:WindowCommands>
-            
+
             <Button Click="ButtonMail_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
@@ -37,7 +37,7 @@
                    Text="Schreib 'nen Beschwerdebrief!" />
                 </StackPanel>
             </Button>
-            
+
             <Button Click="ButtonLogin_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"

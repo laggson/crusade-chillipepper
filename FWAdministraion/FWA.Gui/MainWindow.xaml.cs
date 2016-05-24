@@ -1,5 +1,4 @@
-﻿#define Debug
-using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls.Dialogs;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -108,12 +107,17 @@ namespace FWA.Gui
             test.Add(tab);
             mainMenu.ItemsSource = null;
             mainMenu.ItemsSource = test;
+            //mainMenu erhält neuen Tab mit namen 'Test ' + device.Name;
             
+            //neues CheckControl mit Event wenn fertig
             var controller = new CheckControl();
             controller.ChecksFinished += Controller_ChecksFinished;
+
+            //Alle Devices mit dem Namen aus DB
             var devices = GetDevicesByTabName(name, db).Where(x => x.Name.Equals(device.Name));
             var checks = new List<Check>();
 
+            //Alle neu geladenen Devices in Liste mit Checks umwandeln; Datum, Tester, Check -> Ok wird automatisch gesetzt
             foreach (Device d in devices)
             {
                 checks.Add(new Check
@@ -125,8 +129,10 @@ namespace FWA.Gui
                 });
             }
 
+            //Die neue Liste wird zur Itemssource des neuen CheckControl
             controller.Table.ItemsSource = checks;
             tab.Content = controller;
+            //CheckControl wird in neuen Tab eingefügt und als aktueller Tab gesetzt
             mainMenu.SelectedItem = tab;
         }
 
