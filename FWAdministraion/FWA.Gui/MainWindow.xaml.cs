@@ -15,33 +15,31 @@ using FWA.Logic.Exceptions;
 
 namespace FWA.Gui
 {
-    /// <summary>
-    /// This is the main window (o_O) and therefor does some stuff a Main Window does. Is created as main class of the Gui package.
-    /// </summary>
     public partial class MainWindow
     {
         /// <summary>
-        /// Stores the DBAuthentication object, which is used for checking, if there's any user connected
-        /// (If not, there's not much happening in here)
+        /// Eine Instanz der <see cref="DBAuthentication"/>. Ist diese null, ist aktuell kein Nutzer angemeldet
         /// </summary>
         public DBAuthentication Database { get; set; }
-
         /// <summary>
-        /// Returns the User object that is stored in the Database object
+        /// Der aktuell verbundene Benutzer, zurückgegeben aus <see cref="Database"/>
         /// </summary>
         public User CurrentUser { get { return Database?.CurrentUser; } }
-
+        
         /// <summary>
-        /// 
+        /// Speichert die alle Kategorien, in die die Gegenstände der Datenbank einsortiert werden
         /// </summary>
         public readonly DeviceCategory[] Categorys =
         {
             new DeviceCategory("TLF", "__TF%"),
             new DeviceCategory("LF","__LF%"),
-            //new DeviceCategory("MTF", "__MF%"),
+            //new DeviceCategory("MTF", "__MF%"), // Will be added later
             new DeviceCategory("Halle", string.Empty)
         };
 
+        /// <summary>
+        /// Gibt alle aktuell in <see cref="mainMenu"/> vorhandenen Instanzen von <see cref="OverviewControl"/> zurück
+        /// </summary>
         public OverviewControl[] Tabs
         {
             get
@@ -55,6 +53,9 @@ namespace FWA.Gui
             }
         }
 
+        /// <summary>
+        /// Erstellt eine neue Instanz des <see cref="MainWindow"/> und generiert die Tabs aus <see cref="Categorys"/>
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -93,17 +94,21 @@ namespace FWA.Gui
             await MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
         }
 
+        /// <summary>
+        /// Macht ganz schön kranken scheiß. Muss ich mir in Ruhe mal anschauen und refactorn
+        /// </summary>
+        /// <param name="device"></param>
+        /// <param name="name"></param>
+        /// <param name="db"></param>
         public void Test(Device device, string name, DBAuthentication db)
         {
-            //The new Tab is created, named and added to the ItemsSource, which has to be assigned again.
             var test = mainMenu.ItemsSource as List<TabItem>;
             var tab = new TabItem();
             tab.Header = "Test " + device.Name;
             test.Add(tab);
             mainMenu.ItemsSource = null;
             mainMenu.ItemsSource = test;
-
-            //The DeviceCheck is initialized and gets the data, filtered by name, as Itemssource
+            
             var controller = new CheckControl();
             controller.ChecksFinished += Controller_ChecksFinished;
             var devices = GetDevicesByTabName(name, db).Where(x => x.Name.Equals(device.Name));
@@ -135,6 +140,10 @@ namespace FWA.Gui
             return db.GetDevicesByInvNumberType(invNumberLike);
         }
 
+        /// <summary>
+        /// Der Tab mit dem übergebenen HashCode wird geschlossen
+        /// </summary>
+        /// <param name="contentHash">Der HashCode des zu schließenden Tabs</param>
         public void CloseTab(int contentHash)
         {
             var tabs = mainMenu.ItemsSource as List<TabItem>;
@@ -151,19 +160,25 @@ namespace FWA.Gui
             }
         }
 
+        /// <summary>
+        /// Öffnet ein asynchrones Dialog Fenster mit den angegebenen Daten. Muss mit 'await Dispatcher.Invoke(() => MsgBox(...))' aufgerufen werden
+        /// </summary>
+        /// <param name="header">Die Überschrift des Dialogs</param>
+        /// <param name="message">Die Nachricht</param>
+        /// <param name="style">Die Anzahl der anzuzeigenen Buttons</param>
+        /// <returns>Das Ergebnis der vom Nutzer gewählten Aktion</returns>
         public async Task<MessageDialogResult> MsgBox(string header, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
         {
-            // Task.Run(() => MaterialDesignThemes.Wpf.DialogHost.Show(string.Format("{0}:{1}{2}", header, Environment.NewLine, message)));
             var dialog = await this.ShowMessageAsync(header, message, style);
             return dialog;
         }
-
+        
         /// <summary>
-        /// Retrieves the name of the connected User from the control class and writes it into the Login button text.
+        /// Ist ein Nutzer angemeldet, wird dessen Name in <see cref="TxtLogin"/> geschrieben, andernfalls wird 'Nicht angemeldet' eingefügt
         /// </summary>
         public void RefreshLoginName()
         {
-            Dispatcher.Invoke(() => TxtLogin.Text = CurrentUser?.Name ?? "Nicht angemeldet");
+            Dispatcher.Invoke(() => TxtLogin.Text = "Angemeldet als " + CurrentUser?.Name ?? "Nicht angemeldet");
         }
 
         private async void Login()
@@ -245,40 +260,21 @@ namespace FWA.Gui
                 Task.Run(new Action(Login));
             }
         }
-
-        /// <summary>
-        /// Opens your local E-Mail software to write a report letter.
-        /// Will probably be replaced later on
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
         }
-
-        /// <summary>
-        /// Fired when the frame is loaded. Retrieves the Application version from the
-        /// Control class and writes it into the window title.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "FWAdministration v" + AwkwardFlyingClassInBackground.GetVersion();
+            this.Title = "FWAdministration v" + AwkwardFlyingClassInBackground.Version;
         }
 
         #endregion
 
         #region Key-Pressed-Area
-
-        /// <summary>
-        /// Reacts to any key pressed and is supposed to process them.
-        /// Does not require to be fired with any filled parameters,
-        /// because it uses the static "Keyboard.IsKeyDown" method
-        /// </summary>
-        /// <param name="sender">The object that caused the event call</param>
-        /// <param name="e">The arguments concerning the pressed key, etc</param>
+        
         private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && Keyboard.IsKeyDown(Key.Tab))
@@ -288,18 +284,12 @@ namespace FWA.Gui
                 else this.RaiseMenuIndex();
             }
         }
-
-        /// <summary>
-        /// The currently selected index of the dragablz menu is lowered by 1, or set to the highest if it is 0
-        /// </summary>
+        
         private void LowerMenuIndex()
         {
             mainMenu.SelectedIndex = mainMenu.SelectedIndex == 0 ? mainMenu.Items.Count - 1 : mainMenu.SelectedIndex - 1;
         }
-
-        /// <summary>
-        /// The currently selected index of the dragablz menu is raised by 1, or is set to 0 if it is the highest
-        /// </summary>
+        
         private void RaiseMenuIndex()
         {
             mainMenu.SelectedIndex = mainMenu.SelectedIndex + 1 % mainMenu.Items.Count;

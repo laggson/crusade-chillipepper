@@ -3,8 +3,14 @@ using FWA.Logic.Storage;
 
 namespace FWA.Logic.Mappings
 {
+    /// <summary>
+    /// Wird von NHibernate zum Zugriff auf die Datenbank 'Check' benötigt. Sollte vom Nutzer nicht verwendet werden
+    /// </summary>
     public class CheckMapping : ClassMap<Check>
     {
+        /// <summary>
+        /// Ich bin ein Konstruktor
+        /// </summary>
         public CheckMapping()
         {
             Id(x => x.ID).GeneratedBy.Native();

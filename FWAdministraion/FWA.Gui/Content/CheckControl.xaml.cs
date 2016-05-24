@@ -6,36 +6,27 @@ using System.Windows.Controls;
 
 namespace FWA.Gui.Content
 {
-    /// <summary>
-    /// A UserControl for checking a group of devices and is displayed as a tab for the Dragablz Tab menu
-    /// </summary>
     public partial class CheckControl : UserControl
     {
         /// <summary>
-        /// Initializes the object (o_O)
+        /// Dieses UserControl beinhaltet die Überprüfungen aller Gegenstände mit dem gleichen Namen für einen bestimmten Monat
         /// </summary>
         public CheckControl()
         {
             InitializeComponent();
         }
-
+        
         /// <summary>
-        /// Will rise when the finish button is hit.
+        /// Wird aufgerufen, sobald der Finish-Knopf aktiviert wird.
         /// </summary>
         public event ChecksFinishedListener ChecksFinished;
         /// <summary>
-        /// Will rise when the finish button is hit.
+        /// Stellt die Methode dar, die neben der durchgeführten Prüfung über keine spezifischen Ereignisdaten verfügt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public delegate void ChecksFinishedListener(object sender, ChecksFinishedEventArgs e);
-
-        /// <summary>
-        /// Raises the ChecksFinished event after the finish button is pressed.
-        /// ChecksFinished contains an array of all the added Check objects
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void ButtonFinish_Click(object sender, RoutedEventArgs e)
         {
             ChecksFinished?.Invoke(this, new ChecksFinishedEventArgs
@@ -43,14 +34,7 @@ namespace FWA.Gui.Content
                                              Checks = Table.Items.OfType<Check>().ToArray()
                                          });
         }
-
-        /// <summary>
-        /// This is internally called on every column that is generated.
-        /// Makes the ID and DateChecked column not visible, sets the ReadOnly values for the others 
-        /// and overwrites the column headers for the defined ComponentModel.DisplayName attributes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void Table_AutoGeneratingColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             switch (e.Column.Header.ToString())
@@ -84,14 +68,14 @@ namespace FWA.Gui.Content
             e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
         }
     }
-
+    
     /// <summary>
-    /// Event args that contain the array of the freshly created checks, which are supposed to be pushed to the DB
+    /// Enthält die Ereignisdaten für den Abschluss einer Überprüfung, enthalten in einem Check Array
     /// </summary>
     public class ChecksFinishedEventArgs : EventArgs
     {
         /// <summary>
-        /// The Array where the freshly created checks are stored in
+        /// Eine Sammlung der Prüfungen, die in die Datenbank gespeichert werden.
         /// </summary>
         public Check[] Checks { get; set; }
     }

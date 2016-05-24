@@ -137,8 +137,24 @@ namespace FWA.Logic
         }
     }
 
+    /// <summary>
+    /// Gibt an, ob das Objekt in die Datenbank neu eingefügt oder aktualisiert werden soll
+    /// </summary>
     public enum InsertionMode
     {
-        Save, Update, SaveOrUpdate
+        /// <summary>
+        /// Das angegebene Objekt wird als neue Instanz gespeichert
+        /// </summary>
+        Save,
+
+        /// <summary>
+        /// Eine bestehende Instanz des Objekts wird aktualisiert bzw überschrieben
+        /// </summary>
+        Update,
+
+        /// <summary>
+        /// Das System wählt die passende Methode automatisch aus
+        /// </summary>
+        SaveOrUpdate
     }
 }

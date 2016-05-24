@@ -8,28 +8,32 @@ using System.Windows.Controls;
 
 namespace FWA.Gui.Content
 {
-    /// <summary>
-    /// Interaktionslogik für FWControl.xaml
-    /// </summary>
     public partial class OverviewControl : UserControl
     {
         /// <summary>
-        /// Dunno what to write here. It's just an event, bro
+        ///  Stellt die Methode dar, die neben den Informationen über einen Gegenstand über keine spezifischen Ereignisdaten verfügt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public delegate void DeviceEditedListener(object sender, DeviceEventArgs e);
         /// <summary>
-        /// Will rise when a device was edited. Maybe used for storing the updated data, maybe removed later.
+        /// Wird aufgerufen, sobald das Bearbeiten eines Gegenstandes beendet wurde. Könnte später entfernt werden
         /// </summary>
         public event DeviceEditedListener DeviceEdited;
         /// <summary>
-        /// Will rise when a device in the table is double clicked. Needed to open the check tab
+        /// Wird aufgerufen, sobald ein Doppelklick auf einen Gegenstand der Tabelle ausgeführt wurde
         /// </summary>
         public event DeviceEditedListener DeviceDoubleClicked;
-
+        
+        /// <summary>
+        /// Die Kategorie, mit dessen Bedingung die Gegenstände in diesen Tab einsortiert werden
+        /// </summary>
         public DeviceCategory Category { get; set; }
-
+        
+        /// <summary>
+        /// Initialisiert eine neue Instanz der <see cref="OverviewControl"/>-Klasse mit der angegebenen Kategorie
+        /// </summary>
+        /// <param name="category"></param>
         public OverviewControl(DeviceCategory category)
         {
             InitializeComponent();
@@ -38,7 +42,7 @@ namespace FWA.Gui.Content
         }
 
         /// <summary>
-        /// Uses the transmitted DBAuthentication to receive all devices matching to this object's global category and writes them into 'Table'
+        /// Lädt die Gegenstände, auf die die Bedingung der Kategorie zutrifft und speichert einen jeden Namens in <see cref="Table"/>
         /// </summary>
         /// <param name="db"></param>
         public void LoadValuesFromDatabase(DBAuthentication db)
@@ -47,42 +51,35 @@ namespace FWA.Gui.Content
             list = TrimList(list);
             Dispatcher.Invoke(() => Table.ItemsSource = list);
         }
-
+        
         /// <summary>
-        /// Clears the Table
+        /// Leert <see cref="Table"/>
         /// </summary>
         public void Clear()
         {
             Table.ItemsSource = null;
         }
-
+        
         /// <summary>
-        /// Returns a new List, which contains one and only one Item of each name
+        /// Kürzt die eingegebene Liste von Gegenständen, sodass genau eins von jedem Namen übrig bleibt
         /// </summary>
-        /// <param name="source">The list of items for the specific location</param>
-        /// <returns></returns>
+        /// <param name="source">Die vollständige Liste von Gegenständen</param>
+        /// <returns>Die gekürzte Liste mit genau einem Gegenstand jeden Namens</returns>
         private List<Device> TrimList(IList<Device> source)
         {
             var list = new List<Device>();
 
             foreach (Device d in source)
             {
-                //Check if any of the list items already has that name
                 bool itemFound = list.Any(item => item.Name.Equals(d.Name));
-
-                //If there's no item in the local list with the current name, insert it
+                
                 if (!itemFound)
                     list.Add(d);
             }
 
             return list;
         }
-
-        /// <summary>
-        /// Hides the ID column and overwrites the header of the other columns by the definded ComponentModel.DisplayName
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void Table_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.Column.Header.ToString().Equals("ID"))
@@ -90,12 +87,7 @@ namespace FWA.Gui.Content
             else
                 e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
         }
-
-        /// <summary>
-        /// If the Table's Itemssource is not null, the DeviceDoubleClicked event is raised, containing the selected Device and the name of this tab.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void Table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (Table.ItemsSource != null)
@@ -107,12 +99,7 @@ namespace FWA.Gui.Content
                 });
             }
         }
-
-        /// <summary>
-        /// Is supposed to update the device object after it's data is changed in the Table. Not sure if I'm to leave this implemented...
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void Table_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             // TODO: Transmitted Data has old value.
@@ -125,10 +112,19 @@ namespace FWA.Gui.Content
         }
     }
 
+    /// <summary>
+    /// Enthält die Daten für ein Ereignis in Verbindung mit einem Gegenstand und entählt sowohl diesen als auch den Namen des Tabs
+    /// </summary>
     public class DeviceEventArgs : EventArgs
     {
+        /// <summary>
+        /// Der Gegenstand, für den das Ereignis aufgerufen wurde
+        /// </summary>
         public Device Device { get; set; }
 
+        /// <summary>
+        /// Enthält den Namen des Tabs, in dem das Ereignis aufgerufen wurde
+        /// </summary>
         public string ControlName { get; set; }
     }
 }

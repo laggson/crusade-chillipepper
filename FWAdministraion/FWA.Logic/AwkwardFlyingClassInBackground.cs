@@ -1,15 +1,20 @@
 ﻿namespace FWA.Logic
 {
-    public class AwkwardFlyingClassInBackground
+    /// <summary>
+    /// Verfügt momentan über keinen Nutzen, außer der Ausgabe der Assembly Version als string. Ist statisch.
+    /// </summary>
+    public static class AwkwardFlyingClassInBackground
     {
         /// <summary>
-        /// Reads the current assembly version from the AssemblyInfo.cs and returns it merged to one string
+        /// Gibt die Assembly Version zurück, ausgelesen aus der AssemblyInfo.cs Datei. Formatiert als string ohne die Revisionsnummer
         /// </summary>
-        /// <returns></returns>
-        public static string GetVersion()
+        public static string Version
         {
-            System.Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return ver.Major + "." + ver.Minor + "." + ver.Build;
+            get
+            {
+                System.Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                return ver.Major + "." + ver.Minor + "." + ver.Build;
+            }
         }
     }
 }

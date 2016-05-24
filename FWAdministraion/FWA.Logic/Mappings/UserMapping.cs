@@ -3,8 +3,14 @@ using FWA.Logic.Storage;
 
 namespace FWA.Logic.Mappings
 {
-    public class UserMapping : ClassMap<User> 
+    /// <summary>
+    /// Wird von NHibernate zum Zugriff auf die Datenbank 'User' benötigt. Sollte vom Nutzer nicht verwendet werden
+    /// </summary>
+    public class UserMapping : ClassMap<User>
     {
+        /// <summary>
+        /// Ich bin ein Konstruktor
+        /// </summary>
         public UserMapping()
         {
             Id(x => x.ID).Column("UserID").GeneratedBy.Native();

@@ -3,8 +3,14 @@ using FWA.Logic.Storage;
 
 namespace FWA.Logic.Mappings
 {
+    /// <summary>
+    /// Wird von NHibernate zum Zugriff auf die Datenbank 'Device' benötigt. Sollte vom Nutzer nicht verwendet werden
+    /// </summary>
     public class DeviceMapping : ClassMap<Device>
     {
+        /// <summary>
+        /// Ich bin ein Konstruktor
+        /// </summary>
         public DeviceMapping()
         {
             Id(x => x.ID).Column("DeviceID").GeneratedBy.Native();

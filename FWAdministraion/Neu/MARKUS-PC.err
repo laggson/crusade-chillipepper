@@ -423,3 +423,45 @@ Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2016-05-23T14:44:19.243408Z 31 [Note] Aborted connection 31 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
 2016-05-23T14:44:49.733955Z 32 [Note] Aborted connection 32 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
 2016-05-23T14:47:22.191702Z 33 [Note] Aborted connection 33 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-24T09:54:50.382357Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-05-24T09:54:50.383355Z 0 [Warning] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2016-05-24T09:54:50.391858Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld (mysqld 5.7.12-log) starting as process 11556 ...
+2016-05-24T09:54:50.437418Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2016-05-24T09:54:50.438418Z 0 [Note] InnoDB: Uses event mutexes
+2016-05-24T09:54:50.438918Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2016-05-24T09:54:50.439918Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2016-05-24T09:54:50.440419Z 0 [Note] InnoDB: Adjusting innodb_buffer_pool_instances from 8 to 1 since innodb_buffer_pool_size is less than 1024 MiB
+2016-05-24T09:54:50.446420Z 0 [Note] InnoDB: Number of pools: 1
+2016-05-24T09:54:50.450918Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2016-05-24T09:54:50.523927Z 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2016-05-24T09:54:50.527428Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2016-05-24T09:54:50.629440Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2016-05-24T09:54:50.648445Z 0 [Note] InnoDB: Log scan progressed past the checkpoint lsn 2919251
+2016-05-24T09:54:50.649443Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 2919260
+2016-05-24T09:54:50.651444Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 2919260
+2016-05-24T09:54:50.652444Z 0 [Note] InnoDB: Database was not shutdown normally!
+2016-05-24T09:54:50.653444Z 0 [Note] InnoDB: Starting crash recovery.
+2016-05-24T09:54:51.035533Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2016-05-24T09:54:51.036532Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2016-05-24T09:54:51.040033Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2016-05-24T09:54:51.406404Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2016-05-24T09:54:51.421494Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2016-05-24T09:54:51.424503Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2016-05-24T09:54:51.427491Z 0 [Note] InnoDB: Waiting for purge to start
+2016-05-24T09:54:51.479564Z 0 [Note] InnoDB: 5.7.12 started; log sequence number 2919260
+2016-05-24T09:54:51.482574Z 0 [Note] InnoDB: Loading buffer pool(s) from D:\Eigene Dateien\Dokumente\Programmiertes\crusade-chillipepper\FWAdministraion\Neu\ib_buffer_pool
+2016-05-24T09:54:51.484074Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2016-05-24T09:54:51.610995Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2016-05-24T09:54:51.614506Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2016-05-24T09:54:51.617498Z 0 [Note] IPv6 is available.
+2016-05-24T09:54:51.618510Z 0 [Note]   - '::' resolves to '::';
+2016-05-24T09:54:51.620512Z 0 [Note] Server socket created on IP: '::'.
+2016-05-24T09:54:51.773392Z 0 [Note] InnoDB: Buffer pool(s) load completed at 160524 11:54:51
+2016-05-24T09:54:51.908514Z 0 [Note] Event Scheduler: Loaded 0 events
+2016-05-24T09:54:51.909514Z 0 [Note] C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld: ready for connections.
+Version: '5.7.12-log'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2016-05-24T09:55:50.595523Z 2 [Note] Aborted connection 2 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-24T11:17:58.011522Z 5 [Note] Aborted connection 5 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-24T11:18:48.027162Z 6 [Note] Aborted connection 6 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
+2016-05-24T12:28:21.500081Z 0 [Note] InnoDB: page_cleaner: 1000ms intended loop took 1656606ms. The settings might not be optimal. (flushed=0 and evicted=0, during the time.)
+2016-05-24T13:51:12.948380Z 7 [Note] Aborted connection 7 to db: 'fwadministration' user: 'fwa_app' host: 'localhost' (Got an error reading communication packets)
