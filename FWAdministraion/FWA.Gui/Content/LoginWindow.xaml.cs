@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace FWA.Gui.Content
 {
-    public partial class LoginWindow
+    public partial class LoginWindow : Window
     {
         /// <summary>
         /// Erstellt ein neues <see cref="LoginWindow"/> und wartet, bis es vom Nutzer geschlossen wird, um die eingegebenen Daten an <paramref name="owner"/> zurückzugeben

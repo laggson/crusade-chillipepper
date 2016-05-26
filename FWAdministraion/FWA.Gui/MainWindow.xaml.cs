@@ -13,7 +13,7 @@ using FWA.Logic.Exceptions;
 
 namespace FWA.Gui
 {
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         /// <summary>
         /// Eine Instanz der <see cref="DBAuthentication"/>. Ist diese null, ist aktuell kein Nutzer angemeldet
@@ -31,7 +31,7 @@ namespace FWA.Gui
         {
             new DeviceCategory("TLF", "__TF%"),
             new DeviceCategory("LF","__LF%"),
-            new DeviceCategory("MTF", "__MF%"), // Will be added later
+            //new DeviceCategory("MTF", "__MF%"), // Will be added later
             new DeviceCategory("Halle", string.Empty)
         };
 
@@ -40,7 +40,15 @@ namespace FWA.Gui
         /// </summary>
         public OverviewControl[] Tabs
         {
-            get; set;
+            get
+            {
+                return Dispatcher.Invoke(() =>
+                    mainMenu.ItemsSource.
+                    OfType<TabItem>().
+                    Select(t => t.Content).
+                    OfType<OverviewControl>().
+                    ToArray());
+            }
         }
 
         /// <summary>
@@ -50,16 +58,13 @@ namespace FWA.Gui
         {
             InitializeComponent();
 
-            this.InitControls();
-        }
-
-        private void InitControls()
-        {
-            Tabs = new OverviewControl[4];
-            for(int i = 0; i < Tabs.Length; i++)
-            {
-                Tabs[i] = NewOverviewControl(Categorys[i]);
-            }
+            mainMenu.ItemsSource = Categorys.Select(x =>
+                new TabItem
+                {
+                    Width = (this.Width -20) / Categorys.Length,
+                    Header = x.DisplayName,
+                    Content = NewOverviewControl(x)
+                }).ToList();
         }
 
         private OverviewControl NewOverviewControl(DeviceCategory category)
@@ -85,7 +90,7 @@ namespace FWA.Gui
 
         private void AlertNoDatabaseConnection()
         {
-            MsgBox("Keine Verbindung", "Für diese Aktion muss eine aktive Datenbankverbindung bestehen");
+            MsgBox("Für diese Aktion muss eine aktive Datenbankverbindung bestehen", "Keine Verbindung");
         }
 
         /// <summary>
@@ -100,6 +105,12 @@ namespace FWA.Gui
             var tab = new TabItem();
             tab.Header = "Test " + device.Name;
             test.Add(tab);
+
+            foreach(TabItem widthChangingTabItem in test)
+            {
+                widthChangingTabItem.Width = (this.Width - 20) / test.Count;
+            }
+
             mainMenu.ItemsSource = null;
             mainMenu.ItemsSource = test;
             //mainMenu erhält neuen Tab mit namen 'Test ' + device.Name;
@@ -168,7 +179,7 @@ namespace FWA.Gui
         /// <param name="message">Die Nachricht</param>
         /// <param name="style">Die Anzahl der anzuzeigenen Buttons</param>
         /// <returns>Das Ergebnis der vom Nutzer gewählten Aktion</returns>
-        public MessageBoxResult MsgBox(string header, string message, MessageBoxButton style = MessageBoxButton.OK)
+        public MessageBoxResult MsgBox(string message, string header = "", MessageBoxButton style = MessageBoxButton.OK)
         {
             return MessageBox.Show(message, header, style);
         }
@@ -199,7 +210,7 @@ namespace FWA.Gui
             catch (AuthenticationException ex)
             {
                 Database = null;
-                MsgBox("Warnung", string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message));
+                MsgBox(string.Format("Fehler beim Einloggen: {0}{1}", Environment.NewLine, ex.Message), "Warnung");
             }
         }
 
@@ -209,7 +220,7 @@ namespace FWA.Gui
 
             Dispatcher.Invoke(() =>
             {
-                var result = this.MsgBox("Warnung", msg, MessageBoxButton.YesNo);
+                var result = this.MsgBox(msg, "Warnung", MessageBoxButton.YesNo);
                 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -252,7 +263,7 @@ namespace FWA.Gui
         {
             if (Database != null)
             {
-                MsgBox("Existing Login found", "Logout before you login");
+                MsgBox("Logout before you login", "Existing Login found");
             }
             else
             {
@@ -264,7 +275,7 @@ namespace FWA.Gui
         {
             if (Database == null)
             {
-                MsgBox("No Login found", "Login to logout");
+                MsgBox("Login to logout", "No Login found");
             }
             else
             {
@@ -315,5 +326,10 @@ namespace FWA.Gui
         }
 
         #endregion
+
+        private void ButtonAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MsgBox(new NotImplementedException("Deine Mudda riecht nach Fisch.").Message);
+        }
     }
 }
