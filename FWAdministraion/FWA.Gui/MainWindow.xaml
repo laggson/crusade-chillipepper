@@ -2,48 +2,73 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:FWA.Gui"
+        xmlns:content="clr-namespace:FWA.Gui.Content"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         mc:Ignorable="d"
         Loaded="MetroWindow_Loaded"
         KeyDown="MetroWindow_KeyDown"
                    
-        Height="700" Width="1000">
+        Height="700" Width="1000" SizeChanged="Window_OnResize">
+    
+    <materialDesign:DialogHost>
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=TglExpandButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <Calendar x:Name="MonthChecker" DisplayMode="Year" DisplayModeChanged="Cal_DisplayModeChanged" MouseDoubleClick="Cal_Click" />
+            </materialDesign:DrawerHost.LeftDrawerContent>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Background="White" Height="25" FontSize="15">
-            <MenuItem Header="Datei">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            </MenuItem>
-            <MenuItem Header="Verbindung" x:Name="TxtLogin">
-                <MenuItem Header="Verbindung herstellen" Click="ButtonLogin_Click" />
-                <MenuItem Header="Verbindung trennen" Click="ButtonLogout_Click" />
-                <Separator />
-                <MenuItem Header="Verbindung testen" />
-            </MenuItem>
-            <MenuItem Header="Fenster">
-                <MenuItem Header="TLF" InputGestureText="Strg + 1" />
-                <MenuItem Header="LF" InputGestureText="Strg + 2" />
-                <MenuItem Header="MTF" InputGestureText="Strg + 3" />
-                <MenuItem Header="Halle" InputGestureText="Strg + 4" />
-                <Separator />
-            </MenuItem>
-            <MenuItem Header="Hilfe">
-                <MenuItem Header="Über" Click="ButtonAbout_Click" />
-            </MenuItem>
-        </Menu>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-        <TabControl x:Name="mainMenu" Grid.Row="1" FontSize="15" >
-            <!--<TabItem Header="TLF" />
+                    <ToggleButton Grid.Column="0" Click="TglButton_Click" x:Name="TglExpandButton">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon Kind="ArrowLeft" />
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
+                    <Menu Grid.Column="1" Background="White" Height="25" FontSize="15">
+                        <MenuItem Header="Datei">
+
+                        </MenuItem>
+                        <MenuItem Header="Verbindung" x:Name="TxtLogin">
+                            <MenuItem Header="Verbindung herstellen" InputGestureText="Strg + L" Click="ButtonLogin_Click" />
+                            <MenuItem Header="Verbindung trennen" InputGestureText="Strg + L" Click="ButtonLogout_Click" />
+                            <Separator />
+                            <MenuItem Header="Verbindung testen" />
+                        </MenuItem>
+                        <MenuItem Header="Fenster">
+                            <MenuItem Header="TLF" InputGestureText="Strg + 1" />
+                            <MenuItem Header="LF" InputGestureText="Strg + 2" />
+                            <MenuItem Header="MTF" InputGestureText="Strg + 3" />
+                            <MenuItem Header="Halle" InputGestureText="Strg + 4" />
+                            <Separator />
+                        </MenuItem>
+                        <MenuItem Header="Hilfe">
+                            <MenuItem Header="Über" Click="ButtonAbout_Click" />
+                        </MenuItem>
+                    </Menu>
+                </Grid>
+
+
+                <TabControl x:Name="mainMenu" Grid.Row="1" FontSize="15" >
+                    <!--<TabItem Header="TLF" />
             <TabItem Header="LF" />
             <TabItem Header="MTF" />
             <TabItem Header="Halle" />-->
-        </TabControl>
-    </Grid>
+                </TabControl>
+            </Grid>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 
 </Window>

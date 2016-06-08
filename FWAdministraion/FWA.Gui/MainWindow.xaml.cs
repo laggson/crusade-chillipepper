@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using FWA.Logic;
 using FWA.Gui.Logic;
 using FWA.Logic.Exceptions;
+using MaterialDesignThemes.Wpf;
 
 namespace FWA.Gui
 {
@@ -24,6 +25,7 @@ namespace FWA.Gui
         /// </summary>
         public User CurrentUser { get { return Database?.CurrentUser; } }
         
+
         /// <summary>
         /// Speichert die alle Kategorien, in die die Gegenstände der Datenbank einsortiert werden
         /// </summary>
@@ -61,7 +63,7 @@ namespace FWA.Gui
             mainMenu.ItemsSource = Categorys.Select(x =>
                 new TabItem
                 {
-                    Width = (this.Width -20) / Categorys.Length,
+                    Width = (this.Width - 20) / Categorys.Length,
                     Header = x.DisplayName,
                     Content = NewOverviewControl(x)
                 }).ToList();
@@ -106,9 +108,9 @@ namespace FWA.Gui
             tab.Header = "Test " + device.Name;
             test.Add(tab);
 
-            foreach(TabItem widthChangingTabItem in test)
+            foreach (TabItem widthChangingTabItem in test)
             {
-                widthChangingTabItem.Width = (this.Width - 20) / test.Count;
+                widthChangingTabItem.Width = (this.Width - 22) / test.Count;
             }
 
             mainMenu.ItemsSource = null;
@@ -183,7 +185,7 @@ namespace FWA.Gui
         {
             return MessageBox.Show(message, header, style);
         }
-        
+
         /// <summary>
         /// Ist ein Nutzer angemeldet, wird dessen Name in <see cref="TxtLogin"/> geschrieben, andernfalls wird 'Nicht angemeldet' eingefügt
         /// </summary>
@@ -221,7 +223,7 @@ namespace FWA.Gui
             Dispatcher.Invoke(() =>
             {
                 var result = this.MsgBox(msg, "Warnung", MessageBoxButton.YesNo);
-                
+
                 if (result == MessageBoxResult.Yes)
                 {
                     foreach (var overviewControl in Tabs)
@@ -287,16 +289,30 @@ namespace FWA.Gui
         {
             System.Diagnostics.Process.Start("mailto://markus.schmidt98@outlook.de");
         }
-        
+
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = "FWAdministration v" + AwkwardFlyingClassInBackground.Version;
         }
 
+        private void ButtonAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MsgBox(new NotImplementedException("Deine Mudda riecht nach Fisch.").Message);
+        }
+
+        private void Window_OnResize(object sender, SizeChangedEventArgs e)
+        {
+            var test = mainMenu.ItemsSource as List<TabItem>;
+            foreach (TabItem widthChangingTabItem in test)
+            {
+                widthChangingTabItem.Width = (this.Width - 22) / test.Count;
+            }
+        }
+
         #endregion
 
         #region Key-Pressed-Area
-        
+
         private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Tab) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
@@ -313,6 +329,12 @@ namespace FWA.Gui
                 mainMenu.SelectedIndex = 2;
             else if ((Keyboard.IsKeyDown(Key.D4) || Keyboard.IsKeyDown(Key.NumPad4)) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                 mainMenu.SelectedIndex = 3;
+            else if (Keyboard.IsKeyDown(Key.L) && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                if (Database == null)
+                    Task.Run(new Action(Login));
+                else Task.Run(new Action(Logout));
+            }
         }
 
         private void LowerMenuIndex()
@@ -327,9 +349,42 @@ namespace FWA.Gui
 
         #endregion
 
-        private void ButtonAbout_Click(object sender, RoutedEventArgs e)
+        private void TglButton_Click(object sender, RoutedEventArgs e)
         {
-            MsgBox(new NotImplementedException("Deine Mudda riecht nach Fisch.").Message);
+            PackIcon icon = new PackIcon();
+
+            if (TglExpandButton.IsChecked.GetValueOrDefault())
+            {
+                icon.Kind = PackIconKind.ArrowRight;
+            }
+            else
+            {
+                icon.Kind = PackIconKind.ArrowLeft;
+            }
+
+            TglExpandButton.Content = icon;
+        }
+
+        private void Cal_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
+        {
+            if (MonthChecker.DisplayMode != CalendarMode.Year)
+                MonthChecker.DisplayMode = CalendarMode.Year;
+        }
+
+        private void Cal_Click(object sender, MouseButtonEventArgs e)
+        {
+            string year = MonthChecker.DisplayDate.Year.ToString();
+            string month = MonthChecker.DisplayDate.Month.ToString();
+
+            if (MonthChecker.DisplayDate.Month < 10)
+                month = "0" + month;
+
+            Console.WriteLine(string.Format("Datum: {0}/{1}", month, year));
+        }
+
+        private void Cal_DisplayChanged(object sender, CalendarDateChangedEventArgs e)
+        {
+
         }
     }
 }
