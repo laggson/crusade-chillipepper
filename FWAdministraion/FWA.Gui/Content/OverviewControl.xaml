@@ -7,5 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <DataGrid x:Name="Table" ItemsSource="{Binding}" AutoGeneratingColumn="Table_AutoGeneratingColumn" MouseDoubleClick="Table_MouseDoubleClick" 
-              RowEditEnding="Table_RowEditEnding" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="False" SelectionMode="Single" />
+              RowEditEnding="Table_RowEditEnding" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="False" SelectionMode="Single"
+              LoadingRow="Table_OnRowLoading" />
 </UserControl>

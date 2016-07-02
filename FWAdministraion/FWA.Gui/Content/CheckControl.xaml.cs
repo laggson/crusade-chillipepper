@@ -43,6 +43,10 @@ namespace FWA.Gui.Content
                     e.Cancel = true;
                     return;
 
+                case "MonthsToCheck":
+                    e.Cancel = true;
+                    return;
+
                 case "DateChecked":
                     e.Cancel = true;
                     return;

@@ -3,8 +3,11 @@ using FWA.Logic;
 using FWA.Logic.Storage;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace FWA.Gui.Content
 {
@@ -67,6 +70,9 @@ namespace FWA.Gui.Content
         /// <returns>Die gekürzte Liste mit genau einem Gegenstand jeden Namens</returns>
         private List<Device> TrimList(IList<Device> source)
         {
+            if (this.Category.InvNumberLike.Equals(string.Empty))
+                return source.ToList<Device>();
+
             var list = new List<Device>();
 
             foreach (Device d in source)
@@ -83,6 +89,8 @@ namespace FWA.Gui.Content
         private void Table_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.Column.Header.ToString().Equals("ID"))
+                e.Cancel = true;
+            else if (e.Column.Header.ToString().Equals("MonthsToCheck"))
                 e.Cancel = true;
             else
                 e.Column.Header = ((System.ComponentModel.PropertyDescriptor)e.PropertyDescriptor).DisplayName;
@@ -110,6 +118,103 @@ namespace FWA.Gui.Content
                 ControlName = Name
             });
         }
+
+        private void Table_OnRowLoading(object sender, DataGridRowEventArgs e)
+        {
+
+        }
+
+        //#region Changing of rows - found in the web
+
+        //private void AlterRow(DataGridRowEventArgs e)
+        //{
+        //    var cell = GetCell(Table, e.Row, 1);
+        //    if (cell == null) return;
+
+        //    var item = e.Row.Item as Device;
+        //    if (item == null) return;
+
+        //    //Hier den benötigten Monat auswählen. Gucke später, wie
+        //    var value = item.MonthsToCheck[0];
+        //        switch (value)
+        //        {
+        //            case CheckType.NotNeeded:
+        //                //grau, disabled?
+        //                cell.Background = Brushes.Gray;
+        //                cell.Content = string.Empty;
+        //                break;
+        //            case CheckType.LacksFound:
+        //                //rot
+        //                cell.Background = Brushes.Red;
+        //                cell.Content = string.Empty;
+        //                break;
+        //            case CheckType.Repaired:
+        //                //blau
+        //                cell.Background = Brushes.Blue;
+        //                cell.Content = string.Empty;
+        //                break;
+        //            case CheckType.OK:
+        //                //grün
+        //                cell.Background = Brushes.Green;
+        //                cell.Content = "Ok";
+        //                break;
+        //            default:
+        //                //weiß
+        //                cell.Background = Brushes.White;
+        //                cell.Content = string.Empty;
+        //                break;
+        //        }
+        //}
+
+        //public static DataGridRow GetRow(DataGrid grid, int index)
+        //{
+        //    var row = grid.ItemContainerGenerator.ContainerFromIndex(index) as DataGridRow;
+
+        //    if (row == null)
+        //    {
+        //        // may be virtualized, bring into view and try again
+        //        grid.ScrollIntoView(grid.Items[index]);
+        //        row = (DataGridRow)grid.ItemContainerGenerator.ContainerFromIndex(index);
+        //    }
+        //    return row;
+        //}
+
+        //public static T GetVisualChild<T>(Visual parent) where T : Visual
+        //{
+        //    T child = default(T);
+        //    int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+        //    for (int i = 0; i < numVisuals; i++)
+        //    {
+        //        var v = (Visual)VisualTreeHelper.GetChild(parent, i);
+        //        child = v as T ?? GetVisualChild<T>(v);
+        //        if (child != null)
+        //        {
+        //            break;
+        //        }
+        //    }
+        //    return child;
+        //}
+
+        //public static DataGridCell GetCell(DataGrid host, DataGridRow row, int columnIndex)
+        //{
+        //    if (row == null) return null;
+
+        //    var presenter = GetVisualChild<DataGridCellsPresenter>(row);
+        //    if (presenter == null) return null;
+
+        //    // try to get the cell but it may possibly be virtualized
+        //    var cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(columnIndex);
+        //    if (cell == null)
+        //    {
+        //        // now try to bring into view and retreive the cell
+        //        host.ScrollIntoView(row, host.Columns[columnIndex]);
+        //        cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(columnIndex);
+        //    }
+        //    return cell;
+
+        //}
+
+        //#endregion
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace FWA.Logic.Storage
 {
@@ -7,8 +8,6 @@ namespace FWA.Logic.Storage
     /// </summary>
     public class Device : IStorageItem
     {
-        //private int[] _monthsToCheck;
-
         /// <summary>
         /// Gibt den Namen des aktuellen Gegenstandes zurück
         /// </summary>
@@ -27,22 +26,6 @@ namespace FWA.Logic.Storage
         {
             get; set;
         }
-
-        //public int[] MonthsToCheck
-        //{
-        //    get {
-        //        return _monthsToCheck;
-        //    }
-
-        //    set
-        //    {
-        //        if (value.Length < this?.AnnualChecks)
-        //        {
-        //            _monthsToCheck = value;
-        //        }
-        //        else Console.WriteLine("Angehägtes Array ist zu lang für die angegebene Zahl an jährlichen Prüfungen. Lol");
-        //    }
-        //}
 
         /// <summary>
         /// Der Name des Gegenstandes
@@ -79,6 +62,98 @@ namespace FWA.Logic.Storage
         {
             get; set;
         }
+
+        [DisplayName("J")]
+        public virtual CheckType Januray
+        {
+            get; set;
+        }
+
+        [DisplayName("F")]
+        public virtual CheckType February
+        {
+            get; set;
+        }
+
+        [DisplayName("M")]
+        public virtual CheckType March
+        {
+            get; set;
+        }
+
+        [DisplayName("A")]
+        public virtual CheckType April
+        {
+            get; set;
+        }
+
+        [DisplayName("M")]
+        public virtual CheckType May
+        {
+            get; set;
+        }
+
+        [DisplayName("J")]
+        public virtual CheckType June
+        {
+            get; set;
+        }
+
+        [DisplayName("J")]
+        public virtual CheckType July
+        {
+            get; set;
+        }
+
+        [DisplayName("A")]
+        public virtual CheckType August
+        {
+            get; set;
+        }
+
+        [DisplayName("S")]
+        public virtual CheckType September
+        {
+            get; set;
+        }
+
+        [DisplayName("O")]
+        public virtual CheckType October
+        {
+            get; set;
+        }
+
+        [DisplayName("N")]
+        public virtual CheckType November
+        {
+            get; set;
+        }
+
+        [DisplayName("D")]
+        public virtual CheckType December
+        {
+            get; set;
+        }
+
+        //public List<CheckType> MonthsToCheck()
+        //{
+        //    List<CheckType> list = new List<CheckType>();
+
+        //    list.Add(Januray);
+        //    list.Add(February);
+        //    list.Add(March);
+        //    list.Add(April);
+        //    list.Add(May);
+        //    list.Add(June);
+        //    list.Add(July);
+        //    list.Add(August);
+        //    list.Add(September);
+        //    list.Add(October);
+        //    list.Add(November);
+        //    list.Add(December);
+
+        //    return list;
+        //}
 
         /// <summary>
         /// Ein Hinweis für den Anwender, auf was der Gegenstand überprüft werden muss

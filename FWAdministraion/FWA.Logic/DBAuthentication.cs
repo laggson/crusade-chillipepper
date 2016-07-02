@@ -27,7 +27,17 @@ namespace FWA.Logic
         /// <param name="password">Das eingegebene Passwort als Byte Array</param>
         public DBAuthentication(string username, byte[] password)
         {
-            var userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
+            List<User> userlist = null;
+
+            try
+            {
+                userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             if (userlist.Count < 1)
                 throw new AuthenticationException(username, "Der Nutzer wurde nicht gefunden.");
@@ -168,6 +178,16 @@ namespace FWA.Logic
             {
                 throw new InsufficientRightsException(CurrentUser, needed, action);
             }
+        }
+
+        /// <summary>
+        /// Prüft, ob eine Verbindung zum Server hergestellt werden kann.
+        /// </summary>
+        /// <returns></returns>
+        public bool TestServerConnection()
+        {
+            return true;
+
         }
     }
 }

@@ -33,7 +33,7 @@
     <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
     <AssemblyVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyVersionSettings>
     <AssemblyFileVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyFileVersionSettings>
-    <AssemblyVersion>1.0.576.0912</AssemblyVersion>
+    <AssemblyVersion>1.0.637.1141</AssemblyVersion>
     <AssemblyInfoVersionSettings>None.IncrementOnDemand.Increment.TimeStamp</AssemblyInfoVersionSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -95,6 +95,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
@@ -108,6 +109,7 @@
   <ItemGroup>
     <Compile Include="AwkwardFlyingClassInBackground.cs" />
     <Compile Include="DBAccess.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="Exceptions\AuthenticationException.cs" />
     <Compile Include="Exceptions\InsufficientRightsException.cs" />
     <Compile Include="Mappings\CheckMapping.cs" />

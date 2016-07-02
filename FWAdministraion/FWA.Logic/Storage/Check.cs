@@ -1,4 +1,5 @@
 ﻿using System;
+using Name = System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace FWA.Logic.Storage
@@ -91,12 +92,14 @@ namespace FWA.Logic.Storage
     /// <summary>
     ///  Gibt an, ob Mängel vorhanden sind oder repariert wurden.
     /// </summary>
+    [Flags]
     public enum CheckType
     {
         /// <summary>
         /// Eine Überprüfung ist für diesen Monat nicht benötigt
         /// </summary>
-        NotNeeded,
+        [Name.Display(Name = "Test")]
+        NotNeeded = 0,
 
         /// <summary>
         /// Die Überprüfung wurde noch nicht durchgeführt

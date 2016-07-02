@@ -11,6 +11,7 @@ using FWA.Logic;
 using FWA.Gui.Logic;
 using FWA.Logic.Exceptions;
 using MaterialDesignThemes.Wpf;
+using System.Data;
 
 namespace FWA.Gui
 {
@@ -24,7 +25,7 @@ namespace FWA.Gui
         /// Der aktuell verbundene Benutzer, zurückgegeben aus <see cref="Database"/>
         /// </summary>
         public User CurrentUser { get { return Database?.CurrentUser; } }
-        
+
 
         /// <summary>
         /// Speichert die alle Kategorien, in die die Gegenstände der Datenbank einsortiert werden
@@ -74,6 +75,10 @@ namespace FWA.Gui
             var result = new OverviewControl(category);
             result.DeviceDoubleClicked += Overview_DeviceDoubleClicked;
             result.DeviceEdited += Overview_DeviceEdited;
+
+            //Zum übertragen der geänderten Werte in die ItemsSource im Hintergrund
+            result.Table.CellEditEnding += Table_CellEditEnding;
+
             return result;
         }
 
@@ -192,6 +197,9 @@ namespace FWA.Gui
         public void RefreshLoginName()
         {
             Dispatcher.Invoke(() => TxtLogin.Header = "Verbunden: " + CurrentUser?.Name ?? "Verbinden: Nicht verbunden");
+
+            var description = EnumHelper<CheckType>.GetDisplayValue(CheckType.NotNeeded);
+            Console.WriteLine(description);
         }
 
         private void Login()
@@ -208,6 +216,7 @@ namespace FWA.Gui
                 }
 
                 RefreshLoginName();
+                
             }
             catch (AuthenticationException ex)
             {
@@ -228,6 +237,13 @@ namespace FWA.Gui
                 {
                     foreach (var overviewControl in Tabs)
                     {
+                        //overviewControl.Table.CommitEdit();
+
+                        //foreach(Device d in overviewControl.Table.Items)
+                        //{
+                        //    Database.Insert(d);
+                        //}
+
                         overviewControl.Clear();
                     }
 
@@ -236,6 +252,77 @@ namespace FWA.Gui
                 }
             });
         }
+
+        #region Overview-Updating
+
+        private void Table_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            var t = e.EditingElement as ComboBox;  // Speichert die geänderte ComboBox
+
+            if (t != null) //Falls null, wurde was geändert was keine Combobox ist. Also abort
+            {
+                DataGridColumn dgc = e.Column; //Die Spalte, die bearbeitet wurde
+
+                Device editedDevice = e.Row.Item as Device;
+                CheckType editedMonth;
+
+                switch (dgc.SortMemberPath)
+                {
+                    case "January":
+                        editedDevice.Januray = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "February":
+                        editedDevice.February = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "March":
+                        editedDevice.March = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "April":
+                        editedDevice.April = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "May":
+                        editedDevice.May = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "June":
+                        editedDevice.June = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "July":
+                        editedDevice.July = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "August":
+                        editedDevice.August = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "September":
+                        editedDevice.September = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "October":
+                        editedDevice.October = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "November":
+                        editedDevice.November = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+
+                    case "December":
+                        editedDevice.December = (CheckType)Enum.Parse(typeof(CheckType), t.Text);
+                        break;
+                }
+
+                Database.Insert(editedDevice);
+            }
+        }
+
+
+        #endregion
 
         #region Events
 
@@ -293,11 +380,17 @@ namespace FWA.Gui
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = "FWAdministration v" + AwkwardFlyingClassInBackground.Version;
+
+            this.WindowState = WindowState.Maximized;
+            //this.Width = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width;
+            //this.Height = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
+            //this.Left = 0;
+            //this.Top = 0;
         }
 
         private void ButtonAbout_Click(object sender, RoutedEventArgs e)
         {
-            MsgBox(new NotImplementedException("Deine Mudda riecht nach Fisch.").Message);
+            MsgBox(new NotImplementedException("Deine Mudda riecht nach Fisch.").Message, "Fehler");
         }
 
         private void Window_OnResize(object sender, SizeChangedEventArgs e)
@@ -375,6 +468,11 @@ namespace FWA.Gui
         {
             string year = MonthChecker.DisplayDate.Year.ToString();
             string month = MonthChecker.DisplayDate.Month.ToString();
+
+            int selectedMonth = MonthChecker.DisplayDate.Month;
+
+            // Jedes Device durchlaufen
+            // -> Nur anzeigen, wenn Monat enthalten ist
 
             if (MonthChecker.DisplayDate.Month < 10)
                 month = "0" + month;
