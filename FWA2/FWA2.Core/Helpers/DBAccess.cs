@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FWA.Logic
+namespace FWA2.Core.Helpers
 {
    internal static class DBAccess
    {

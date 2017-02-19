@@ -4,9 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FWA2.Wpf"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:vm="clr-namespace:FWA2.Core.ViewModels;assembly=FWA2.Core"
+        mc:Ignorable="d" WindowState="Maximized"
+        Title="FWA2" Height="700" Width="1200">
+    <Window.DataContext>
+        <vm:ListViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <local:BoolToPruefkarteConverter x:Key="PruefkarteConverter"/>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <!-- To be filled -->
+            <MenuItem Header="Datei"></MenuItem>
+            <MenuItem Header="Bearbeiten"></MenuItem>
+            <MenuItem Header="?"></MenuItem>
+        </Menu>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Gegenstaende}" AutoGenerateColumns="False" x:Name="GridMain" 
+                  IsReadOnly="True" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" CanUserDeleteRows="False"
+                  CanUserReorderColumns="False" CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Bezeichnung" Binding="{Binding Bezeichnung}" />
+                <DataGridTextColumn Header="Inventar-Nr." Binding="{Binding InvNummer}" />
+                <DataGridTextColumn Header="PK" Width="25">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Text" Value="{Binding BrauchtPruefkarte, Converter={StaticResource PruefkarteConverter}}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Art der Prüfung" Binding="{Binding ArtDerPruefung}" />
+                <DataGridTextColumn Header="Kommentar" Binding="{Binding Kommentar}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

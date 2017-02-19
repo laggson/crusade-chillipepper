@@ -1,4 +1,5 @@
 ﻿using CryptSharp;
+using FWA2.Core.Exceptions;
 using FWA2.Core.Models;
 using NHibernate;
 using NHibernate.Criterion;
@@ -6,9 +7,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FWA2.Core.Exceptions;
 
-namespace FWA.Logic
+namespace FWA2.Core.Helpers
 {
    /// <summary>
    /// Die für den Anwender zugängliche Klasse zur Verwaltung der Datenbank
@@ -81,7 +81,12 @@ namespace FWA.Logic
       /// <returns></returns>
       public List<Gegenstand> GetDevicesByInvNumberType(string invNumberLike)
       {
-         return DBAccess.GetByCriteria<Gegenstand>(c => c.Add(Restrictions.Like("InvNumber", invNumberLike)));
+         return DBAccess.GetByCriteria<Gegenstand>(c => c.Add(Restrictions.Like("InvNummer", invNumberLike)));
+      }
+
+      public List<Gegenstand> GetAlleGegenstaende()
+      {
+         return DBAccess.GetByCriteria<Gegenstand>(c => c.List());
       }
 
       /// <summary>

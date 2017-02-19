@@ -1,6 +1,8 @@
-﻿using FWA.Logic;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using FWA2.Core.Models;
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace FWA2.Wpf
 {
@@ -12,20 +14,19 @@ namespace FWA2.Wpf
       public MainWindow()
       {
          InitializeComponent();
-
-         //ShowCsvDlg();
-         UserTest();
       }
 
-      private void UserTest()
+      private void PrepareGrid()
       {
-         var bytes = System.Text.Encoding.UTF8.GetBytes("Vivendi2016");
+         var columns = new ObservableCollection<DataGridColumn>();
 
-         //DBAuthentication.CreateNewUser("hs", "hermann.schmidt24@freenet.de", bytes);
-         DBAuthentication.Create("hs", bytes);
+         columns.Add(new DataGridTextColumn
+         {
+
+         });
       }
 
-      private void ShowCsvDlg()
+      /*private void ShowCsvDlg()
       {
          if (!CommonFileDialog.IsPlatformSupported)
             return;
@@ -39,6 +40,6 @@ namespace FWA2.Wpf
             return;
 
          var data = Core.Helpers.CsvImport.GetFiles(dlg.FileName);
-      }
+      }*/
    }
 }

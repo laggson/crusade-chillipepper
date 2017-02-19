@@ -61,6 +61,18 @@
             kommentar = value;
          }
       }
-      
+
+      public override string ToString()
+      {
+         return Bezeichnung;
+      }
+
+      public virtual string GetLocation()
+      {
+         if (string.IsNullOrEmpty(invNummer))
+            return string.Empty;
+
+         return invNummer.Substring(2, 2);
+      }
    }
 }

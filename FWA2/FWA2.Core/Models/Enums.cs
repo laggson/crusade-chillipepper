@@ -11,8 +11,8 @@
 
    public enum AccountType
    {
-      Master = 0,
+      Spectator = 0,
       User,
-      Spectator
+      Master
    }
 }
