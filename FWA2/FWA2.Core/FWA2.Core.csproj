@@ -62,6 +62,7 @@
     <Compile Include="Helpers\CsvImport.cs" />
     <Compile Include="Helpers\DBAccess.cs" />
     <Compile Include="Helpers\DBAuthentication.cs" />
+    <Compile Include="Helpers\MvvmDataObjects.cs" />
     <Compile Include="Models\Mappings\GegenstandMapping.cs" />
     <Compile Include="Models\Mappings\PruefungMapping.cs" />
     <Compile Include="Models\Mappings\UserMapping.cs" />

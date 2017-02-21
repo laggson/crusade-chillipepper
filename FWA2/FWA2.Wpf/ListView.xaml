@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="FWA2.Wpf.ListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FWA2.Wpf"
+             xmlns:viewModel="clr-namespace:FWA2.Core.ViewModels;assembly=FWA2.Core"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <viewModel:ListViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <local:BoolToPruefkarteConverter x:Key="PruefkarteConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Gegenstaende}" AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" CanUserDeleteRows="False"
+                  CanUserReorderColumns="False" CanUserResizeRows="False" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ListItemDoubleClicked}" />
+            </DataGrid.InputBindings>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Bezeichnung" Binding="{Binding Bezeichnung}" />
+                <DataGridTextColumn Header="Inventar-Nr." Binding="{Binding InvNummer}" />
+                <DataGridTextColumn Header="PK" Width="38" x:Name="colPruefkarte" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Text" Value="{Binding BrauchtPruefkarte, Converter={StaticResource PruefkarteConverter}}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Art der Prüfung" Binding="{Binding ArtDerPruefung}" />
+                <DataGridTextColumn Header="Kommentar" Binding="{Binding Kommentar}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <metro:ProgressRing Grid.Row="1" IsActive="{Binding IsLoading}" x:Name="GridProgress" />
+    </Grid>
+</UserControl>

@@ -1,29 +1,13 @@
-﻿using FWA2.Core.Models;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-
-namespace FWA2.Wpf
+﻿namespace FWA2.Wpf
 {
    /// <summary>
    /// Interaktionslogik für MainWindow.xaml
    /// </summary>
-   public partial class MainWindow : Window
+   public partial class MainWindow
    {
       public MainWindow()
       {
          InitializeComponent();
-      }
-
-      private void PrepareGrid()
-      {
-         var columns = new ObservableCollection<DataGridColumn>();
-
-         columns.Add(new DataGridTextColumn
-         {
-
-         });
       }
 
       /*private void ShowCsvDlg()
