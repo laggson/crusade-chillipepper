@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace FWA2.Core.Helpers
+namespace FWA2.Core.Mvvm
 {
    public class ObservableObject : INotifyPropertyChanged
    {

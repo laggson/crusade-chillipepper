@@ -5,15 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FWA2.Wpf"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:windows="clr-namespace=System.Windows"
         xmlns:vm="clr-namespace:FWA2.Core.ViewModels;assembly=FWA2.Core"
         mc:Ignorable="d" BorderBrush="LightBlue"
+        WindowStartupLocation="CenterScreen"
         Title="FWA2" Height="700" Width="1200">
+    <metro:MetroWindow.DataContext>
+        <vm:MainViewModel />
+    </metro:MetroWindow.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Menu>
@@ -23,5 +29,12 @@
         </Menu>
 
         <local:ListView Grid.Row="1" />
+
+        <StatusBar Grid.Row="2"  >
+            <StatusBarItem>
+                <DatePicker local:DatePickerCalendar.IsMonthYear="True" SelectedDate="{Binding SelectedDate}"
+                            local:DatePickerDateFormat.DateFormat="MMMM yyyy" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </metro:MetroWindow>

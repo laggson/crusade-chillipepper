@@ -3,6 +3,9 @@ using FWA2.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FWA2.Core.Mvvm;
+using GalaSoft.MvvmLight.Messaging;
+using System;
 
 namespace FWA2.Core.ViewModels
 {
@@ -52,14 +55,36 @@ namespace FWA2.Core.ViewModels
          }
       }
 
+      public ICommand ListItemDoubleClicked => new DelegateCommand(OpenPruefung);
       #endregion
 
       public ListViewModel()
       {
+         RegisterEvents();
          IsLoading = true;
          LoadItems();
       }
 
+      /// <summary>
+      /// Registriert die benötigten Events beim Galasoft-Messenger
+      /// </summary>
+      private void RegisterEvents()
+      {
+         Messenger.Default.Register<PropertyChangedMessage<DateTime>>(this, OnDateChanged);
+      }
+
+      /// <summary>
+      /// Wird aufgerufen, wenn sich im MainWindow das ausgewählte Datum ändert.
+      /// </summary>
+      /// <param name="message">Die Nachricht, die empfangen wurde.</param>
+      private void OnDateChanged(PropertyChangedMessage<DateTime> message)
+      {
+         // TODO: Bei Gegenstaende nur die anzeigen, die im ausgewählten Monat geprüft werden müssen.
+      }
+
+      /// <summary>
+      /// Meldet sich mit dem Nutzer 'hs' an und lädt alle Gegenstände aus der Datenbank, damit sie im Dialog angezeigt werden.
+      /// </summary>
       public void LoadItems()
       {
          Task.Run(() =>
@@ -72,9 +97,10 @@ namespace FWA2.Core.ViewModels
          });
       }
 
-      public ICommand ListItemDoubleClicked => new DelegateCommand(ItemDoubleClicked);
-
-      private void ItemDoubleClicked()
+      /// <summary>
+      /// Wird ausgelöst, wenn ein Item doppelt geklickt wurde und soll den Dialog öffnen.
+      /// </summary>
+      private void OpenPruefung()
       {
          if (SelectedItem == null)
             return;

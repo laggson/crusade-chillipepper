@@ -7,12 +7,12 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("FWA2.Wpf")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("FWA2")]
+[assembly: AssemblyDescription("Feuerwehr-Administration v2")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FWA2.Wpf")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("Laggson Softworks")]
+[assembly: AssemblyProduct("FWA2")]
+[assembly: AssemblyCopyright("Copyright © Laggson Softworks 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,3 +53,6 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("de-DE")]
+[assembly: Guid("FCCC0A17-EE5D-4525-A1B0-BAF0947101A9")]
+
