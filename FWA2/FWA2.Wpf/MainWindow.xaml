@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FWA2.Wpf"
+        xmlns:viewHelpers="clr-namespace:FWA2.Wpf.Helpers"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:windows="clr-namespace=System.Windows"
@@ -25,6 +26,7 @@
         <Menu>
             <MenuItem Header="Datei"></MenuItem>
             <MenuItem Header="Bearbeiten"></MenuItem>
+            <MenuItem Header="Admin" ></MenuItem>
             <MenuItem Header="?"></MenuItem>
         </Menu>
 
@@ -32,8 +34,8 @@
 
         <StatusBar Grid.Row="2"  >
             <StatusBarItem>
-                <DatePicker local:DatePickerCalendar.IsMonthYear="True" SelectedDate="{Binding SelectedDate}"
-                            local:DatePickerDateFormat.DateFormat="MMMM yyyy" />
+                <DatePicker viewHelpers:DatePickerCalendar.IsMonthYear="True" SelectedDate="{Binding SelectedDate}"
+                            viewHelpers:DatePickerDateFormat.DateFormat="MMMM yyyy" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

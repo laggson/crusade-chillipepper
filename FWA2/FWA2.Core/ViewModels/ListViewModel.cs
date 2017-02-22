@@ -13,17 +13,28 @@ namespace FWA2.Core.ViewModels
    {
       #region Properties
 
-      private List<Gegenstand> _gegenstaende;
-      public List<Gegenstand> Gegenstaende
+      private List<Gegenstand> _alleGegenstaende;
+      public List<Gegenstand> AlleGegenstaende
+      {
+         get { return _alleGegenstaende; }
+         set
+         {
+            _alleGegenstaende = value;
+            RefreshFilter();
+         }
+      }
+      
+      private List<Gegenstand> _filterGegenstaende;
+      public List<Gegenstand> FilterGegenstaende
       {
          get
          {
-            return _gegenstaende;
+            return _filterGegenstaende;
          }
          private set
          {
-            _gegenstaende = value;
-            NotifyPropertyChanged(nameof(Gegenstaende));
+            _filterGegenstaende = value;
+            NotifyPropertyChanged(nameof(FilterGegenstaende));
          }
       }
 
@@ -55,6 +66,8 @@ namespace FWA2.Core.ViewModels
          }
       }
 
+      private DateTime SelectedDate;
+
       public ICommand ListItemDoubleClicked => new DelegateCommand(OpenPruefung);
       #endregion
 
@@ -79,7 +92,13 @@ namespace FWA2.Core.ViewModels
       /// <param name="message">Die Nachricht, die empfangen wurde.</param>
       private void OnDateChanged(PropertyChangedMessage<DateTime> message)
       {
+         SelectedDate = message.NewValue;
+      }
+
+      public void RefreshFilter()
+      {
          // TODO: Bei Gegenstaende nur die anzeigen, die im ausgewählten Monat geprüft werden müssen.
+         FilterGegenstaende = AlleGegenstaende;
       }
 
       /// <summary>
@@ -89,12 +108,16 @@ namespace FWA2.Core.ViewModels
       {
          Task.Run(() =>
          {
+            // TODO: nicht hartkodieren.
             DBAuthentication.Create("hs", System.Text.Encoding.UTF8.GetBytes("Vivendi2016"));
 
-            Gegenstaende = DBAuthentication.Instance.GetAlleGegenstaende();
+            AlleGegenstaende = DBAuthentication.Instance.GetAlleGegenstaende();
 
             IsLoading = false;
          });
+
+         // Anderen VMs bescheid geben, dass ich da bin.
+         Messenger.Default.Send(new NotificationMessage(this, "Bereit"));
       }
 
       /// <summary>

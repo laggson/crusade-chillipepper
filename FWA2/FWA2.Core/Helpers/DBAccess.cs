@@ -35,7 +35,6 @@ namespace FWA2.Core.Helpers
                                                                    .Username("sa")
                                                                    .Password("Vivendi2016"));
       }
-            // TODO: Mappings auf Fluent-> AutoMapping ändern, wenn das geht. sonst kopieren und umstellen.
 
       public static ISession OpenSession()
       {

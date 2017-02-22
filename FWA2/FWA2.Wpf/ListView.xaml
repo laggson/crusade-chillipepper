@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FWA2.Wpf"
+             xmlns:viewHelpers="clr-namespace:FWA2.Wpf.Helpers"
              xmlns:viewModel="clr-namespace:FWA2.Core.ViewModels;assembly=FWA2.Core"
              xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
@@ -14,11 +15,11 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <local:BoolToPruefkarteConverter x:Key="PruefkarteConverter" />
+        <viewHelpers:BoolToPruefkarteConverter x:Key="PruefkarteConverter" />
     </UserControl.Resources>
 
     <Grid>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Gegenstaende}" AutoGenerateColumns="False"
+        <DataGrid Grid.Row="1" ItemsSource="{Binding FilterGegenstaende}" AutoGenerateColumns="False"
                   IsReadOnly="True" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" CanUserDeleteRows="False"
                   CanUserReorderColumns="False" CanUserResizeRows="False" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
             <DataGrid.InputBindings>

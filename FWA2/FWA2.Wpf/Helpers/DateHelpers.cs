@@ -7,7 +7,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace FWA2.Wpf
+namespace FWA2.Wpf.Helpers
 {
    public class DatePickerCalendar
    {

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace FWA2.Wpf
+namespace FWA2.Wpf.Helpers
 {
    class BoolToPruefkarteConverter : IValueConverter
    {
