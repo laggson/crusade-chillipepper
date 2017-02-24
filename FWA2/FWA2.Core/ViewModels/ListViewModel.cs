@@ -100,7 +100,7 @@ namespace FWA2.Core.ViewModels
       public void RefreshFilter()
       {
          // TODO: Bei Gegenstaende nur die anzeigen, die im ausgewählten Monat geprüft werden müssen.
-         FilterGegenstaende = AlleGegenstaende.Where(g => g.Zeitraum != null && 
+         FilterGegenstaende = AlleGegenstaende?.Where(g => g.Zeitraum != null && 
             g.Zeitraum.ToArray()[SelectedDate.Month -1]).ToList();
       }
 

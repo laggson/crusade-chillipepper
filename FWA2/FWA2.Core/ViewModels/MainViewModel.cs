@@ -27,6 +27,9 @@ namespace FWA2.Core.ViewModels
       }
       #endregion
 
+      /// <summary>
+      /// Erstellt eine neue Instanz des <see cref="MainViewModel"/>.
+      /// </summary>
       public MainViewModel()
       {
          RegisterEvents();
