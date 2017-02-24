@@ -12,13 +12,20 @@
          }
       }
 
-      string name;
+      private Zeitraum zeitraumMap;
+      public virtual Zeitraum Zeitraum
+      {
+         get { return zeitraumMap; }
+         set { zeitraumMap = value; }
+      }
+
+      string bezeichnung;
       public virtual string Bezeichnung
       {
-         get { return name; }
+         get { return bezeichnung; }
          set
          {
-            name = value;
+            bezeichnung = value;
          }
       }
 

@@ -82,6 +82,8 @@
     <Compile Include="Helpers\CsvImport.cs" />
     <Compile Include="Helpers\DBAccess.cs" />
     <Compile Include="Helpers\DBAuthentication.cs" />
+    <Compile Include="Models\Mappings\PruefungMonatMapping.cs" />
+    <Compile Include="Models\Zeitraum.cs" />
     <Compile Include="Mvvm\MvvmDataObjects.cs" />
     <Compile Include="Models\Mappings\GegenstandMapping.cs" />
     <Compile Include="Models\Mappings\PruefungMapping.cs" />

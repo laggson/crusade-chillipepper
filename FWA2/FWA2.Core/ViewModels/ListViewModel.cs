@@ -1,11 +1,12 @@
 ﻿using FWA2.Core.Helpers;
 using FWA2.Core.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using FWA2.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FWA2.Core.ViewModels
 {
@@ -93,12 +94,14 @@ namespace FWA2.Core.ViewModels
       private void OnDateChanged(PropertyChangedMessage<DateTime> message)
       {
          SelectedDate = message.NewValue;
+         RefreshFilter();
       }
 
       public void RefreshFilter()
       {
          // TODO: Bei Gegenstaende nur die anzeigen, die im ausgewählten Monat geprüft werden müssen.
-         FilterGegenstaende = AlleGegenstaende;
+         FilterGegenstaende = AlleGegenstaende.Where(g => g.Zeitraum != null && 
+            g.Zeitraum.ToArray()[SelectedDate.Month -1]).ToList();
       }
 
       /// <summary>

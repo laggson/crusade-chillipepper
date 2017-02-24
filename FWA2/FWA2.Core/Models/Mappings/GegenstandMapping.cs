@@ -12,6 +12,7 @@ namespace FWA2.Core.Models.Mappings
          Map(x => x.BrauchtPruefkarte).Column("Pruefkarte");
          Map(x => x.ArtDerPruefung).Column("Art");
          Map(x => x.Kommentar).Column("Kommentar");
+         References(x => x.Zeitraum).Fetch.Join();
       }
    }
 }

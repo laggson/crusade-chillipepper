@@ -24,6 +24,7 @@ namespace FWA2.Core.Models
          }
       }
 
+
       DateTime datum;
       public virtual DateTime Datum
       {
