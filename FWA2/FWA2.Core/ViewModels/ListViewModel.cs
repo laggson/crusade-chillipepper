@@ -21,10 +21,10 @@ namespace FWA2.Core.ViewModels
          set
          {
             _alleGegenstaende = value;
-            RefreshFilter();
+            RefreshFilter(SelectedDate);
          }
       }
-      
+
       private List<Gegenstand> _filterGegenstaende;
       public List<Gegenstand> FilterGegenstaende
       {
@@ -85,6 +85,17 @@ namespace FWA2.Core.ViewModels
       private void RegisterEvents()
       {
          Messenger.Default.Register<PropertyChangedMessage<DateTime>>(this, OnDateChanged);
+         Messenger.Default.Register<PropertyChangedMessage<bool>>(this, OnAlleZeigenChanged);
+      }
+
+      private void OnAlleZeigenChanged(PropertyChangedMessage<bool> message)
+      {
+         switch (message.PropertyName)
+         {
+            case nameof(MainViewModel.AlleAnzeigen):
+               RefreshFilter(message.NewValue ? default(DateTime) : SelectedDate);
+               break;
+         }
       }
 
       /// <summary>
@@ -94,14 +105,26 @@ namespace FWA2.Core.ViewModels
       private void OnDateChanged(PropertyChangedMessage<DateTime> message)
       {
          SelectedDate = message.NewValue;
-         RefreshFilter();
+         RefreshFilter(message.NewValue);
       }
 
-      public void RefreshFilter()
+      /// <summary>
+      /// Aktualisiert die angezeigten Gegenstände der Liste mit dem aktuellen Datum.
+      /// </summary>
+      public void RefreshFilter(int month)
       {
-         // TODO: Bei Gegenstaende nur die anzeigen, die im ausgewählten Monat geprüft werden müssen.
-         FilterGegenstaende = AlleGegenstaende?.Where(g => g.Zeitraum != null && 
-            g.Zeitraum.ToArray()[SelectedDate.Month -1]).ToList();
+         FilterGegenstaende = month <= 0
+            ? AlleGegenstaende
+            : AlleGegenstaende?.Where(g => g.Zeitraum != null &&
+               g.Zeitraum.ToArray()[month]).ToList();
+      }
+
+      /// <summary>
+      /// Aktualisiert die angezeigten Gegenstände der Liste mit dem aktuellen Datum.
+      /// </summary>
+      public void RefreshFilter(DateTime dateTime)
+      {
+         RefreshFilter(dateTime == default(DateTime) ? -1 : dateTime.Month - 1);
       }
 
       /// <summary>

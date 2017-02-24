@@ -35,7 +35,10 @@
         <StatusBar Grid.Row="2"  >
             <StatusBarItem>
                 <DatePicker viewHelpers:DatePickerCalendar.IsMonthYear="True" SelectedDate="{Binding SelectedDate}"
-                            viewHelpers:DatePickerDateFormat.DateFormat="MMMM yyyy" />
+                            viewHelpers:DatePickerDateFormat.DateFormat="MMMM yyyy" IsEnabled="{Binding CbDisabled}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <CheckBox Content="Alle Einträge anzeigen" IsChecked="{Binding AlleAnzeigen}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

@@ -8,7 +8,6 @@ namespace FWA2.Core.ViewModels
    {
       #region Properties
       private DateTime selectedDate = DateTime.Today;
-
       public DateTime SelectedDate
       {
          get
@@ -25,6 +24,30 @@ namespace FWA2.Core.ViewModels
             NotifyPropertyChanged(nameof(SelectedDate));
          }
       }
+
+      private bool alleAnzeigen;
+      public bool AlleAnzeigen
+      {
+         get { return alleAnzeigen; }
+         set
+         {
+            Messenger.Default.Send(new PropertyChangedMessage<bool>(alleAnzeigen, value, nameof(AlleAnzeigen)));
+            alleAnzeigen = value;
+            CbDisabled = !alleAnzeigen;
+            NotifyPropertyChanged(nameof(AlleAnzeigen));
+         }
+      }
+
+      private bool cbDisabled;
+      public bool CbDisabled
+      {
+         get { return cbDisabled; }
+         set
+         {
+            cbDisabled = value;
+            NotifyPropertyChanged(nameof(CbDisabled));
+         }
+      }
       #endregion
 
       /// <summary>
@@ -32,6 +55,7 @@ namespace FWA2.Core.ViewModels
       /// </summary>
       public MainViewModel()
       {
+         AlleAnzeigen = false;
          RegisterEvents();
       }
 
