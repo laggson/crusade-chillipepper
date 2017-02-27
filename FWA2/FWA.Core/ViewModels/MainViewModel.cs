@@ -65,6 +65,9 @@ namespace FWA.Core.ViewModels
       private void RegisterEvents()
       {
          Messenger.Default.Register<NotificationMessage>(this, NotificationReceived);
+
+         // Nach dem Registrieren das Login-Fenster öffnen.
+         //Messenger.Default.Send(new RequestDialogOpenMessage(Models.Dialog.LoginWindow));
       }
 
       /// <summary>

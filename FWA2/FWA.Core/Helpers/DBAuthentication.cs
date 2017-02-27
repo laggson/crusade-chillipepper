@@ -61,6 +61,14 @@ namespace FWA.Core.Helpers
       }
 
       /// <summary>
+      /// Setzt die Instanz auf null, um einen Zugriff von außen zu verhindern.
+      /// </summary>
+      public static void Dispose()
+      {
+         Instance = null;
+      }
+
+      /// <summary>
       /// Erstellt ein Objekt für die Eigenschaft 'Instance', falls die Daten richtig sind, und löst sonst eine Ausnahme aus.
       /// </summary>
       /// <param name="user"></param>

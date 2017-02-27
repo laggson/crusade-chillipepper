@@ -6,7 +6,7 @@ namespace FWA.Wpf
    /// <summary>
    /// Interaktionslogik für LoginWindow.xaml
    /// </summary>
-   public partial class LoginWindow : Window
+   public partial class LoginWindow
    {
       public LoginWindow()
       {
@@ -14,13 +14,25 @@ namespace FWA.Wpf
       }
 
       private void Login_KeyUp(object sender, KeyEventArgs e)
-      {
-
+         {
+         if (e.Key == Key.Enter)
+         {
+            TryLogin();
+         }
       }
 
       private void BtnLogin_Click(object sender, RoutedEventArgs e)
       {
+         TryLogin();
+      }
 
+      private void TryLogin()
+      {
+         var result = ViewModel.Login(TxtName.Text, TxtPassword.Password);
+
+         if (result)
+            Close();
+         // Was mach ich jetzt damit? :D
       }
    }
 }

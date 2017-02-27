@@ -15,4 +15,16 @@
       User,
       Master
    }
+
+   public enum Dialog
+   {
+      LoginWindow = 0,
+      AboutWindow
+   }
+
+   public enum DialogStatus
+   {
+      Geoeffnet = 0,
+      Fertig
+   }
 }

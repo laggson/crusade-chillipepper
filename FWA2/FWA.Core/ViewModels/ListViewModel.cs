@@ -75,8 +75,6 @@ namespace FWA.Core.ViewModels
       public ListViewModel()
       {
          RegisterEvents();
-         IsLoading = true;
-         LoadItems();
       }
 
       /// <summary>
@@ -86,6 +84,19 @@ namespace FWA.Core.ViewModels
       {
          Messenger.Default.Register<PropertyChangedMessage<DateTime>>(this, OnDateChanged);
          Messenger.Default.Register<PropertyChangedMessage<bool>>(this, OnAlleZeigenChanged);
+         Messenger.Default.Register<LoginMessage>(this, OnLoginChanged);
+      }
+      private void OnLoginChanged(LoginMessage message)
+      {
+         if(message.JetztEingeloggt)
+         {
+            LoadItems();
+            RefreshFilter(SelectedDate);
+         }
+         else
+         {
+            AlleGegenstaende.Clear();
+         }
       }
 
       private void OnAlleZeigenChanged(PropertyChangedMessage<bool> message)
@@ -132,11 +143,10 @@ namespace FWA.Core.ViewModels
       /// </summary>
       public void LoadItems()
       {
+         IsLoading = true;
+
          Task.Run(() =>
          {
-            // TODO: nicht hartkodieren.
-            DBAuthentication.Create("hs", System.Text.Encoding.UTF8.GetBytes("Vivendi2016"));
-
             AlleGegenstaende = DBAuthentication.Instance.GetAlleGegenstaende();
 
             IsLoading = false;

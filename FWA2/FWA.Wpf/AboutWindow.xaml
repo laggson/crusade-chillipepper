@@ -9,7 +9,7 @@
         mc:Ignorable="d" Width="265" Height="320"
         ShowMaxRestoreButton="False" ShowMinButton="False"
         BorderBrush="{StaticResource AccentColorBrush}" Title="Über"
-        WindowStartupLocation="CenterOwner" >
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" >
     <controls:MetroWindow.DataContext>
         <vm:AboutViewModel />
     </controls:MetroWindow.DataContext>
