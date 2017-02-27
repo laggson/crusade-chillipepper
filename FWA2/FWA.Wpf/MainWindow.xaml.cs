@@ -25,5 +25,18 @@
 
          var data = Core.Helpers.CsvImport.GetFiles(dlg.FileName);
       }*/
+
+      /// <summary>
+      /// Zeigt modal den About-Dialog an, der die aktuelle Version und die verwendeten Libraries enthält.
+      /// </summary>
+      private void OpenAboutWindow()
+      {
+         var aboutWindow = new AboutWindow { Owner = this }.ShowDialog();
+      }
+
+      private void MiAbout_Click(object sender, System.Windows.RoutedEventArgs e)
+      {
+         OpenAboutWindow();
+      }
    }
 }

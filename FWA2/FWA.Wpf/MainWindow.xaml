@@ -27,7 +27,9 @@
             <MenuItem Header="Datei"></MenuItem>
             <MenuItem Header="Bearbeiten"></MenuItem>
             <MenuItem Header="Admin" ></MenuItem>
-            <MenuItem Header="?"></MenuItem>
+            <MenuItem Header="?">
+                <MenuItem Header="Über.." Click="MiAbout_Click" />
+            </MenuItem>
         </Menu>
 
         <local:ListView Grid.Row="1" />

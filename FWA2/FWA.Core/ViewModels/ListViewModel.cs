@@ -145,7 +145,7 @@ namespace FWA.Core.ViewModels
          // Anderen VMs bescheid geben, dass ich da bin.
          Messenger.Default.Send(new NotificationMessage(this, "Bereit"));
       }
-
+      
       /// <summary>
       /// Wird ausgelöst, wenn ein Item doppelt geklickt wurde und soll den Dialog öffnen.
       /// </summary>
@@ -153,6 +153,9 @@ namespace FWA.Core.ViewModels
       {
          if (SelectedItem == null)
             return;
+
+         // ShowPruefungMessage an MainWindow -> Zeigt neuen Dialog
+         // Dialog feuert, wenn fertig
       }
    }
 }
