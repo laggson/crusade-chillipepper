@@ -1,4 +1,5 @@
-﻿using FWA.Core.Mvvm;
+﻿using FWA.Core.Models;
+using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 
@@ -68,6 +69,7 @@ namespace FWA.Core.ViewModels
 
          // Nach dem Registrieren das Login-Fenster öffnen.
          //Messenger.Default.Send(new RequestDialogOpenMessage(Models.Dialog.LoginWindow));
+         Messenger.Default.Send(new RequestDialogOpenMessage(Dialog.LoginWindow));
       }
 
       /// <summary>

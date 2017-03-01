@@ -12,8 +12,8 @@ namespace FWA.Core.Mvvm
       public ErrorMessage(Exception e, string message = "", string header = "")
       {
          Exception = e;
-         Message = message;
-         Header = header;
+         Message = string.IsNullOrEmpty(message) ? e.Message : message;
+         Header = string.IsNullOrEmpty(header) ? "Fehler" : header;
       }
    }
 }

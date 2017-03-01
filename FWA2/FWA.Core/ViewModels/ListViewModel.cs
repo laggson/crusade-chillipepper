@@ -88,15 +88,18 @@ namespace FWA.Core.ViewModels
       }
       private void OnLoginChanged(LoginMessage message)
       {
-         if(message.JetztEingeloggt)
+         Task.Run(() =>
          {
-            LoadItems();
-            RefreshFilter(SelectedDate);
-         }
-         else
-         {
-            AlleGegenstaende.Clear();
-         }
+            if (message.JetztEingeloggt)
+            {
+               LoadItems();
+               RefreshFilter(SelectedDate);
+            }
+            else
+            {
+               AlleGegenstaende.Clear();
+            }
+         });
       }
 
       private void OnAlleZeigenChanged(PropertyChangedMessage<bool> message)

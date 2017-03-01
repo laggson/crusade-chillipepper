@@ -20,22 +20,24 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!--<materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" 
                                  Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
-        
+
         <TextBox Grid.Row="0" Grid.Column="1" Margin="5 20 5 20" Height="30" Padding="0 5 0 0"
-				    x:Name="TxtName" VerticalAlignment="Center" KeyUp="Login_KeyUp">
-        </TextBox>
+				    x:Name="TxtName" VerticalAlignment="Center" KeyUp="Login_KeyUp" Grid.ColumnSpan="2" />
+
 
         <!--<materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Key" HorizontalAlignment="Center" 
                                  VerticalAlignment="Center" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" />-->
         <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5 10 5 10" x:Name="TxtPassword" 
-                     KeyUp="Login_KeyUp" Height="30" Padding="0 4 0 0" />
+                     KeyUp="Login_KeyUp" Height="30" Padding="0 4 0 0" Grid.ColumnSpan="2" />
 
         <!--<Expander ExpandDirection="Left" Grid.Row="2" Margin="0 15 0 0" HorizontalAlignment="Center" />-->
-        <Button Grid.Row="2" Grid.Column="1" Margin="5 0 5 0" Height="40" Content="Anmelden" Click="BtnLogin_Click" />
+        <Button Grid.Row="2" Grid.Column="1" Margin="5 0 5 0" Height="40" Content="Abbrechen" Click="BtnAbort_Click" />
+        <Button Grid.Row="2" Grid.Column="2" Margin="5 0 5 0" Height="40" Content="Ok" Click="BtnLogin_Click" />
 
     </Grid>
 </controls:MetroWindow>

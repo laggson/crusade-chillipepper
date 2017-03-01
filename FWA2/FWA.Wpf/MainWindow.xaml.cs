@@ -1,8 +1,6 @@
 ﻿using FWA.Core.Models;
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace FWA.Wpf

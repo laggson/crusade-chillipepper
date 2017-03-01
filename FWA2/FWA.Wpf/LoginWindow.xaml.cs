@@ -11,6 +11,7 @@ namespace FWA.Wpf
       public LoginWindow()
       {
          InitializeComponent();
+         TxtName.Focus();
       }
 
       private void Login_KeyUp(object sender, KeyEventArgs e)
@@ -28,11 +29,26 @@ namespace FWA.Wpf
 
       private void TryLogin()
       {
-         var result = ViewModel.Login(TxtName.Text, TxtPassword.Password);
+         var loginErfolgreich = ViewModel.Login(TxtName.Text, TxtPassword.Password);
 
-         if (result)
+         if (loginErfolgreich)
+         {
             Close();
-         // Was mach ich jetzt damit? :D
+         }
+         else
+         {
+            LoginAbgebrochen();
+         }
+      }
+
+      private void LoginAbgebrochen()
+      {
+         MessageBox.Show(this, "Das Programm wird jetzt beendet.", "Login abgebrochen", MessageBoxButton.OK, MessageBoxImage.Information);
+      }
+
+      private void BtnAbort_Click(object sender, RoutedEventArgs e)
+      {
+         LoginAbgebrochen();
       }
    }
 }
