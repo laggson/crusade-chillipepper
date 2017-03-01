@@ -4,10 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:vm="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
         xmlns:local="clr-namespace:FWA.Wpf"
         mc:Ignorable="d"
-        Title="PruefungsWindow" Height="300" Width="300">
+        Title="PruefungsWindow" Height="500" Width="650">
+    <controls:MetroWindow.DataContext>
+        <vm:PruefungViewModel />
+    </controls:MetroWindow.DataContext>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" 
+                  CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Bezeichnung" />
+                <DataGridTextColumn Header="Inventar-Nr." />
+                <DataGridComboBoxColumn Header="Zustand" />
+                <DataGridTextColumn Header="Mangel" />
+                <DataGridTextColumn Header="Kommentar" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="10" Content="Abbrechen" />
+            <Button Margin="10" Content="Fertig" />
+        </StackPanel>
     </Grid>
 </controls:MetroWindow>

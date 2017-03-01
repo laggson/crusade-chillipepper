@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using MahApps.Metro.Controls.Dialogs;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FWA.Wpf
@@ -15,8 +17,12 @@ namespace FWA.Wpf
       }
 
       private void Login_KeyUp(object sender, KeyEventArgs e)
+      {
+         if(TxtError.Visibility == Visibility.Visible)
          {
-         if (e.Key == Key.Enter)
+            TxtError.Visibility = Visibility.Collapsed;
+         }
+         else if (e.Key == Key.Enter)
          {
             TryLogin();
          }
@@ -29,6 +35,8 @@ namespace FWA.Wpf
 
       private void TryLogin()
       {
+         TxtError.Visibility = Visibility.Hidden;
+
          var loginErfolgreich = ViewModel.Login(TxtName.Text, TxtPassword.Password);
 
          if (loginErfolgreich)
@@ -37,13 +45,15 @@ namespace FWA.Wpf
          }
          else
          {
-            LoginAbgebrochen();
+            TxtError.Visibility = Visibility.Visible;
          }
       }
 
-      private void LoginAbgebrochen()
+      private async void LoginAbgebrochen()
       {
-         MessageBox.Show(this, "Das Programm wird jetzt beendet.", "Login abgebrochen", MessageBoxButton.OK, MessageBoxImage.Information);
+         await this.ShowMessageAsync("Login abgebrochen", "Das Programm wird jetzt beendet.");
+
+         System.Environment.Exit(0);
       }
 
       private void BtnAbort_Click(object sender, RoutedEventArgs e)

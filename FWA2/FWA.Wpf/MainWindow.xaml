@@ -10,7 +10,7 @@
         xmlns:windows="clr-namespace=System.Windows"
         xmlns:vm="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
         mc:Ignorable="d" BorderBrush="LightBlue"
-        WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded"
+        WindowStartupLocation="CenterScreen"
         Title="Feuerweehr" Height="700" Width="1200">
     <metro:MetroWindow.DataContext>
         <vm:MainViewModel />

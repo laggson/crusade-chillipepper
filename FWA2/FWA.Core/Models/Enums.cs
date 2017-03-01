@@ -19,7 +19,8 @@
    public enum Dialog
    {
       LoginWindow = 0,
-      AboutWindow
+      AboutWindow,
+      PruefungWindow
    }
 
    public enum DialogStatus

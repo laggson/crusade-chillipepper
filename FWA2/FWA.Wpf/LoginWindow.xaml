@@ -6,8 +6,8 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:vm="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
         xmlns:local="clr-namespace:FWA.Wpf"
-        mc:Ignorable="d"
-        Title="Login" Height="300" Width="300">
+        mc:Ignorable="d" BorderBrush="LightBlue"
+        Title="Login" Height="245" Width="300">
     <controls:MetroWindow.DataContext>
         <vm:LoginViewModel x:Name="ViewModel" />
     </controls:MetroWindow.DataContext>
@@ -16,28 +16,27 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="80" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="80" />
         </Grid.ColumnDefinitions>
 
-        <!--<materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" 
-                                 Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
-
+        <TextBlock Text="Nutzername" VerticalAlignment="Center" Margin="5 0 0 0" />
         <TextBox Grid.Row="0" Grid.Column="1" Margin="5 20 5 20" Height="30" Padding="0 5 0 0"
-				    x:Name="TxtName" VerticalAlignment="Center" KeyUp="Login_KeyUp" Grid.ColumnSpan="2" />
+				    x:Name="TxtName" VerticalAlignment="Center" KeyUp="Login_KeyUp" Grid.ColumnSpan="3" />
 
-
-        <!--<materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Key" HorizontalAlignment="Center" 
-                                 VerticalAlignment="Center" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" />-->
+        <TextBlock Text="Passwort" Grid.Row="1" VerticalAlignment="Center" Margin="5 0 0 0" />
         <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5 10 5 10" x:Name="TxtPassword" 
-                     KeyUp="Login_KeyUp" Height="30" Padding="0 4 0 0" Grid.ColumnSpan="2" />
+                     KeyUp="Login_KeyUp" Height="30" Padding="0 4 0 0" Grid.ColumnSpan="3" />
 
-        <!--<Expander ExpandDirection="Left" Grid.Row="2" Margin="0 15 0 0" HorizontalAlignment="Center" />-->
-        <Button Grid.Row="2" Grid.Column="1" Margin="5 0 5 0" Height="40" Content="Abbrechen" Click="BtnAbort_Click" />
-        <Button Grid.Row="2" Grid.Column="2" Margin="5 0 5 0" Height="40" Content="Ok" Click="BtnLogin_Click" />
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5 15 5 0" Height="40" Content="Abbrechen" Click="BtnAbort_Click" />
+        <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="5 15 5 0" Height="40" Content="Ok" Click="BtnLogin_Click" />
 
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="4" Text="Die Anmeldedaten waren ungültig." Foreground="Red" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" Margin="0 10 0 0" Visibility="Hidden" Name="TxtError"/>
     </Grid>
 </controls:MetroWindow>

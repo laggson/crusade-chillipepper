@@ -2,7 +2,6 @@
 using FWA.Core.Helpers;
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
-using System.Threading.Tasks;
 
 namespace FWA.Core.ViewModels
 {
@@ -29,7 +28,7 @@ namespace FWA.Core.ViewModels
          }
          catch (AuthenticationException e)
          {
-            Messenger.Default.Send(new ErrorMessage(e));
+            //Messenger.Default.Send(new ErrorMessage(e));
             return false;
          }
 

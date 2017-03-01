@@ -1,7 +1,9 @@
 ﻿using FWA.Core.Models;
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
+using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
+using System;
 
 namespace FWA.Wpf
 {
@@ -22,7 +24,12 @@ namespace FWA.Wpf
       private void RegisterEvents()
       {
          Messenger.Default.Register<ErrorMessage>(this, OnErroReceived);
+         Messenger.Default.Register<LoginMessage>(this, OnloginChanged);
          Messenger.Default.Register<RequestDialogOpenMessage>(this, OnDialogOpenRequest);
+      }
+      void OnloginChanged(LoginMessage msg)
+      {
+         Focus();
       }
 
       private void OnDialogOpenRequest(RequestDialogOpenMessage msg)
@@ -36,6 +43,9 @@ namespace FWA.Wpf
                break;
             case Dialog.LoginWindow:
                window = new LoginWindow();
+               break;
+            case Dialog.PruefungWindow:
+               window = new PruefungsWindow();
                break;
             default:
                return;
@@ -52,7 +62,7 @@ namespace FWA.Wpf
       /// <param name="message"></param>
       private void OnErroReceived(ErrorMessage message)
       {
-         MessageBox.Show(this, message.Message, message.Header);
+         this.ShowMessageAsync(message.Header, message.Message);
       }
 
       /*private void ShowCsvDlg()
@@ -84,8 +94,9 @@ namespace FWA.Wpf
          OpenAboutWindow();
       }
 
-      private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+      protected override void OnContentRendered(EventArgs e)
       {
+         base.OnContentRendered(e);
          OnDialogOpenRequest(new RequestDialogOpenMessage(Dialog.LoginWindow));
       }
    }

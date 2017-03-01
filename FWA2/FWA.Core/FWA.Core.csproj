@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PruefungViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
