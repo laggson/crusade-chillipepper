@@ -1,6 +1,4 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace FWA.Wpf
@@ -16,9 +14,22 @@ namespace FWA.Wpf
          TxtName.Focus();
       }
 
+      #region Events
+      private bool erfolgreichEingeloggt;
+
+      private void BtnAbort_Click(object sender, RoutedEventArgs e)
+      {
+         LoginAbgebrochen();
+      }
+
+      private void BtnLogin_Click(object sender, RoutedEventArgs e)
+      {
+         TryLogin();
+      }
+
       private void Login_KeyUp(object sender, KeyEventArgs e)
       {
-         if(TxtError.Visibility == Visibility.Visible)
+         if (TxtError.Visibility == Visibility.Visible)
          {
             TxtError.Visibility = Visibility.Collapsed;
          }
@@ -28,9 +39,18 @@ namespace FWA.Wpf
          }
       }
 
-      private void BtnLogin_Click(object sender, RoutedEventArgs e)
+      private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
       {
-         TryLogin();
+         if (!erfolgreichEingeloggt)
+            LoginAbgebrochen();
+      }
+
+      #endregion
+
+      private void LoginAbgebrochen()
+      {
+         MessageBox.Show(this, "Das Programm wird jetzt beendet.", "Login abgebrochen", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+         System.Environment.Exit(0);
       }
 
       private void TryLogin()
@@ -41,24 +61,13 @@ namespace FWA.Wpf
 
          if (loginErfolgreich)
          {
+            erfolgreichEingeloggt = true;
             Close();
          }
          else
          {
             TxtError.Visibility = Visibility.Visible;
          }
-      }
-
-      private void LoginAbgebrochen()
-      {
-         //await this.ShowMessageAsync(, );
-         MessageBox.Show(this, "Das Programm wird jetzt beendet.", "Login abgebrochen", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-         System.Environment.Exit(0);
-      }
-
-      private void BtnAbort_Click(object sender, RoutedEventArgs e)
-      {
-         LoginAbgebrochen();
       }
    }
 }

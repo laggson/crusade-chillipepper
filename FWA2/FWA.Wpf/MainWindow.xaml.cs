@@ -41,7 +41,9 @@ namespace FWA.Wpf
                window = new LoginWindow();
                break;
             case Dialog.PruefungWindow:
-               window = new PruefungsWindow();
+               var pruefungsWindow =  new PruefungWindow();
+               pruefungsWindow.ViewModel.Init(msg.Data as Gegenstand);
+               window = pruefungsWindow;
                break;
             default:
                return;

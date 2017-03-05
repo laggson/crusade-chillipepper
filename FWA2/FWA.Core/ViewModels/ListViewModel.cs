@@ -86,6 +86,7 @@ namespace FWA.Core.ViewModels
          Messenger.Default.Register<PropertyChangedMessage<bool>>(this, OnAlleZeigenChanged);
          Messenger.Default.Register<LoginMessage>(this, OnLoginChanged);
       }
+
       private void OnLoginChanged(LoginMessage message)
       {
          Task.Run(() =>
@@ -127,10 +128,15 @@ namespace FWA.Core.ViewModels
       /// </summary>
       public void RefreshFilter(int month)
       {
-         FilterGegenstaende = month <= 0
+         var test = month <= 0
             ? AlleGegenstaende
             : AlleGegenstaende?.Where(g => g.Zeitraum != null &&
-               g.Zeitraum.ToArray()[month]).ToList();
+               g.Zeitraum.ToArray()[month]);
+
+         if (test == null)
+            return;
+
+         FilterGegenstaende = test.GroupBy(g => g.GetLocation() + "_" + g.Bezeichnung).Select(g => g.First()).ToList();
       }
 
       /// <summary>
@@ -156,9 +162,9 @@ namespace FWA.Core.ViewModels
          });
 
          // Anderen VMs bescheid geben, dass ich da bin.
-         Messenger.Default.Send(new GalaSoft.MvvmLight.Messaging.NotificationMessage(this, "Bereit"));
+         Messenger.Default.Send(new NotificationMessage(this, "Bereit"));
       }
-      
+
       /// <summary>
       /// Wird ausgelöst, wenn ein Item doppelt geklickt wurde und soll den Dialog öffnen.
       /// </summary>
@@ -167,8 +173,15 @@ namespace FWA.Core.ViewModels
          if (SelectedItem == null)
             return;
 
-         // ShowPruefungMessage an MainWindow -> Zeigt neuen Dialog
-         // Dialog feuert, wenn fertig
+         if (SelectedItem.BrauchtPruefkarte)
+         {
+            // Word Engine? Muss ich mich mal mit auseinander setzen.. :D
+            Messenger.Default.Send(new MessageboxMessage("Die Aktion \"Prüfkarte\" wird aktuell noch nicht unterstützt.", ImageType.Fehler, Buttons.Ok));
+         }
+         else
+         {
+            Messenger.Default.Send(new RequestDialogOpenMessage(Dialog.PruefungWindow, SelectedItem));
+         }
       }
    }
 }

@@ -6,7 +6,7 @@ namespace FWA.Core.Mvvm
    {
       public MessageboxMessage(string message, ImageType image, Buttons buttons, string header = "") : base(message, header)
       {
-         ImageType = ImageType;
+         ImageType = image;
          Buttons = buttons;
       }
 

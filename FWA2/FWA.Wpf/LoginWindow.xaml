@@ -6,8 +6,8 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:vm="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
         xmlns:local="clr-namespace:FWA.Wpf"
-        xmlns:i="clr-namespace:FWA.Wpf.Helpers"
-        mc:Ignorable="d" BorderBrush="LightBlue"
+        xmlns:i="clr-namespace:FWA.Wpf.Helpers" ResizeMode="NoResize"
+        mc:Ignorable="d" BorderBrush="LightBlue" Closing="Window_Closing"
         i:WindowEx.ShowIcon="False" ShowInTaskbar="False" Topmost="True"
         Title="Login" Height="210" Width="300">
     <Window.DataContext>

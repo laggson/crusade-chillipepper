@@ -16,9 +16,16 @@ namespace FWA.Core.Helpers
       public static bool NeuereVerfuegbar()
       {
          CurrentAssembly = Assembly.GetExecutingAssembly().GetName();
-         bool neuereVerfuegbar = UpdateHelper.IsNewVersionAvailable(Name, CurrentAssembly.Version);
 
-         return neuereVerfuegbar;
+         try
+         {
+            bool neuereVerfuegbar = UpdateHelper.IsNewVersionAvailable(Name, CurrentAssembly.Version);
+            return neuereVerfuegbar;
+         }
+         catch (System.Net.WebException)
+         {
+            return false;
+         }
       }
 
       /// <summary>

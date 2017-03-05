@@ -30,16 +30,8 @@ namespace FWA.Core.Helpers
       private DBAuthentication(string username, byte[] password)
       {
          List<User> userlist = null;
-
-         try
-         {
-            userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
-         }
-
-         catch (Exception e)
-         {
-            throw e;
-         }
+         
+         userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
 
          if (userlist.Count < 1)
             throw new AuthenticationException(username, "Der Nutzer wurde nicht gefunden.");
