@@ -1,4 +1,4 @@
-﻿<metro:MetroWindow x:Class="FWA.Wpf.MainWindow"
+﻿<Window x:Class="FWA.Wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,10 +11,10 @@
         xmlns:vm="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
         mc:Ignorable="d" BorderBrush="LightBlue"
         WindowStartupLocation="CenterScreen"
-        Title="Feuerweehr" Height="700" Width="1200">
-    <metro:MetroWindow.DataContext>
+        Title="Feuerwehr Administration" Height="700" Width="1200">
+    <Window.DataContext>
         <vm:MainViewModel />
-    </metro:MetroWindow.DataContext>
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
             </MenuItem>
         </Menu>
 
-        <local:ListView Grid.Row="1" />
+        <local:ListView Grid.Row="1" Margin="10 0 0 0" />
 
         <StatusBar Grid.Row="2"  >
             <StatusBarItem>
@@ -44,4 +44,4 @@
             </StatusBarItem>
         </StatusBar>
     </Grid>
-</metro:MetroWindow>
+</Window>

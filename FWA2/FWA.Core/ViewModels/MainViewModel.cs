@@ -2,6 +2,8 @@
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.Reflection;
+using Update = Laggson.Common.UpdateHelper;
 
 namespace FWA.Core.ViewModels
 {
@@ -75,7 +77,7 @@ namespace FWA.Core.ViewModels
       /// <summary>
       /// Wird aufgerufen, wenn eine nicht generische NotificationMessage empfangen wird. Zeigt aktuell, dass das <see cref="ListViewModel"/> bereit ist.
       /// </summary>
-      /// <param name="message">Die empfangene Nachricht vom Typ <see cref="NotificationMessage"/></param>
+      /// <param name="message">Die empfangene Nachricht vom Typ <see cref="NotifyUserMessage"/></param>
       private void NotificationReceived(NotificationMessage message)
       {
          if(message.Sender is ListViewModel && message.Notification == "Bereit")

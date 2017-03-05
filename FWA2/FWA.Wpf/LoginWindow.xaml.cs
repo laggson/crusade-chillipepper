@@ -49,10 +49,10 @@ namespace FWA.Wpf
          }
       }
 
-      private async void LoginAbgebrochen()
+      private void LoginAbgebrochen()
       {
-         await this.ShowMessageAsync("Login abgebrochen", "Das Programm wird jetzt beendet.");
-
+         //await this.ShowMessageAsync(, );
+         MessageBox.Show(this, "Das Programm wird jetzt beendet.", "Login abgebrochen", MessageBoxButton.OK, MessageBoxImage.Asterisk);
          System.Environment.Exit(0);
       }
 

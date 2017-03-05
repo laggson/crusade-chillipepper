@@ -1,7 +1,6 @@
 ﻿using FWA.Core.Models;
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
-using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
 using System;
 
@@ -23,13 +22,10 @@ namespace FWA.Wpf
       /// </summary>
       private void RegisterEvents()
       {
-         Messenger.Default.Register<ErrorMessage>(this, OnErroReceived);
-         Messenger.Default.Register<LoginMessage>(this, OnloginChanged);
+         Messenger.Default.Register<NotifyUserMessage>(this, OnErroReceived);
+         Messenger.Default.Register<MessageboxMessage>(this, OnMessageboxInvoked);
+         //Messenger.Default.Register<ErrorMessage>(this, OnErroReceived); // kann vl weg, wenn der Messenger erkennt dass es derived ist
          Messenger.Default.Register<RequestDialogOpenMessage>(this, OnDialogOpenRequest);
-      }
-      void OnloginChanged(LoginMessage msg)
-      {
-         Focus();
       }
 
       private void OnDialogOpenRequest(RequestDialogOpenMessage msg)
@@ -53,16 +49,61 @@ namespace FWA.Wpf
 
          window.Owner = this;
          window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+         window.Closed += (o, args) => { Application.Current.MainWindow.Focus(); };
          window.ShowDialog();
+      }
+
+      /// <summary>
+      /// Wird aufgerufen, wenn eine <see cref="MessageboxMessage"/> empfangen wird und zeigt eine entsprechende <see cref="MessageBox"/>.
+      /// </summary>
+      /// <param name="message"></param>
+      void OnMessageboxInvoked(MessageboxMessage message)
+      {
+         MessageBoxButton button;
+         MessageBoxImage image;
+
+         switch(message.Buttons)
+         {
+            case Buttons.OkCancel:
+               button = MessageBoxButton.OKCancel;
+               break;
+            case Buttons.YesNo:
+               button = MessageBoxButton.YesNo;
+               break;
+            case Buttons.YesNoCancel:
+               button = MessageBoxButton.YesNoCancel;
+               break;
+            default:
+               button = MessageBoxButton.OK;
+               break;
+         }
+
+         switch(message.ImageType)
+         {
+            case ImageType.Information:
+               image = MessageBoxImage.Information;
+               break;
+            case ImageType.Warnung:
+               image = MessageBoxImage.Warning;
+               break;
+            case ImageType.Fehler:
+               image = MessageBoxImage.Error;
+               break;
+            default:
+               image = MessageBoxImage.None;
+               break;
+         }
+
+         var result = Dispatcher.Invoke(() => MessageBox.Show(this, message.Message, message.Header, button, image));
       }
 
       /// <summary>
       /// Wird aufgerufen, wenn im Programm eine Ausnahme abgefangen wird, und zeigt eine entsprechende Meldung.
       /// </summary>
       /// <param name="message"></param>
-      private void OnErroReceived(ErrorMessage message)
-      {
-         this.ShowMessageAsync(message.Header, message.Message);
+      private void OnErroReceived(NotifyUserMessage message)
+      { 
+         MessageBox.Show(this, message.Message, message.Header, MessageBoxButton.OK, MessageBoxImage.Error);
       }
 
       /*private void ShowCsvDlg()

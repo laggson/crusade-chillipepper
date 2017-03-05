@@ -156,7 +156,7 @@ namespace FWA.Core.ViewModels
          });
 
          // Anderen VMs bescheid geben, dass ich da bin.
-         Messenger.Default.Send(new NotificationMessage(this, "Bereit"));
+         Messenger.Default.Send(new GalaSoft.MvvmLight.Messaging.NotificationMessage(this, "Bereit"));
       }
       
       /// <summary>

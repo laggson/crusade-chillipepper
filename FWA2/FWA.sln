@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWA.Wpf", "FWA.Wpf\FWA.Wpf.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWA.Core", "FWA.Core\FWA.Core.csproj", "{93E38633-F64F-48B1-ADAA-0220B5932C76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laggson.Common", "..\..\crusade-common-library\Laggson.Common.csproj", "{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{93E38633-F64F-48B1-ADAA-0220B5932C76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{93E38633-F64F-48B1-ADAA-0220B5932C76}.Release|x86.ActiveCfg = Release|Any CPU
 		{93E38633-F64F-48B1-ADAA-0220B5932C76}.Release|x86.Build.0 = Release|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Debug|x86.Build.0 = Debug|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DFCA3B1-826D-450B-A1B6-601A9BF986EF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

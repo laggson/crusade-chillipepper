@@ -11,6 +11,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
+;SignTool=sign
 AppId={{4A5466C2-1A68-434D-B854-B0C0901B9A99}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -24,9 +25,14 @@ DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=D:\Eigene Dateien\Desktop\FWA Setup
 OutputBaseFilename=FWA-latest
-SetupIconFile=D:\Eigene Dateien\Dokumente\GitHub\crusade-chillipepper\FWA2\FWA.Wpf\Assets\install.ico
+SetupIconFile=D:\Eigene Dateien\Dokumente\GitHub\crusade-chillipepper\FWA2\FWA.Wpf\Assets\Install.ico
 Compression=lzma
 SolidCompression=yes
+
+VersionInfoVersion={#MyAppVersion}
+;VersionInfoCompany=Laggson Softworks
+;VersionInfoCopyright=© 2017, Laggson Softworks
+;VersionInfoProductName=FW Administration
 
 [Languages]
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
