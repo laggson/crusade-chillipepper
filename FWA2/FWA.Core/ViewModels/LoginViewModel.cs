@@ -26,7 +26,7 @@ namespace FWA.Core.ViewModels
          {
             DBAuthentication.Create(username, bytes);
          }
-         catch (AuthenticationException e)
+         catch (AuthenticationException)
          {
             //Messenger.Default.Send(new ErrorMessage(e));
             return false;
