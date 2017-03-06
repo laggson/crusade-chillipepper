@@ -18,14 +18,21 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" 
-                  CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" >
+        <DataGrid DataGridCell.Selected="DataGrid_GotFocus" RowEditEnding="PruefungGrid_RowEditEnding"
+            AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" x:Name="PruefungGrid"
+            CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" ItemsSource="{Binding Pruefungen, Mode=TwoWay}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Bezeichnung" />
-                <DataGridTextColumn Header="Inventar-Nr." />
-                <DataGridComboBoxColumn Header="Zustand" />
-                <DataGridTextColumn Header="Mangel" />
-                <DataGridTextColumn Header="Kommentar" />
+                <DataGridTextColumn     Header="Bezeichnung"  IsReadOnly="True" Binding="{Binding Gegenstand.Bezeichnung}" />
+                <DataGridTextColumn     Header="Inventar-Nr." IsReadOnly="True" Binding="{Binding Gegenstand.InvNummer}" />
+                <DataGridComboBoxColumn Header="Zustand"      IsReadOnly="False" SelectedItemBinding="{Binding Zustand}" x:Name="CbZustand" >
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="SelectedIndex" Value="1" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn     Header="Mangel"       IsReadOnly="False"  />
+                <DataGridTextColumn     Header="Kommentar"    IsReadOnly="False"  />
             </DataGrid.Columns>
         </DataGrid>
 

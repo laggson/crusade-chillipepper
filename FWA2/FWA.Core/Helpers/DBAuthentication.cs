@@ -30,7 +30,7 @@ namespace FWA.Core.Helpers
       private DBAuthentication(string username, byte[] password)
       {
          List<User> userlist = null;
-         
+
          userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
 
          if (userlist.Count < 1)
@@ -75,9 +75,9 @@ namespace FWA.Core.Helpers
       /// </summary>
       /// <param name="invNumberLike">Die Zeichenfolge, die in der InvNumber der zurückzugebenen Devices enthalten sein soll</param>
       /// <returns></returns>
-      public List<Gegenstand> GetDevicesByInvNumberType(string invNumberLike)
+      public List<Gegenstand> GetDevicesByInvNumberType(string invNumberLike, string bezeichnung)
       {
-         return DBAccess.GetByCriteria<Gegenstand>(c => c.Add(Restrictions.Like("InvNummer", invNumberLike)));
+         return DBAccess.GetItemsLikeInvNummer(invNumberLike, bezeichnung);
       }
 
       public List<Gegenstand> GetAlleGegenstaende()

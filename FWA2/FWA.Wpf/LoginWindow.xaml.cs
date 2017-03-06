@@ -12,6 +12,7 @@ namespace FWA.Wpf
       {
          InitializeComponent();
          TxtName.Focus();
+
       }
 
       #region Events
@@ -24,6 +25,10 @@ namespace FWA.Wpf
 
       private void BtnLogin_Click(object sender, RoutedEventArgs e)
       {
+#if DEBUG
+         TxtName.Text = "hs";
+         TxtPassword.Password = "Vivendi2016";
+#endif
          TryLogin();
       }
 

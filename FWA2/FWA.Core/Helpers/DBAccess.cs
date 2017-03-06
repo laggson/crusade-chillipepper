@@ -1,7 +1,9 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using FWA.Core.Models;
 using FWA.Core.Models.Mappings;
 using NHibernate;
+using NHibernate.Linq;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections;
@@ -73,6 +75,15 @@ namespace FWA.Core.Helpers
       public static T GetById<T>(object id, ISession session = null)
       {
          return ExecuteFuncInTransaction(s => s.Get<T>(id), session);
+      }
+
+      public static List<Gegenstand> GetItemsLikeInvNummer(string invNummerLike, string bezeichnung)
+      {
+         var session = OpenSession();
+         var items = session.Query<Gegenstand>().Where(g => g.Bezeichnung == bezeichnung && g.InvNummer.Like(invNummerLike)).ToList();
+         session.Close();
+
+         return items;
       }
 
       public static List<T> GetByCriteria<T>(Action<ICriteria> criteriaEditor, ISession session = null)
