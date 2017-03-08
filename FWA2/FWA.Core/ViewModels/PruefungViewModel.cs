@@ -22,6 +22,17 @@ namespace FWA.Core.ViewModels
             NotifyPropertyChanged(nameof(Pruefungen));
          }
       }
+      private string windowTitle;
+
+      public string WindowTitle
+      {
+         get { return windowTitle; }
+         set
+         {
+            windowTitle = value;
+            NotifyPropertyChanged(nameof(WindowTitle));
+         }
+      }
 
       #endregion
 
@@ -44,12 +55,13 @@ namespace FWA.Core.ViewModels
             invNummerLike = "__" + gegenstand.InvNummer.Substring(2, 2) + "%";
          }
 
+         WindowTitle = "Prüfung " + gegenstand.Bezeichnung + " - " + DateTime.Today.ToString("MMMM yyyy");
          CreatePruefungen(invNummerLike, gegenstand.Bezeichnung);
       }
 
       public void Fertig()
       {
-         var test = Pruefungen;
+         DBAuthentication.Instance.InsertMultiple(Pruefungen);
       }
 
       /// <summary>

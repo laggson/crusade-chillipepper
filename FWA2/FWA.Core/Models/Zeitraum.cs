@@ -131,6 +131,16 @@ namespace FWA.Core.Models
       }
 
       /// <summary>
+      /// Gibt den Wert des Monats am 1-basierten Index zurück (also z.b. 12 für Dezember).
+      /// </summary>
+      /// <param name="index"></param>
+      /// <returns></returns>
+      public virtual bool ValueAt(int index)
+      {
+         return ToArray()[index - 1];
+      }
+
+      /// <summary>
       /// Fasst die einzelnen Eigenschaften als <see cref="Dictionary{TKey, TValue}" zusammen, mit dem Namen als Key/>
       /// </summary>
       /// <returns></returns>

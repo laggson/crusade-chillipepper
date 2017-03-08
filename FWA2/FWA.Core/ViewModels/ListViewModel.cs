@@ -180,7 +180,28 @@ namespace FWA.Core.ViewModels
          }
          else
          {
-            Messenger.Default.Send(new RequestDialogOpenMessage(Dialog.PruefungWindow, SelectedItem));
+            MessageboxMessage message = null;
+
+            if (SelectedItem.Zeitraum == null)
+            {
+               message = new MessageboxMessage("Für den Gegenstand '" + SelectedItem.Bezeichnung + "' wurde noch kein Prüfungsmonat hinterlegt.", 
+                  ImageType.Warnung, Buttons.Ok);
+            }
+            else if(!SelectedItem.Zeitraum.ValueAt(DateTime.Today.Month))
+            {
+               message = new MessageboxMessage("Der Gegenstand '" + SelectedItem.Bezeichnung + "' muss im Monat "
+                  + DateTime.Today.ToString("MMMM") + " nicht geprüft werden.", ImageType.Information, Buttons.Ok);
+            }
+            // TODO: Prüfen, ob für den Monat im akt Jahr schon was gemacht wurde.
+
+            if(message != null)
+            {
+               Messenger.Default.Send(message);
+            }
+            else
+            {
+               Messenger.Default.Send(new RequestDialogOpenMessage(Dialog.PruefungWindow, SelectedItem));
+            }
          }
       }
    }

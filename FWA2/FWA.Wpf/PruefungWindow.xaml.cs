@@ -44,10 +44,5 @@ namespace FWA.Wpf
             grd.BeginEdit(e);
          }
       }
-
-      private void PruefungGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-      {
-
-      }
    }
 }

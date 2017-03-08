@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
         xmlns:local="clr-namespace:FWA.Wpf"
         mc:Ignorable="d"
-        Title="PruefungsWindow" Height="500" Width="650">
+        Title="{Binding WindowTitle}" Height="500" Width="650">
     <Window.DataContext>
         <vm:PruefungViewModel x:Name="ViewModel" />
     </Window.DataContext>
@@ -18,7 +18,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <DataGrid DataGridCell.Selected="DataGrid_GotFocus" RowEditEnding="PruefungGrid_RowEditEnding"
+        <DataGrid DataGridCell.Selected="DataGrid_GotFocus" 
             AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" x:Name="PruefungGrid"
             CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" ItemsSource="{Binding Pruefungen, Mode=TwoWay}" >
             <DataGrid.Columns>
@@ -31,8 +31,8 @@
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                 </DataGridComboBoxColumn>
-                <DataGridTextColumn     Header="Mangel"       IsReadOnly="False"  />
-                <DataGridTextColumn     Header="Kommentar"    IsReadOnly="False"  />
+                <DataGridTextColumn     Header="Mangel"    Binding="{Binding Mangel,    Mode=TwoWay}"  />
+                <DataGridTextColumn     Header="Kommentar" Binding="{Binding Kommentar, Mode=TwoWay}"  />
             </DataGrid.Columns>
         </DataGrid>
 
