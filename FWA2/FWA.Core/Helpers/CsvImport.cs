@@ -9,6 +9,11 @@ namespace FWA.Core.Helpers
 {
    public class CsvImport
    {
+      /// <summary>
+      /// Sucht alle CSV-Dateien im angegebenen Ordner, und versucht, sie in eine Liste von Gegenständen umzuwandeln.
+      /// </summary>
+      /// <param name="folderPath">Der absolute Dateipfad zum gesuchten Ordner.</param>
+      /// <returns></returns>
       public static List<Gegenstand> GetFiles(string folderPath)
       {
          var data = new List<Gegenstand>();
@@ -23,7 +28,11 @@ namespace FWA.Core.Helpers
 
          return data;
       }
-             
+
+      /// <summary>
+      /// Wandelt die angegebene CSV-Datei in eine Liste von Gegenständen um.
+      /// </summary>
+      /// <param name="filePath">Der absolute Pfad zur gesuchten CSV-Datei.</param>
       public static List<Gegenstand> FileToDevices(string filePath)
       {
          var data = new List<Gegenstand>();
@@ -38,7 +47,11 @@ namespace FWA.Core.Helpers
 
          return data;
       }
-             
+
+      /// <summary>
+      /// Wandelt eine einzelne Zeile einer CSV-Datei in einen <see cref="Gegenstand"/> um, falls die Daten gültig sind.
+      /// </summary>
+      /// <param name="csv">Die CSV-Zeile, die decodiert werden soll.</param>
       public static Gegenstand GetDeviceModel(string csv)
       {
          var line = csv.Split(new []{ ';'}, StringSplitOptions.None);

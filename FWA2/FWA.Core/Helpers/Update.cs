@@ -29,7 +29,7 @@ namespace FWA.Core.Helpers
       }
 
       /// <summary>
-      /// Führt ein Update auf die aktuellste Version aus.
+      /// Lädt den Installer der aktuellsten Version herunter und startet diesen.
       /// </summary>
       public static void Do()
       {

@@ -7,7 +7,7 @@ using System;
 namespace FWA.Wpf
 {
    /// <summary>
-   /// Interaktionslogik für MainWindow.xaml
+   /// Stellt das Hauptfenster der Anwendung dar.
    /// </summary>
    public sealed partial class MainWindow
    {
@@ -18,16 +18,20 @@ namespace FWA.Wpf
       }
 
       /// <summary>
-      /// Registriert sich beim MVVM-Messenger für die angegebenen Message-Typen
+      /// Registriert sich beim MVVM-Messenger für die angegebenen Message-Typen.
       /// </summary>
       private void RegisterEvents()
       {
          Messenger.Default.Register<NotifyUserMessage>(this, OnErroReceived);
          Messenger.Default.Register<MessageboxMessage>(this, OnMessageboxInvoked);
-         //Messenger.Default.Register<ErrorMessage>(this, OnErroReceived); // kann vl weg, wenn der Messenger erkennt dass es derived ist
+         Messenger.Default.Register<ErrorMessage>(this, OnErroReceived); // kann vl weg, wenn der Messenger erkennt dass es derived ist
          Messenger.Default.Register<RequestDialogOpenMessage>(this, OnDialogOpenRequest);
       }
 
+      /// <summary>
+      /// Wird aufgerufen, wenn der Dialog eine Nachricht zum Öffnen eines neuen Dialogs empfängt.
+      /// </summary>
+      /// <param name="msg"></param>
       private void OnDialogOpenRequest(RequestDialogOpenMessage msg)
       {
          Window window = null;
@@ -63,7 +67,7 @@ namespace FWA.Wpf
       {
          MessageBoxButton button;
          MessageBoxImage image;
-
+         
          switch(message.Buttons)
          {
             case Buttons.OkCancel:

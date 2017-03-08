@@ -23,10 +23,21 @@ namespace FWA.Core.Helpers
          OpenUrl(url.ToString());
       }
 
+      /// <summary>
+      /// Macht einen synchronen Get-Request auf die angegebene Url und gibt den Text zurück.
+      /// </summary>
+      /// <param name="url">Die absolute Adresse der gesuchten Website.</param>
+      /// <returns></returns>
       public static string Get(string url)
       {
          return Get(new Uri(url));
       }
+
+      /// <summary>
+      /// Macht einen synchronen Get-Request auf die angegebene Url und gibt den Text zurück.
+      /// </summary>
+      /// <param name="url">Die absolute Adresse der gesuchten Website.</param>
+      /// <returns></returns>
       public static string Get(Uri url)
       {
          string text;
@@ -39,6 +50,11 @@ namespace FWA.Core.Helpers
          return text;
       }
 
+      /// <summary>
+      /// Lädt die angegebene Datei herunter und speichert sie lokal unter dem angegebenen Namen.
+      /// </summary>
+      /// <param name="url">Die Adresse der Datei im Internet.</param>
+      /// <param name="fileName">Pfad und Name, unter denen die Datei lokal gespeichert werden soll.</param>
       public static void GetFile(string url, string fileName)
       {
          using (var client = new WebClient())

@@ -7,6 +7,9 @@ namespace FWA.Core.ViewModels
 {
    public class LoginViewModel : ObservableObject
    {
+      /// <summary>
+      /// Erstellt eine neue Instanz der <see cref="LoginViewModel"/>-Klasse
+      /// </summary>
       public LoginViewModel()
       {
          DBAuthentication.Dispose();
@@ -21,14 +24,13 @@ namespace FWA.Core.ViewModels
       public bool Login(string username, string pass)
       {
          var bytes = System.Text.Encoding.UTF8.GetBytes(pass);
-
+         Messenger.Default.Send(new ErrorMessage(new System.Exception(), "Hallo"));
          try
          {
             DBAuthentication.Create(username, bytes);
          }
          catch (AuthenticationException)
          {
-            //Messenger.Default.Send(new ErrorMessage(e));
             return false;
          }
 

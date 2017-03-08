@@ -5,6 +5,9 @@ namespace FWA.Core.Models
    public class Pruefung
    {
       int id;
+      /// <summary>
+      /// Der Datenbank-Primärschlüssel des Objekts. Braucht man nicht zu verändern.
+      /// </summary>
       public virtual int Id
       {
          get { return id; }
@@ -15,6 +18,9 @@ namespace FWA.Core.Models
       }
 
       Gegenstand gegenstand;
+      /// <summary>
+      /// Der Gegenstand, der geprüft wird. Wird für Fremdschlüssel benötigt.
+      /// </summary>
       public virtual Gegenstand Gegenstand
       {
          get { return gegenstand; }
@@ -26,6 +32,9 @@ namespace FWA.Core.Models
 
 
       DateTime datum;
+      /// <summary>
+      /// Das Datum, an dem geprüft wird. Nur monatsweise angezeigt.
+      /// </summary>
       public virtual DateTime Datum
       {
          get { return datum; }
@@ -36,6 +45,9 @@ namespace FWA.Core.Models
       }
 
       User tester;
+      /// <summary>
+      /// Der Nutzer, der den Test durchgeführt hat.
+      /// </summary>
       public virtual User Tester
       {
          get { return tester; }
@@ -46,6 +58,9 @@ namespace FWA.Core.Models
       }
 
       Zustand zustand;
+      /// <summary>
+      /// Der Zustand, der zum Zeitpunkt der Prüfung festgestellt wurde.
+      /// </summary>
       public virtual Zustand Zustand
       {
          get { return zustand; }
@@ -56,6 +71,9 @@ namespace FWA.Core.Models
       }
 
       string mangel;
+      /// <summary>
+      /// Gibt einen Hinweis für weitere Nutzer, welcher Mangel gefunden wurde.
+      /// </summary>
       public virtual string Mangel
       {
          get { return mangel; }
@@ -66,6 +84,9 @@ namespace FWA.Core.Models
       }
 
       string kommentar;
+      /// <summary>
+      /// Ein möglicher sonstiger Kommentar für weitere Nutzer.
+      /// </summary>
       public virtual string Kommentar
       {
          get { return kommentar; }

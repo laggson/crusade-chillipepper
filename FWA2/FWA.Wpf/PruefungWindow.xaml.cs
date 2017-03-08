@@ -7,12 +7,18 @@ using System.Windows.Controls;
 namespace FWA.Wpf
 {
    /// <summary>
-   /// Interaktionslogik für PruefungsWindow.xaml
+   /// Stellt den Dialog dar, in dem die Prüfungen durchgeführt werden.
    /// </summary>
    public partial class PruefungWindow
    {
-      public static IEnumerable<string> ZustandValues => Enum.GetValues(typeof(Zustand)).Cast<Zustand>().Select(z => z.ToString());//.GetDescription());
+      /// <summary>
+      /// Stellt alle Werte von <see cref="Zustand"/> als <see cref="string"/>-Aufzählung dar.
+      /// </summary>
+      public static IEnumerable<string> ZustandValues => Enum.GetValues(typeof(Zustand)).Cast<Zustand>().Select(z => z.ToString());
 
+      /// <summary>
+      /// Erstelllt eine neue Instanz der <see cref="PruefungWindow"/>-Klasse.
+      /// </summary>
       public PruefungWindow()
       {
          InitializeComponent();
@@ -29,7 +35,7 @@ namespace FWA.Wpf
 
       private void Fertig_Click(object sender, System.Windows.RoutedEventArgs e)
       {
-         ViewModel.Fertig();
+         ViewModel.OnPruefungFinished();
          DialogResult = true;
          Close();
       }

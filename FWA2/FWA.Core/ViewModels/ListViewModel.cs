@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace FWA.Core.ViewModels
 {
+   /// <summary>
+   /// Stellt das ViewModel für die Hauptliste dar.
+   /// </summary>
    public class ListViewModel : ObservableObject
    {
       #region Properties
@@ -87,6 +90,10 @@ namespace FWA.Core.ViewModels
          Messenger.Default.Register<LoginMessage>(this, OnLoginChanged);
       }
 
+      /// <summary>
+      /// Wird aufgerufen, wenn sich der Anmelde-Status des Login-Fensters ändert.
+      /// </summary>
+      /// <param name="message"></param>
       private void OnLoginChanged(LoginMessage message)
       {
          Task.Run(() =>
@@ -103,6 +110,10 @@ namespace FWA.Core.ViewModels
          });
       }
 
+      /// <summary>
+      /// Wird aufgerufen, wenn sich <see cref="MainViewModel.AlleAnzeigen"/> ändert.
+      /// </summary>
+      /// <param name="message"></param>
       private void OnAlleZeigenChanged(PropertyChangedMessage<bool> message)
       {
          switch (message.PropertyName)

@@ -20,6 +20,9 @@ namespace FWA.Core.Helpers
       /// </summary>
       public User CurrentUser { get; }
 
+      /// <summary>
+      /// Die aktuelel Instanz der <see cref="DBAuthentication"/>. Ist null, falls kein User angemeldet ist.
+      /// </summary>
       public static DBAuthentication Instance { get; private set; }
 
       /// <summary>
@@ -80,6 +83,10 @@ namespace FWA.Core.Helpers
          return DBAccess.GetItemsLikeInvNummer(invNumberLike, bezeichnung);
       }
 
+      /// <summary>
+      /// Lädt eine Liste aller Gegenstände aus der Datenbank.
+      /// </summary>
+      /// <returns></returns>
       public List<Gegenstand> GetAlleGegenstaende()
       {
          return DBAccess.GetByCriteria<Gegenstand>(c => c.List());
@@ -186,6 +193,7 @@ namespace FWA.Core.Helpers
       }
 
       /// <summary>
+      /// Gibt immer true zurück.
       /// Prüft, ob eine Verbindung zum Server hergestellt werden kann.
       /// </summary>
       /// <returns></returns>

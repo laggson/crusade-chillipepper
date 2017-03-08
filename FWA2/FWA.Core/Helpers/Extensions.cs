@@ -7,9 +7,9 @@ namespace FWA.Core.Helpers
    public static class Extensions
    {
       /// <summary>
-      /// Ältere Version.
+      /// Die ältere Version einer Übersetzungsmethode für Beschreibungen von Enum-Werten.
       /// </summary>
-      /// <param name="value"></param>
+      /// <param name="value">Der Wert des Enums, der Übersetzt werden soll.</param>
       /// <returns></returns>
       public static string Description(this Enum value)
       {
@@ -23,9 +23,9 @@ namespace FWA.Core.Helpers
       }
 
       /// <summary>
-      /// Neuere Version.
+      /// Die neuere Version einer Übersetzungsmethode für Beschreibungen von Enum-Werten.
       /// </summary>
-      /// <param name="enumValue"></param>
+      /// <param name="enumValue">Der Wert des Enums, der Übersetzt werden soll.</param>
       /// <returns></returns>
       public static string GetDescription(this Enum enumValue)
       {

@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace FWA.Core.ViewModels
 {
+   /// <summary>
+   /// Stellt das ViewModel für den Prüfungs-Dialog dar.
+   /// </summary>
    public class PruefungViewModel : ObservableObject
    {
       #region
@@ -59,7 +62,10 @@ namespace FWA.Core.ViewModels
          CreatePruefungen(invNummerLike, gegenstand.Bezeichnung);
       }
 
-      public void Fertig()
+      /// <summary>
+      /// Wird aufgerufen, wenn der 'Fertig'-Button im Prüfungs-Dialog gedrückt wurde.
+      /// </summary>
+      public void OnPruefungFinished()
       {
          DBAuthentication.Instance.InsertMultiple(Pruefungen);
       }

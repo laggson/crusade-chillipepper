@@ -4,10 +4,13 @@ using System.Windows.Input;
 namespace FWA.Wpf
 {
    /// <summary>
-   /// Interaktionslogik für LoginWindow.xaml
+   /// Stellt das Anmelde-Fenster dar.
    /// </summary>
    public partial class LoginWindow
    {
+      /// <summary>
+      /// Erstellt eine neue Instanz der <see cref="LoginWindow"/>-Klasse.
+      /// </summary>
       public LoginWindow()
       {
          InitializeComponent();
@@ -52,12 +55,18 @@ namespace FWA.Wpf
 
       #endregion
 
+      /// <summary>
+      /// Zeigt eine Nachricht über das beenden des Programms und beendet das Programm. :D
+      /// </summary>
       private void LoginAbgebrochen()
       {
          MessageBox.Show(this, "Das Programm wird jetzt beendet.", "Login abgebrochen", MessageBoxButton.OK, MessageBoxImage.Asterisk);
          System.Environment.Exit(0);
       }
 
+      /// <summary>
+      /// Versucht, sich mit den angegebenen Daten an der Datenbank anzumelden, und zeigt bei einem Fehler eine Meldung.
+      /// </summary>
       private void TryLogin()
       {
          TxtError.Visibility = Visibility.Hidden;

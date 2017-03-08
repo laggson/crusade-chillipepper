@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace FWA.Core.Helpers
 {
+   /// <summary>
+   /// Diese Klasse hat Mirko gebaut, und ich hab absolut keine Ahnung was hier abgeht. Wird vielleicht demnächst noch ersetzt.
+   /// </summary>
    internal static class DBAccess
    {
       public static ISessionFactory SessionFactory { get; }

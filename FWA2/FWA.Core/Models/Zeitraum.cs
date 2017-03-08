@@ -6,7 +6,9 @@ namespace FWA.Core.Models
    public class Zeitraum
    {
       private int id;
-
+      /// <summary>
+      /// Der Datenbank-Primärschlüssel des Objekts. Braucht man nicht zu verändern.
+      /// </summary>
       public virtual int Id
       {
          get { return id; }
@@ -97,9 +99,13 @@ namespace FWA.Core.Models
          set { dezember = value; }
       }
 
+      /// <summary>
+      /// Fasst die zu prüfenden Monate als <see cref="string"/> zusammen.
+      /// </summary>
+      /// <returns></returns>
       public override string ToString()
       {
-         var aktivierte = ToDictionary().Values.Where(v => v);
+         var aktivierte = ToArray().Where(v => v == true);
 
          if (aktivierte.Count() <= 3)
             return string.Join(", ", aktivierte.Select(c => nameof(c)));
@@ -143,24 +149,39 @@ namespace FWA.Core.Models
       /// <summary>
       /// Fasst die einzelnen Eigenschaften als <see cref="Dictionary{TKey, TValue}" zusammen, mit dem Namen als Key/>
       /// </summary>
-      /// <returns></returns>
-      public virtual Dictionary<string, bool> ToDictionary()
+      public virtual Dictionary<Monat, bool> ToDictionary()
       {
-         var dictionary = new Dictionary<string, bool>();
-         dictionary.Add(nameof(Januar), Januar);
-         dictionary.Add(nameof(Februar), Februar);
-         dictionary.Add(nameof(Maerz), Maerz);
-         dictionary.Add(nameof(April), April);
-         dictionary.Add(nameof(Mai), Mai);
-         dictionary.Add(nameof(Juni), Juni);
-         dictionary.Add(nameof(Juli), Juli);
-         dictionary.Add(nameof(August), August);
-         dictionary.Add(nameof(September), September);
-         dictionary.Add(nameof(Oktober), Oktober);
-         dictionary.Add(nameof(November), November);
-         dictionary.Add(nameof(Dezember), Dezember);
+         var dictionary = new Dictionary<Monat, bool>();
+         dictionary.Add(Monat.Januar,    Januar);
+         dictionary.Add(Monat.Februar,   Februar);
+         dictionary.Add(Monat.Maerz,     Maerz);
+         dictionary.Add(Monat.April,     April);
+         dictionary.Add(Monat.Mai,       Mai);
+         dictionary.Add(Monat.Juni,      Juni);
+         dictionary.Add(Monat.Juli,      Juli);
+         dictionary.Add(Monat.August,    August);
+         dictionary.Add(Monat.September, September);
+         dictionary.Add(Monat.Oktober,   Oktober);
+         dictionary.Add(Monat.November,  November);
+         dictionary.Add(Monat.Dezember,  Dezember);
 
          return dictionary;
+      }
+
+      public enum Monat
+      {
+         Januar = 1,
+         Februar,
+         Maerz,
+         April,
+         Mai,
+         Juni,
+         Juli,
+         August,
+         September,
+         Oktober,
+         November,
+         Dezember
       }
    }
 }

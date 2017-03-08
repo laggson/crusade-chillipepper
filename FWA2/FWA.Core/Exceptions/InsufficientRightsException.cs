@@ -1,13 +1,11 @@
 ﻿using FWA.Core.Models;
 using System;
-using System.Runtime.Serialization;
 
 namespace FWA.Core.Exceptions
 {
    /// <summary>
    /// Die Ausnahme wird ausgelöst, falls ein Benutzer versucht eine Aktion auszuführen, für die sein Rechte-Level zu gering ist.
    /// </summary>
-   [Serializable]
    public class InsufficientRightsException : Exception
    {
       private static string GenerateMessage(User user, AccountType needed, string action)
@@ -46,11 +44,6 @@ namespace FWA.Core.Exceptions
          User = user;
          Needed = needed;
          Action = action;
-      }
-
-      public override void GetObjectData(SerializationInfo info, StreamingContext context)
-      {
-         base.GetObjectData(info, context);
       }
    }
 }

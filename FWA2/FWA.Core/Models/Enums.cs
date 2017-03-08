@@ -12,7 +12,7 @@ namespace FWA.Core.Models
       Ok,
 
       [Description("Defekt")]
-      MangelGefunden,
+      Defekt,
 
       [Description("Repariert")]
       Repariert
