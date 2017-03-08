@@ -22,53 +22,30 @@ namespace FWA.Wpf
       /// </summary>
       private void RegisterEvents()
       {
-         Messenger.Default.Register<NotifyUserMessage>(this, OnErroReceived);
+         Messenger.Default.Register<ErrorMessage>(this, OnErroReceived);
          Messenger.Default.Register<MessageboxMessage>(this, OnMessageboxInvoked);
-         Messenger.Default.Register<ErrorMessage>(this, OnErroReceived); // kann vl weg, wenn der Messenger erkennt dass es derived ist
          Messenger.Default.Register<RequestDialogOpenMessage>(this, OnDialogOpenRequest);
       }
 
       /// <summary>
-      /// Wird aufgerufen, wenn der Dialog eine Nachricht zum Öffnen eines neuen Dialogs empfängt.
+      /// Wird aufgerufen, wenn im Programm eine Ausnahme abgefangen wird, und zeigt eine entsprechende Meldung.
       /// </summary>
-      /// <param name="msg"></param>
-      private void OnDialogOpenRequest(RequestDialogOpenMessage msg)
+      /// <param name="message"></param>
+      private void OnErroReceived(NotifyUserMessage message)
       {
-         Window window = null;
-
-         switch (msg.Dialog)
-         {
-            case Dialog.AboutWindow:
-               window = new AboutWindow();
-               break;
-            case Dialog.LoginWindow:
-               window = new LoginWindow();
-               break;
-            case Dialog.PruefungWindow:
-               var pruefungsWindow =  new PruefungWindow();
-               pruefungsWindow.ViewModel.Init(msg.Data as Gegenstand);
-               window = pruefungsWindow;
-               break;
-            default:
-               return;
-         }
-
-         window.Owner = this;
-         window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-         window.Closed += (o, args) => { Application.Current.MainWindow.Focus(); };
-         window.ShowDialog();
+         MessageBox.Show(this, message.Message, message.Header, MessageBoxButton.OK, MessageBoxImage.Error);
       }
 
       /// <summary>
       /// Wird aufgerufen, wenn eine <see cref="MessageboxMessage"/> empfangen wird und zeigt eine entsprechende <see cref="MessageBox"/>.
       /// </summary>
       /// <param name="message"></param>
-      void OnMessageboxInvoked(MessageboxMessage message)
+      private void OnMessageboxInvoked(MessageboxMessage message)
       {
          MessageBoxButton button;
          MessageBoxImage image;
-         
-         switch(message.Buttons)
+
+         switch (message.Buttons)
          {
             case Buttons.OkCancel:
                button = MessageBoxButton.OKCancel;
@@ -84,7 +61,7 @@ namespace FWA.Wpf
                break;
          }
 
-         switch(message.ImageType)
+         switch (message.ImageType)
          {
             case ImageType.Information:
                image = MessageBoxImage.Information;
@@ -104,12 +81,37 @@ namespace FWA.Wpf
       }
 
       /// <summary>
-      /// Wird aufgerufen, wenn im Programm eine Ausnahme abgefangen wird, und zeigt eine entsprechende Meldung.
+      /// Wird aufgerufen, wenn der Dialog eine Nachricht zum Öffnen eines neuen Dialogs empfängt.
       /// </summary>
-      /// <param name="message"></param>
-      private void OnErroReceived(NotifyUserMessage message)
-      { 
-         MessageBox.Show(this, message.Message, message.Header, MessageBoxButton.OK, MessageBoxImage.Error);
+      /// <param name="msg">Die Nachricht, die den betroffenen Dialog enthält.</param>
+      private void OnDialogOpenRequest(RequestDialogOpenMessage msg)
+      {
+         Window window = null;
+
+         switch (msg.Dialog)
+         {
+            case Dialog.AboutWindow:
+               window = new AboutWindow();
+               break;
+            case Dialog.LoginWindow:
+               window = new LoginWindow();
+               break;
+            case Dialog.PruefungWindow:
+               var pruefungsWindow =  new PruefungWindow();
+               pruefungsWindow.ViewModel.Init(msg.Data as Gegenstand);
+               window = pruefungsWindow;
+               break;
+            case Dialog.BenutzerWindow:
+               window = new BenutzerWindow();
+               break;
+            default:
+               return;
+         }
+
+         window.Owner = this;
+         window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+         window.Closed += (o, args) => { Application.Current.MainWindow.Focus(); };
+         window.ShowDialog();
       }
 
       /*private void ShowCsvDlg()
@@ -145,6 +147,11 @@ namespace FWA.Wpf
       {
          base.OnContentRendered(e);
          OnDialogOpenRequest(new RequestDialogOpenMessage(Dialog.LoginWindow));
+      }
+
+      private void BenutzerAnlegen_Click(object sender, RoutedEventArgs e)
+      {
+         OnDialogOpenRequest(new RequestDialogOpenMessage(Dialog.BenutzerWindow));
       }
    }
 }

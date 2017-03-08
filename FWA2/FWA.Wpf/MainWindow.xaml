@@ -15,6 +15,9 @@
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +29,10 @@
         <Menu>
             <MenuItem Header="Datei"></MenuItem>
             <MenuItem Header="Bearbeiten"></MenuItem>
-            <MenuItem Header="Admin" ></MenuItem>
+            <MenuItem Header="Admin" Visibility="{Binding Path=ShowAdminMenu, Converter={StaticResource booleanToVisibilityConverter}}" >
+                <MenuItem Header="Nutzer anlegen" Click="BenutzerAnlegen_Click" />
+                
+            </MenuItem>
             <MenuItem Header="?">
                 <MenuItem Header="Über.." Click="MiAbout_Click" />
             </MenuItem>

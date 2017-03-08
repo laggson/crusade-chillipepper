@@ -1,4 +1,5 @@
-﻿using FWA.Core.Models;
+﻿using FWA.Core.Helpers;
+using FWA.Core.Models;
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -41,6 +42,17 @@ namespace FWA.Core.ViewModels
          }
       }
 
+      private bool showAdminMenu;
+      public bool ShowAdminMenu
+      {
+         get { return showAdminMenu; }
+         set
+         {
+            showAdminMenu = value;
+            NotifyPropertyChanged(nameof(ShowAdminMenu));
+         }
+      }
+      
       private bool cbDisabled;
       public bool CbDisabled
       {
@@ -67,11 +79,22 @@ namespace FWA.Core.ViewModels
       /// </summary>
       private void RegisterEvents()
       {
+         Messenger.Default.Register<LoginMessage>(this, OnLoginChanged);
          Messenger.Default.Register<NotificationMessage>(this, NotificationReceived);
 
          // Nach dem Registrieren das Login-Fenster öffnen.
          //Messenger.Default.Send(new RequestDialogOpenMessage(Models.Dialog.LoginWindow));
          Messenger.Default.Send(new RequestDialogOpenMessage(Dialog.LoginWindow));
+      }
+
+      /// <summary>
+      /// Wird aufgerufen, wenn sich der Login-Zustand geändert hat.
+      /// </summary>
+      /// <param name="message"></param>
+      private void OnLoginChanged(LoginMessage message)
+      {
+         if(message.JetztEingeloggt && DBAuthentication.Instance.CurrentUser.Name == "msc")
+            ShowAdminMenu = true;
       }
 
       /// <summary>

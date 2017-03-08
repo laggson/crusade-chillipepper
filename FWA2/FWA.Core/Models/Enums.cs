@@ -29,7 +29,8 @@ namespace FWA.Core.Models
    {
       LoginWindow = 0,
       AboutWindow,
-      PruefungWindow
+      PruefungWindow,
+      BenutzerWindow
    }
 
    public enum DialogStatus

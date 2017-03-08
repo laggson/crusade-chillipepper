@@ -126,6 +126,9 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BenutzerWindow.xaml.cs">
+      <DependentUpon>BenutzerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -139,6 +142,10 @@
       <DependentUpon>PruefungWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BenutzerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

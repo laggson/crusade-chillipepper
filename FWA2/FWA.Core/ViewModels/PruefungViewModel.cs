@@ -13,7 +13,7 @@ namespace FWA.Core.ViewModels
    /// </summary>
    public class PruefungViewModel : ObservableObject
    {
-      #region
+      #region Properties
 
       private ObservableCollection<Pruefung> pruefungen;
       public ObservableCollection<Pruefung> Pruefungen

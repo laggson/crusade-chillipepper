@@ -7,13 +7,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FWA.Core.Helpers
 {
    /// <summary>
    /// Die für den Anwender zugängliche Klasse zur Verwaltung der Datenbank
    /// </summary>
-   public class DBAuthentication
+   internal class DBAuthentication
    {
       /// <summary>
       /// Der Nutzer, der aktuell in die Datenbank eingeloggt ist.
@@ -32,17 +33,7 @@ namespace FWA.Core.Helpers
       /// <param name="password">Das eingegebene Passwort als Byte Array</param>
       private DBAuthentication(string username, byte[] password)
       {
-         List<User> userlist = null;
-
-         userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
-
-         if (userlist.Count < 1)
-            throw new AuthenticationException(username, "Der Nutzer wurde nicht gefunden.");
-
-         if (userlist.Count > 1)
-            throw new AuthenticationException(username, "Mehrere Nutzer des Namens gefunden." + Environment.NewLine + "Emfehlung des Hauses: Entwickler wechseln.");
-
-         var user = userlist.Single();
+         var user = GetUserByNameOrMail(username);
          string newHash = Crypter.Blowfish.Crypt(password, user.Salt);
 
          //Clear password array
@@ -53,6 +44,56 @@ namespace FWA.Core.Helpers
             throw new AuthenticationException(username, "Falsches Passwort");
 
          CurrentUser = user;
+      }
+
+      /// <summary>
+      /// Sucht anhand des angegebenen Namen den Nutzer aus der Datenbank und löst eine Ausnahme aus, falls ein Fehler auftritt.
+      /// </summary>
+      /// <exception cref="AuthenticationException">Wenn die Anzahl der gefundenen Nutzer ungleich 1 ist.</exception>
+      /// <param name="username">Der gesuchte Nutzername oder die E-Mail</param>
+      public User GetUserByNameOrMail(string username)
+      {
+         var userlist = DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq(username.Contains("@") ? "EMail" : "Name", username)));
+
+         if (userlist.Count < 1)
+            throw new AuthenticationException(username, "Der Nutzer wurde nicht gefunden.");
+
+         if (userlist.Count > 1)
+            throw new AuthenticationException(username, "Mehrere Nutzer des Namens gefunden." + Environment.NewLine + "Emfehlung des Hauses: Entwickler wechseln.");
+
+         return userlist.Single();
+      }
+
+      /// <summary>
+      /// Ändert die Eigenschaften eines Users, falls er existiert oder erstellt einen neuen.
+      /// </summary>
+      /// <param name="username"></param>
+      /// <param name="email"></param>
+      /// <param name="password"></param>
+      /// <param name="accountType"></param>
+      public void CreateOrAlterUser(string username, string email, string password, AccountType accountType = AccountType.Spectator)
+      {
+         User user;
+         var bytes = Encoding.UTF8.GetBytes(password);
+
+         try
+         {
+            user = GetUserByNameOrMail(username);
+         }
+         catch
+         {
+            user = null;
+         }
+
+         if(user == null)
+         {
+            CreateNewUser(username, email, bytes);
+         }
+         else
+         {
+            // Überschreiben
+            AlterUser(username, email, bytes);
+         }
       }
 
       /// <summary>
@@ -132,6 +173,32 @@ namespace FWA.Core.Helpers
       }
 
       /// <summary>
+      /// Überschreibt die angegebenen Daten für den Nutzer und behält hoffentlich die ID bei.
+      /// </summary>
+      /// <param name="username"></param>
+      /// <param name="email"></param>
+      /// <param name="password"></param>
+      public void AlterUser(string username, string email, byte[] password)
+      {
+         AssertRights(AccountType.Master, "User creation");
+         var session = DBAccess.OpenSession();
+
+         //Cryptsharp generates a random Salt and hashes the password
+         string salt = Crypter.Blowfish.GenerateSalt();
+         string pwHash = Crypter.Blowfish.Crypt(password, salt);
+
+         var user = new User
+         {
+            Name = username,
+            EMail = email,
+            Hash = pwHash,
+            Salt = salt
+         };
+
+         DBAccess.Insert(null, InsertionMode.Update, session);
+      }
+
+      /// <summary>
       /// Speichert einen neuen Nutzer mit den angegebenen Daten in der Datenbank
       /// </summary>
       /// <param name="username">Der Name des Nutzers. Kann zur Anmeldung genutzt werden</param>
@@ -140,9 +207,7 @@ namespace FWA.Core.Helpers
       public void CreateNewUser(string username, string email, byte[] password)
       {
          AssertRights(AccountType.Master, "User creation");
-
          var session = DBAccess.OpenSession();
-
          AssertUnique(username, email, session);
 
          //Cryptsharp generates a random Salt and hashes the password
@@ -160,6 +225,12 @@ namespace FWA.Core.Helpers
          DBAccess.Insert(user, InsertionMode.Save, session);
       }
 
+      /// <summary>
+      /// Stellt sicher, dass kein Nutzer des angegebenen Namens oder der Adresse in der Datenbank existiert.
+      /// </summary>
+      /// <param name="username"></param>
+      /// <param name="email"></param>
+      /// <param name="session"></param>
       private void AssertUnique(string username, string email, ISession session)
       {
          if (DBAccess.GetByCriteria<User>(c => c.Add(Restrictions.Eq("Name", username)), session).Count > 0)

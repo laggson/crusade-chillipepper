@@ -24,7 +24,7 @@ namespace FWA.Core.ViewModels
       public bool Login(string username, string pass)
       {
          var bytes = System.Text.Encoding.UTF8.GetBytes(pass);
-         Messenger.Default.Send(new ErrorMessage(new System.Exception(), "Hallo"));
+         //Messenger.Default.Send(new ErrorMessage(new System.Exception(), "Hallo"));
          try
          {
             DBAuthentication.Create(username, bytes);
