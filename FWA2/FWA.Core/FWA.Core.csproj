@@ -95,6 +95,7 @@
     <Compile Include="Mvvm\ErrorMessage.cs" />
     <Compile Include="Mvvm\LoginMessage.cs" />
     <Compile Include="Mvvm\MessageboxMessage.cs" />
+    <Compile Include="Mvvm\MessageboxResponseMessage.cs" />
     <Compile Include="Mvvm\MvvmDataObjects.cs" />
     <Compile Include="Models\Mappings\GegenstandMapping.cs" />
     <Compile Include="Models\Mappings\PruefungMapping.cs" />

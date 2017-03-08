@@ -92,7 +92,7 @@ namespace FWA.Core.Helpers
          else
          {
             // Überschreiben
-            AlterUser(username, email, bytes);
+            AlterUser(user.Id, username, email, bytes, accountType);
          }
       }
 
@@ -178,7 +178,7 @@ namespace FWA.Core.Helpers
       /// <param name="username"></param>
       /// <param name="email"></param>
       /// <param name="password"></param>
-      public void AlterUser(string username, string email, byte[] password)
+      public void AlterUser(int id, string username, string email, byte[] password, AccountType accountType)
       {
          AssertRights(AccountType.Master, "User creation");
          var session = DBAccess.OpenSession();
@@ -189,13 +189,15 @@ namespace FWA.Core.Helpers
 
          var user = new User
          {
+            Id = id,
             Name = username,
             EMail = email,
             Hash = pwHash,
-            Salt = salt
+            Salt = salt,
+            AccountType = accountType
          };
 
-         DBAccess.Insert(null, InsertionMode.Update, session);
+         DBAccess.Insert(user, InsertionMode.Update, session);
       }
 
       /// <summary>

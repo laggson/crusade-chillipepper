@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Collections;
 
 namespace FWA.Core.Models
 {
@@ -31,6 +32,14 @@ namespace FWA.Core.Models
       AboutWindow,
       PruefungWindow,
       BenutzerWindow
+   }
+
+   public enum MyDialogResult
+   {
+      Ok = 0,
+      Ja,
+      Nein,
+      Abbrechen
    }
 
    public enum DialogStatus

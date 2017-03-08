@@ -1,6 +1,7 @@
 ﻿using FWA.Core.Helpers;
 using FWA.Core.Models;
 using FWA.Core.Mvvm;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Linq;
 using System.Security.Authentication;
@@ -56,7 +57,22 @@ namespace FWA.Core.ViewModels
          if (pass1 != pass2)
             throw new InvalidCredentialException("Die angegebenen Passwörter stimmen nicht überein.");
 
-         DBAuthentication.Instance.CreateOrAlterUser(name, mail, pass1);
+         AccountType accountType;
+         Enum.TryParse(SelectedAccountType, out accountType);
+
+         DBAuthentication.Instance.CreateOrAlterUser(name, mail, pass1, accountType);
+      }
+
+      public bool ExistiertNutzer(string username)
+      {
+         try
+         {
+            return DBAuthentication.Instance.GetUserByNameOrMail(username) != null;
+         }
+         catch
+         {
+            return false;
+         }
       }
    }
 }

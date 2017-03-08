@@ -78,6 +78,22 @@ namespace FWA.Wpf
          }
 
          var result = Dispatcher.Invoke(() => MessageBox.Show(this, message.Message, message.Header, button, image));
+         MyDialogResult dialogResult = MyDialogResult.Ok;
+
+         switch (result)
+         {
+            case MessageBoxResult.Yes:
+               dialogResult = MyDialogResult.Ja;
+               break;
+            case MessageBoxResult.No:
+               dialogResult = MyDialogResult.Nein;
+               break;
+            case MessageBoxResult.Cancel:
+               dialogResult = MyDialogResult.Abbrechen;
+               break;
+         }
+
+         Messenger.Default.Send(new MessageboxResponseMessage(dialogResult));
       }
 
       /// <summary>

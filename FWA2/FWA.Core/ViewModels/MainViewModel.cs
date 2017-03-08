@@ -3,8 +3,6 @@ using FWA.Core.Models;
 using FWA.Core.Mvvm;
 using GalaSoft.MvvmLight.Messaging;
 using System;
-using System.Reflection;
-using Update = Laggson.Common.UpdateHelper;
 
 namespace FWA.Core.ViewModels
 {
@@ -93,7 +91,7 @@ namespace FWA.Core.ViewModels
       /// <param name="message"></param>
       private void OnLoginChanged(LoginMessage message)
       {
-         if(message.JetztEingeloggt && DBAuthentication.Instance.CurrentUser.Name == "msc")
+         if(message.JetztEingeloggt && DBAuthentication.Instance.CurrentUser.Name == "hs")
             ShowAdminMenu = true;
       }
 
