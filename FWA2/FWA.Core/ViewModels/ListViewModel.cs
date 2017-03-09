@@ -70,6 +70,19 @@ namespace FWA.Core.ViewModels
          }
       }
 
+      private bool alleAnzeigen;
+
+      public bool AlleAnzeigen
+      {
+         get { return alleAnzeigen; }
+         set
+         {
+            alleAnzeigen = value;
+            NotifyPropertyChanged(nameof(AlleAnzeigen));
+         }
+      }
+
+
       private DateTime SelectedDate;
 
       public ICommand ListItemDoubleClicked => new DelegateCommand(OpenPruefung);
@@ -119,6 +132,7 @@ namespace FWA.Core.ViewModels
          switch (message.PropertyName)
          {
             case nameof(MainViewModel.AlleAnzeigen):
+               AlleAnzeigen = message.NewValue;
                RefreshFilter(message.NewValue ? default(DateTime) : SelectedDate);
                break;
          }

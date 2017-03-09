@@ -8,7 +8,7 @@
              xmlns:viewModel="clr-namespace:FWA.Core.ViewModels;assembly=FWA.Core"
              xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="400" d:DesignWidth="1024">
     <!--  -->
     <UserControl.DataContext>
         <viewModel:ListViewModel />
@@ -16,9 +16,12 @@
 
     <UserControl.Resources>
         <viewHelpers:BoolToPruefkarteConverter x:Key="PruefkarteConverter" />
+        <viewHelpers:BoolToVisibilityConverter x:Key="BoolToVisConverter" />
     </UserControl.Resources>
 
     <Grid>
+        <FrameworkElement x:Name="dummyElement" Visibility="Collapsed"/>
+        
         <DataGrid Grid.Row="1" ItemsSource="{Binding FilterGegenstaende}" AutoGenerateColumns="False"
                   IsReadOnly="True" SelectionMode="Single" ColumnWidth="*" CanUserAddRows="False" CanUserDeleteRows="False"
                   CanUserReorderColumns="False" CanUserResizeRows="False" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
@@ -37,6 +40,15 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
+                <DataGridTextColumn Header="Anz" Width="50" Binding="{Binding JaehrlichePruefungen}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="10 0 0 0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Nächste Prüfung" Binding="{Binding NaechstePruefung}"
+                                    Visibility="{Binding DataContext.AlleAnzeigen, Converter={StaticResource BoolToVisConverter}, Source={x:Reference dummyElement}}" />
                 <DataGridTextColumn Header="Art der Prüfung" Binding="{Binding ArtDerPruefung}" />
                 <DataGridTextColumn Header="Kommentar" Binding="{Binding Kommentar}" />
             </DataGrid.Columns>

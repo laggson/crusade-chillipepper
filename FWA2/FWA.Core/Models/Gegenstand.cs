@@ -1,4 +1,7 @@
-﻿namespace FWA.Core.Models
+﻿using System;
+using System.Linq;
+
+namespace FWA.Core.Models
 {
    public class Gegenstand
    {
@@ -87,6 +90,34 @@
          set
          {
             kommentar = value;
+         }
+      }
+
+      public virtual string JaehrlichePruefungen
+      {
+         get
+         {
+            if (Zeitraum == null)
+               return "";
+
+            return Zeitraum.ToArray().Count(monat => monat == true) + "x";
+         }
+      }
+      
+      public virtual string NaechstePruefung
+      {
+         get
+         {
+            //if (Zeitraum == null)
+               return "";
+
+            for(int i = DateTime.Today.Month; i <= 12; i++)
+            {
+               if (Zeitraum.ValueAt(i))
+                  return DateTime.Today.ToString("MMMM");
+            }
+
+            return "";
          }
       }
 
