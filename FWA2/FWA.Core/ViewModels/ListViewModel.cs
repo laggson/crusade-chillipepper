@@ -132,7 +132,7 @@ namespace FWA.Core.ViewModels
          switch (message.PropertyName)
          {
             case nameof(MainViewModel.AlleAnzeigen):
-               AlleAnzeigen = message.NewValue;
+               //AlleAnzeigen = message.NewValue;
                RefreshFilter(message.NewValue ? default(DateTime) : SelectedDate);
                break;
          }
@@ -217,8 +217,13 @@ namespace FWA.Core.ViewModels
                message = new MessageboxMessage("Der Gegenstand '" + SelectedItem.Bezeichnung + "' muss im Monat "
                   + DateTime.Today.ToString("MMMM") + " nicht geprüft werden.", ImageType.Information, Buttons.Ok);
             }
-            // TODO: Prüfen, ob für den Monat im akt Jahr schon was gemacht wurde.
+            else if(DBAuthentication.Instance.MonatBereitsGeprueft(SelectedItem.Id, DateTime.Today))
+            {
+               message = new MessageboxMessage("Der Gegenstand wurde für den Monat " + DateTime.Today.ToString("MMMM") + " bereits geprüft.",
+                  ImageType.Information, Buttons.Ok);
+            }
 
+            // Wenn eine Nachricht gesetzt wurde, wird die gesendet. Sonst wird Dialog geöffnet.
             if(message != null)
             {
                Messenger.Default.Send(message);

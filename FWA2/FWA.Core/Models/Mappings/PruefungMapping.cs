@@ -12,7 +12,7 @@ namespace FWA.Core.Models.Mappings
          Map(x => x.Kommentar).Column("Kommentar");
          Map(x => x.Mangel).Column("Mangel");
          References(x => x.Tester);
-         Map(x => x.Zustand).Column("Zustand");
+         Map(x => x.Zustand).Column("Zustand").CustomType<int>();
       }
    }
 }

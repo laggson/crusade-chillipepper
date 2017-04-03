@@ -35,7 +35,7 @@ namespace FWA.Core.Helpers
 
       private static IPersistenceConfigurer GetDatabase()
       {
-         return MsSqlConfiguration.MsSql2012.ConnectionString(x => x.Server("Markus-PC")
+         return MsSqlConfiguration.MsSql2012.ConnectionString(x => x.Server("h2608125.stratoserver.net")
                                                                    .Database("FWA")
                                                                    .Username("sa")
                                                                    .Password("Vivendi2016"));

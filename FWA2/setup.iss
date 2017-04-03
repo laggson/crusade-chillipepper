@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FWA"
-#define MyAppVersion "1.1.0.0"
+#define MyAppVersion "1.0.0"
 #define MyAppPublisher "Laggson Softworks"
 #define MyAppURL "http://www.fwa.laggson.de"
 #define MyAppExeName "FWA.exe"
@@ -24,7 +24,7 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=D:\Eigene Dateien\Desktop\FWA Setup
-OutputBaseFilename=FWA-latest
+OutputBaseFilename=FWA-{#MyAppVersion}
 SetupIconFile=D:\Eigene Dateien\Dokumente\GitHub\crusade-chillipepper\FWA2\FWA.Wpf\Assets\Install.ico
 Compression=lzma
 SolidCompression=yes

@@ -87,6 +87,7 @@
     <Compile Include="Helpers\DBAccess.cs" />
     <Compile Include="Helpers\DBAuthentication.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\Http.cs" />
     <Compile Include="Helpers\Update.cs" />
     <Compile Include="Models\Mappings\PruefungMonatMapping.cs" />

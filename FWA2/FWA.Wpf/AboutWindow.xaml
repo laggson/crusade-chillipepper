@@ -44,7 +44,7 @@
         <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0">
             Erstellt am
         </TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="26.01.2017"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="09.03.2017"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="10,0,0,0" Text="Unterstützt von:" VerticalAlignment="Bottom"/>
 

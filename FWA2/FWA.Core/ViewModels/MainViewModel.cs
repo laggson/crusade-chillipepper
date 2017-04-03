@@ -81,7 +81,6 @@ namespace FWA.Core.ViewModels
          Messenger.Default.Register<NotificationMessage>(this, NotificationReceived);
 
          // Nach dem Registrieren das Login-Fenster öffnen.
-         //Messenger.Default.Send(new RequestDialogOpenMessage(Models.Dialog.LoginWindow));
          Messenger.Default.Send(new RequestDialogOpenMessage(Dialog.LoginWindow));
       }
 
@@ -91,7 +90,7 @@ namespace FWA.Core.ViewModels
       /// <param name="message"></param>
       private void OnLoginChanged(LoginMessage message)
       {
-         if(message.JetztEingeloggt && DBAuthentication.Instance.CurrentUser.Name == "hs")
+         if(message.JetztEingeloggt && DBAuthentication.Instance.CurrentUser.AccountType == AccountType.Master)
             ShowAdminMenu = true;
       }
 
@@ -104,6 +103,21 @@ namespace FWA.Core.ViewModels
          if(message.Sender is ListViewModel && message.Notification == "Bereit")
          {
             Messenger.Default.Send(new PropertyChangedMessage<DateTime>(default(DateTime), SelectedDate, nameof(SelectedDate)));
+
+            var hinweisGesehen = bool.Parse(FileHelper.Settings[Setting.HinweisGesehen].ToString());
+
+            // TODO: Feststellen, dass noch nicht gesehen wurde.
+            if (!hinweisGesehen)
+            {
+               Messenger.Default.Send(new MessageboxMessage("Hab's doch nochmal geschafft, mich dran zu setzen.\r\n"
+                  + "Die grundsätzlichen Sachen gehen schon mal, aber das kann \r\nman auf jeden Fall in den nächsten Wochen noch ausbauen.\r\n"
+                  + "Vor allem an der Geschwindigkeit wird sich wohl noch was machen lassen.\r\n\r\n"
+                  + "Also viel Spaß, Hoffe das nimmt euch schon mal einige Arbeit ab :)",
+                  ImageType.None, Buttons.Ok, "Hallöchen Poppöchen"));
+
+               FileHelper.Settings[Setting.HinweisGesehen] = true;
+               FileHelper.WriteSettings();
+            }
          }
       }
    }

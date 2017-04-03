@@ -96,6 +96,14 @@ namespace FWA.Core.Helpers
          }
       }
 
+      public bool MonatBereitsGeprueft(int gegenstandId, DateTime date)
+      {
+         var session = DBAccess.OpenSession();
+         var items = DBAccess.GetByCriteria<Pruefung>(c => c.Add(Restrictions.Eq("Gegenstand.Id", gegenstandId)));
+
+         return items.Count(pruefung => pruefung.Datum.Year == date.Year && pruefung.Datum.Month == date.Month) > 0;
+      }
+
       /// <summary>
       /// Setzt die Instanz auf null, um einen Zugriff von außen zu verhindern.
       /// </summary>
