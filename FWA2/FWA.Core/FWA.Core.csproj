@@ -115,7 +115,7 @@
     <Compile Include="ViewModels\PruefungViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\crusade-common-library\Laggson.Common.csproj">
+    <ProjectReference Include="..\..\..\crusade-common-library\Laggson.Common\Laggson.Common.csproj">
       <Project>{0dfca3b1-826d-450b-a1b6-601a9bf986ef}</Project>
       <Name>Laggson.Common</Name>
     </ProjectReference>

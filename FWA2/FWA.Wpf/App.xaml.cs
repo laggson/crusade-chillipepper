@@ -11,7 +11,7 @@ namespace FWA.Wpf
       [STAThread]
       public static void Main(string[] args)
       {
-         CheckForUpdates();
+         //CheckForUpdates();
 
          var app = new App();
          app.InitializeComponent();
